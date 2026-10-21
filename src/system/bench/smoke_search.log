@@ -1,0 +1,14 @@
+1000 truy vấn, kho train 33759 bài
+chế độ         P@10  MAP@100  nDCG@10  p50 ms  p95 ms
+bm25         0.7414   0.5564   0.7456    11.5    20.2
+bm25+syl     0.6171   0.4136   0.6221    72.3   126.5
+knn          0.8099   0.6812   0.8155     4.8    12.1
+knn-exact    0.8104   0.6808   0.8158
+hybrid       0.8109   0.6379   0.8176    16.5    30.3
+HNSW recall@10 so với vét cạn: 0.9972
+[  bm25    23 ms] 'giá vàng tăng mạnh': KD 'Đừng quá hốt hoảng mà vội mua vàng đầu  | KD Các quỹ đầu cơ ồ ạt mua vàng trở lại | KD 'Không có chuyện đầu cơ vàng trong mấy n
+[   knn    20 ms] 'giá vàng tăng mạnh': KD Giá vàng tăng lên 1.090.000 đồng/chỉ | KD Giá vàng tăng lên 1.125.000 đồng/chỉ | KD Giá vàng giảm nhẹ
+[hybrid    11 ms] 'giá vàng tăng mạnh': KD Giá vàng trồi sụt rất mạnh | KD Các quỹ đầu cơ ồ ạt mua vàng trở lại | KD Giá vàng trồi sụt rất mạnh
+[  bm25     5 ms] 'đội tuyển Việt Nam thắng trận': TT Việt Nam khó làm nên điều kỳ diệu thứ ha | TT Việt Nam khó làm nên điều kỳ diệu thứ ha | TT Trận hoà không tồi Văn Quyến luôn chứng 
+[   knn     5 ms] 'đội tuyển Việt Nam thắng trận': TT Hành trình 'dã tràng xe cát' của HLV Tav | TT U23 Việt Nam nằm ở 'bảng tử thần' tại SE | TT Việt Nam không dễ thắng trên đất Maldive
+[hybrid     9 ms] 'đội tuyển Việt Nam thắng trận': TT Hành trình 'dã tràng xe cát' của HLV Tav | TT Việt Nam không dễ thắng trên đất Maldive | TT Tuyển VN quyết thắng trận đầu ở vòng loạ

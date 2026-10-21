@@ -1,0 +1,26 @@
+exp,method,view,query,p@10,map@100,ndcg@10
+E1,TF-IDF (toàn văn),word,doc,0.7308,0.56543,0.74016
+E1,MLP-128 có giám sát [7],word,doc,0.8887,0.85565,0.8906
+E1,LDA-100,word,doc,0.7601,0.60267,0.7654
+E1,TRANS-IT,word,doc,0.7949,0.67125,0.80012
+E1,TRANS-FI,word,doc,0.7821,0.65081,0.78753
+E1,Trans2Vec-JOI,word,doc,0.8049,0.6863,0.80942
+E1,Trans2Vec-IND,word,doc,0.7952,0.67036,0.79986
+E1,TF-IDF (toàn văn),word,3 từ khóa – tất cả,0.6223,0.42024,0.6339,1000
+E1,Trans2Vec-JOI,word,3 từ khóa – tất cả,0.691,0.60207,0.69222,1000
+E1,TF-IDF (toàn văn),word,3 từ khóa – có FI,0.79464,0.64422,0.80531,56
+E1,Trans2Vec-JOI,word,3 từ khóa – có FI,0.84821,0.76326,0.85162,56
+E1,TF-IDF (toàn văn),word,3 từ khóa – không FI,0.61208,0.40695,0.62373,944
+E1,Trans2Vec-JOI,word,3 từ khóa – không FI,0.68517,0.59546,0.68617,944
+E2,TF-IDF (toàn văn),syl,doc,0.7293,0.55565,0.73902
+E2,TRANS-IT,syl,doc,0.7729,0.61203,0.77979
+E2,TRANS-FI,syl,doc,0.7628,0.59752,0.76754
+E2,Trans2Vec-JOI,syl,doc,0.7798,0.62534,0.78449
+E6,TRANS-IT (train suy luận lại),word,doc,0.7989,0.66434,0.80287
+E6,TRANS-FI (train suy luận lại),word,doc,0.77,0.62248,0.77495
+E6,Trans2Vec-JOI (train suy luận lại),word,doc,0.8062,0.67962,0.81172
+E6,TRANS-IT (train suy luận lại),word,doc,0.7782,0.62258,0.78543
+E6,Trans2Vec-JOI (train suy luận lại),word,doc,0.764,0.57734,0.77004
+E6,TRANS-IT (train suy luận lại),syl,doc,0.7471,0.54776,0.75754
+E6,TRANS-FI (train suy luận lại),syl,doc,0.7498,0.57363,0.75653
+E6,Trans2Vec-JOI (train suy luận lại),syl,doc,0.7712,0.60567,0.77822

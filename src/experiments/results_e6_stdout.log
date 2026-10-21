@@ -1,0 +1,176 @@
+23:19:25 === Tải corpus 
+23:19:29 train=33759 test=50373
+23:19:29 === XONG
+23:19:30 === E6: vector train suy luận lại (nhất quán với test)
+23:19:48 View word k=50: {"vocab": 43777, "stopwords": 78, "delta": 0.00535, "n_fi": 3586, "n_fi_len": {"1": 2102, "2": 1069, "3": 415}, "mine_s": 2.7, "fi_per_doc_train": 38.00506531591576, "docs_without_fi2_test": 0.15317729736168184}
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+23:21:18 [E6] TRANS-IT (train suy luận lại) word k=50 d=128 seed=1 svm: acc=0.8700 macroF1=0.8412
+23:21:19 [E6] TRANS-IT (train suy luận lại) word k=50 d=128 seed=1 lr: acc=0.8740 macroF1=0.8473
+23:21:28 [E6] TRANS-IT (train suy luận lại) word k=50 d=128 seed=1 svm-tuned: acc=0.8700 macroF1=0.8412
+23:21:28 [E6] TRANS-IT (train suy luận lại) word k=50 d=128 seed=1 lr-tuned: acc=0.8761 macroF1=0.8491
+23:21:28 [E6] RET TRANS-IT (train suy luận lại) word doc: P@10=0.7989 MAP@100=0.6643 nDCG@10=0.8029
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+23:22:13 [E6] TRANS-FI (train suy luận lại) word k=50 d=128 seed=1 svm: acc=0.8491 macroF1=0.8198
+23:22:13 [E6] TRANS-FI (train suy luận lại) word k=50 d=128 seed=1 lr: acc=0.8539 macroF1=0.8263
+23:22:20 [E6] TRANS-FI (train suy luận lại) word k=50 d=128 seed=1 svm-tuned: acc=0.8491 macroF1=0.8198
+23:22:20 [E6] TRANS-FI (train suy luận lại) word k=50 d=128 seed=1 lr-tuned: acc=0.8539 macroF1=0.8263
+23:22:20 [E6] RET TRANS-FI (train suy luận lại) word doc: P@10=0.7700 MAP@100=0.6225 nDCG@10=0.7749
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+23:23:48 [E6] Trans2Vec-JOI (train suy luận lại) word k=50 d=128 seed=1 svm: acc=0.8708 macroF1=0.8424
+23:23:48 [E6] Trans2Vec-JOI (train suy luận lại) word k=50 d=128 seed=1 lr: acc=0.8749 macroF1=0.8487
+23:23:56 [E6] Trans2Vec-JOI (train suy luận lại) word k=50 d=128 seed=1 svm-tuned: acc=0.8708 macroF1=0.8424
+23:23:56 [E6] Trans2Vec-JOI (train suy luận lại) word k=50 d=128 seed=1 lr-tuned: acc=0.8779 macroF1=0.8519
+23:23:57 [E6] RET Trans2Vec-JOI (train suy luận lại) word doc: P@10=0.8062 MAP@100=0.6796 nDCG@10=0.8117
+23:24:51 View word k=100: {"vocab": 43777, "stopwords": 78, "delta": 0.00535, "n_fi": 30866, "n_fi_len": {"1": 3232, "2": 19976, "3": 7658}, "mine_s": 14.3, "fi_per_doc_train": 282.34346396516486, "docs_without_fi2_test": 0.0007345204772397912}
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+23:26:48 [E6] TRANS-IT (train suy luận lại) word k=100 d=128 seed=1 svm: acc=0.8676 macroF1=0.8393
+23:26:49 [E6] TRANS-IT (train suy luận lại) word k=100 d=128 seed=1 lr: acc=0.8744 macroF1=0.8483
+23:26:55 [E6] TRANS-IT (train suy luận lại) word k=100 d=128 seed=1 svm-tuned: acc=0.8678 macroF1=0.8395
+23:26:55 [E6] TRANS-IT (train suy luận lại) word k=100 d=128 seed=1 lr-tuned: acc=0.8744 macroF1=0.8483
+23:26:55 [E6] RET TRANS-IT (train suy luận lại) word doc: P@10=0.7782 MAP@100=0.6226 nDCG@10=0.7854
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+23:34:26 [E6] Trans2Vec-JOI (train suy luận lại) word k=100 d=128 seed=1 svm: acc=0.8657 macroF1=0.8384
+23:34:27 [E6] Trans2Vec-JOI (train suy luận lại) word k=100 d=128 seed=1 lr: acc=0.8704 macroF1=0.8452
+23:34:35 [E6] Trans2Vec-JOI (train suy luận lại) word k=100 d=128 seed=1 svm-tuned: acc=0.8657 macroF1=0.8384
+23:34:35 [E6] Trans2Vec-JOI (train suy luận lại) word k=100 d=128 seed=1 lr-tuned: acc=0.8704 macroF1=0.8452
+23:34:35 [E6] RET Trans2Vec-JOI (train suy luận lại) word doc: P@10=0.7640 MAP@100=0.5773 nDCG@10=0.7700
+23:35:18 View syl k=50: {"vocab": 19963, "stopwords": 149, "delta": 0.00535, "n_fi": 8984, "n_fi_len": {"1": 1991, "2": 5299, "3": 1694}, "mine_s": 4.1, "fi_per_doc_train": 95.72357001096005, "docs_without_fi2_test": 0.006312905723304151}
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+23:36:20 [E6] TRANS-IT (train suy luận lại) syl k=50 d=128 seed=1 svm: acc=0.8385 macroF1=0.8091
+23:36:21 [E6] TRANS-IT (train suy luận lại) syl k=50 d=128 seed=1 lr: acc=0.8441 macroF1=0.8159
+23:36:28 [E6] TRANS-IT (train suy luận lại) syl k=50 d=128 seed=1 svm-tuned: acc=0.8385 macroF1=0.8091
+23:36:28 [E6] TRANS-IT (train suy luận lại) syl k=50 d=128 seed=1 lr-tuned: acc=0.8441 macroF1=0.8159
+23:36:28 [E6] RET TRANS-IT (train suy luận lại) syl doc: P@10=0.7471 MAP@100=0.5478 nDCG@10=0.7575
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+23:38:08 [E6] TRANS-FI (train suy luận lại) syl k=50 d=128 seed=1 svm: acc=0.8339 macroF1=0.8045
+23:38:08 [E6] TRANS-FI (train suy luận lại) syl k=50 d=128 seed=1 lr: acc=0.8386 macroF1=0.8113
+23:38:14 [E6] TRANS-FI (train suy luận lại) syl k=50 d=128 seed=1 svm-tuned: acc=0.8338 macroF1=0.8042
+23:38:14 [E6] TRANS-FI (train suy luận lại) syl k=50 d=128 seed=1 lr-tuned: acc=0.8386 macroF1=0.8104
+23:38:15 [E6] RET TRANS-FI (train suy luận lại) syl doc: P@10=0.7498 MAP@100=0.5736 nDCG@10=0.7565
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+23:40:18 [E6] Trans2Vec-JOI (train suy luận lại) syl k=50 d=128 seed=1 svm: acc=0.8460 macroF1=0.8180
+23:40:18 [E6] Trans2Vec-JOI (train suy luận lại) syl k=50 d=128 seed=1 lr: acc=0.8502 macroF1=0.8244
+23:40:26 [E6] Trans2Vec-JOI (train suy luận lại) syl k=50 d=128 seed=1 svm-tuned: acc=0.8460 macroF1=0.8178
+23:40:26 [E6] Trans2Vec-JOI (train suy luận lại) syl k=50 d=128 seed=1 lr-tuned: acc=0.8502 macroF1=0.8244
+23:40:26 [E6] RET Trans2Vec-JOI (train suy luận lại) syl doc: P@10=0.7712 MAP@100=0.6057 nDCG@10=0.7782
+23:40:27 === E6 XONG

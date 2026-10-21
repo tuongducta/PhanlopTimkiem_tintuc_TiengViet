@@ -1,0 +1,5 @@
+# File bị .gitignore nhưng cần chép sang mỗi git worktree khi chạy song song
+.env
+src/system/.env
+CLAUDE.local.md
+.claude/settings.local.json

@@ -1,0 +1,19 @@
+# Giao diện Streamlit theo bản phác (nền sáng, xanh #1F4E99). Streamlit đọc file này khi chạy từ thư mục gốc dự án.
+[theme]
+base = "light"
+primaryColor = "#1F4E99"
+backgroundColor = "#F4F5F7"
+secondaryBackgroundColor = "#EEF1F5"
+textColor = "#1A2230"
+borderColor = "#E1E5EA"
+baseRadius = "8px"
+
+[theme.sidebar]
+backgroundColor = "#FFFFFF"
+secondaryBackgroundColor = "#F4F5F7"
+
+[client]
+toolbarMode = "minimal"
+
+[browser]
+gatherUsageStats = false

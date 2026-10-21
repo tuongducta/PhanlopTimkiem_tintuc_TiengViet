@@ -1,0 +1,31 @@
+# Secrets & cấu hình cá nhân
+.env
+.env.*
+!.env.example
+CLAUDE.local.md
+.claude/settings.local.json
+.claude/agent-memory/*
+!.claude/agent-memory/README.md
+
+# Python
+.venv/
+.venv-exp/
+__pycache__/
+*.pyc
+
+# Dữ liệu lớn và tái tạo được (không đưa lên git)
+sources/data/
+# PDF có bản quyền
+sources/papers/
+sources/repos/
+# ~230 MB, sinh lại bằng train_models.py + train_variants.py
+src/system/models/
+livrables/report_db/reference.docx
+livrables/**/_*_for_docx.md
+
+# IDE / OS
+.idea/
+*.iml
+.vscode/
+.DS_Store
+out/

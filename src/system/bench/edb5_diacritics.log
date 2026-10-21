@@ -1,0 +1,28 @@
+kw            (a) fold    nDCG@10=0.6207 rỗng=0.000 p50=4.0ms
+kw            (b) vi      nDCG@10=0.6531 rỗng=0.000 p50=2.2ms
+kw            (c) vi+syl  nDCG@10=0.6506 rỗng=0.000 p50=3.6ms
+kw            (d) vi-fold nDCG@10=0.6151 rỗng=0.000 p50=3.2ms
+kw không dấu  (a) fold    nDCG@10=0.6073 rỗng=0.000 p50=3.2ms
+kw không dấu  (b) vi      nDCG@10=0.3941 rỗng=0.090 p50=1.1ms
+kw không dấu  (c) vi+syl  nDCG@10=0.3976 rỗng=0.000 p50=2.8ms
+kw không dấu  (d) vi-fold nDCG@10=0.6151 rỗng=0.000 p50=2.7ms
+doc           (a) fold    nDCG@10=0.6645 rỗng=0.000 p50=45.2ms
+doc           (b) vi      nDCG@10=0.7488 rỗng=0.000 p50=11.0ms
+doc           (c) vi+syl  nDCG@10=0.6315 rỗng=0.000 p50=71.3ms
+doc           (d) vi-fold nDCG@10=0.6636 rỗng=0.000 p50=36.4ms
+số bài train khớp: {'bàn': {'vi': 3520, 'fold': 21316, 'vi_fold_field': 23788}, 'bán': {'vi': 4183, 'fold': 21316, 'vi_fold_field': 23788}, 'bạn': {'vi': 6410, 'fold': 7397, 'vi_fold_field': 23788}, 'bản': {'vi': 1946, 'fold': 21316, 'vi_fold_field': 23788}, 'ban': {'vi': 3687, 'fold': 21316, 'vi_fold_field': 23788}}
+đầu-cuối, kw không dấu gõ tự do: {'old: bm25 giữ dấu': 0.399, 'search() bm25': 0.534, 'search() knn': 0.354, 'search() hybrid': 0.534}
+→ system/bench/results/edb5_diacritics.json
+query                        |     config |       p@10 |    map@100 |    ndcg@10 |      empty |     p50_ms |     p95_ms
+kw                           |   (a) fold |     0.6067 |     0.3824 |     0.6207 |     0.0000 |     3.9529 |     8.6072
+kw                           |     (b) vi |     0.6396 |     0.4230 |     0.6531 |     0.0000 |     2.2212 |     6.4192
+kw                           | (c) vi+syl |     0.6363 |     0.4147 |     0.6506 |     0.0000 |     3.6024 |     8.4681
+kw                           | (d) vi-fold |     0.6004 |     0.3769 |     0.6151 |     0.0000 |     3.2093 |     5.7735
+kw không dấu                 |   (a) fold |     0.5943 |     0.3735 |     0.6073 |     0.0000 |     3.2462 |     6.4785
+kw không dấu                 |     (b) vi |     0.3873 |     0.2275 |     0.3941 |     0.0900 |     1.1441 |     2.5988
+kw không dấu                 | (c) vi+syl |     0.3935 |     0.2317 |     0.3976 |     0.0000 |     2.8266 |     5.2933
+kw không dấu                 | (d) vi-fold |     0.6004 |     0.3769 |     0.6151 |     0.0000 |     2.7341 |     4.8018
+doc                          |   (a) fold |     0.6598 |     0.4386 |     0.6645 |     0.0000 |    45.2376 |    76.5990
+doc                          |     (b) vi |     0.7443 |     0.5578 |     0.7488 |     0.0000 |    10.9866 |    18.2664
+doc                          | (c) vi+syl |     0.6274 |     0.4199 |     0.6315 |     0.0000 |    71.2946 |   126.3564
+doc                          | (d) vi-fold |     0.6590 |     0.4358 |     0.6636 |     0.0000 |    36.3973 |    50.9185

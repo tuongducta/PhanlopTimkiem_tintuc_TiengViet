@@ -1,0 +1,47 @@
+[    17s] fim run 1 (3586 FI), trans-it run 2, joi run 4
+[   141s] trans2vec-orig: emb 8, svm 9: macroF1=0.8232 (train 116s)
+[   186s] trans-fi: emb 10 (46s)
+[   191s] trans-fi: emb 10, lr 12: macroF1=0.8260 nDCG@10=0.7761
+[   196s] trans2vec-ind: emb 11, lr 13: macroF1=0.8423 nDCG@10=0.7928
+[   201s] CV train macro-F1: cat=0.8730 stack=0.8663 đơn={'trans-it': 0.8613, 'trans-fi': 0.8439, 'trans2vec-ind': 0.858, 'trans2vec-joi': 0.8615} (5s)
+Traceback (most recent call last):
+  File "/Users/ductuongta/Documents/Sau_dai_hoc_Hutech/Tri-thuc-du-lieu/TriThucDuLieu_BaiTap2/system/pipeline/train_variants.py", line 209, in <module>
+    main()
+  File "/Users/ductuongta/Documents/Sau_dai_hoc_Hutech/Tri-thuc-du-lieu/TriThucDuLieu_BaiTap2/system/pipeline/train_variants.py", line 185, in main
+    store_vectors(con, c, emb, tr_ids + te_ids, Z)
+  File "/Users/ductuongta/Documents/Sau_dai_hoc_Hutech/Tri-thuc-du-lieu/TriThucDuLieu_BaiTap2/system/pipeline/train_variants.py", line 47, in store_vectors
+    insert_many(con, c, "INSERT INTO article_vector (article_id, run_id, vec) VALUES (%s,%s,%s)",
+  File "/Users/ductuongta/Documents/Sau_dai_hoc_Hutech/Tri-thuc-du-lieu/TriThucDuLieu_BaiTap2/system/pipeline/train_models.py", line 49, in insert_many
+    c.executemany(sql, rows[i:i + BATCH])
+  File "/Users/ductuongta/Documents/Sau_dai_hoc_Hutech/Tri-thuc-du-lieu/TriThucDuLieu_BaiTap2/.venv-exp/lib/python3.11/site-packages/pymysql/cursors.py", line 199, in executemany
+    return self._do_execute_many(
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ductuongta/Documents/Sau_dai_hoc_Hutech/Tri-thuc-du-lieu/TriThucDuLieu_BaiTap2/.venv-exp/lib/python3.11/site-packages/pymysql/cursors.py", line 226, in _do_execute_many
+    rows += self.execute(sql + postfix)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ductuongta/Documents/Sau_dai_hoc_Hutech/Tri-thuc-du-lieu/TriThucDuLieu_BaiTap2/.venv-exp/lib/python3.11/site-packages/pymysql/cursors.py", line 170, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "/Users/ductuongta/Documents/Sau_dai_hoc_Hutech/Tri-thuc-du-lieu/TriThucDuLieu_BaiTap2/.venv-exp/lib/python3.11/site-packages/pymysql/cursors.py", line 335, in _query
+    conn.query(q)
+  File "/Users/ductuongta/Documents/Sau_dai_hoc_Hutech/Tri-thuc-du-lieu/TriThucDuLieu_BaiTap2/.venv-exp/lib/python3.11/site-packages/pymysql/connections.py", line 581, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ductuongta/Documents/Sau_dai_hoc_Hutech/Tri-thuc-du-lieu/TriThucDuLieu_BaiTap2/.venv-exp/lib/python3.11/site-packages/pymysql/connections.py", line 857, in _read_query_result
+    result.read()
+  File "/Users/ductuongta/Documents/Sau_dai_hoc_Hutech/Tri-thuc-du-lieu/TriThucDuLieu_BaiTap2/.venv-exp/lib/python3.11/site-packages/pymysql/connections.py", line 1290, in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ductuongta/Documents/Sau_dai_hoc_Hutech/Tri-thuc-du-lieu/TriThucDuLieu_BaiTap2/.venv-exp/lib/python3.11/site-packages/pymysql/connections.py", line 810, in _read_packet
+    packet.raise_for_error()
+  File "/Users/ductuongta/Documents/Sau_dai_hoc_Hutech/Tri-thuc-du-lieu/TriThucDuLieu_BaiTap2/.venv-exp/lib/python3.11/site-packages/pymysql/protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "/Users/ductuongta/Documents/Sau_dai_hoc_Hutech/Tri-thuc-du-lieu/TriThucDuLieu_BaiTap2/.venv-exp/lib/python3.11/site-packages/pymysql/err.py", line 154, in raise_mysql_exception
+    raise errorclass(errno, errval, sqlstate=sqlstate)
+pymysql.err.OperationalError: (1292, "Incorrect vector value: '\\x12\\x91}\\xBA~\\xCDV\\xBD:\\x82\\x8A\\xBD\\xA9:\\xFE:\\x1F\\xA5?=sH\\x0E\\xBB\\xDB@\\xA2\\xBD\\xD7G\\x16=V\\xD9\\xBD\\xBCt\\xF7j\\xBDV_'\\xBD\\x96\\x...' for column `trans2vec`.`article_vector`.`vec` at row 1")
+[    12s] fim run 1 (3586 FI), trans-it run 2, joi run 4
+[    12s] trans2vec-orig: dùng lại run 8
+[    13s] trans-fi: dùng lại run 10
+[    19s] CV train macro-F1: cat=0.8730 stack=0.8663 đơn={'trans-it': 0.8613, 'trans-fi': 0.8439, 'trans2vec-ind': 0.858, 'trans2vec-joi': 0.8615} (5s)
+[    22s] cải tiến = cat: emb 15, lr 16: macroF1=0.8565
+[    22s] XONG {"trans2vec-cat": {"acc": 0.8823774641176821, "macro_f1": 0.8565125585332304, "fit_s": 0.5541582107543945}}

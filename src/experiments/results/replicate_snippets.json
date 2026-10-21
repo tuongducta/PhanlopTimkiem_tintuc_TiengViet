@@ -1,0 +1,68 @@
+[
+ {
+  "method": "TRANS-IT",
+  "protocol": "transductive",
+  "acc": 75.29239766081871,
+  "acc_sd": 0.6645215308399732,
+  "macro_f1": 75.19563068806026,
+  "f1_sd": 0.7225891569259358,
+  "paper_acc": 75.23,
+  "paper_f1": 74.79,
+  "seconds": 24.9
+ },
+ {
+  "method": "TRANS-IT",
+  "protocol": "inductive",
+  "acc": 73.4356725146199,
+  "acc_sd": 0.5963765512974057,
+  "macro_f1": 73.33536760918035,
+  "f1_sd": 0.7192020111897275,
+  "paper_acc": 75.23,
+  "paper_f1": 74.79,
+  "seconds": 36.1
+ },
+ {
+  "method": "TRANS-FI",
+  "protocol": "transductive",
+  "acc": 75.23391812865498,
+  "acc_sd": 0.46737916266507695,
+  "macro_f1": 74.69324814447997,
+  "f1_sd": 0.9707714409904118,
+  "paper_acc": 77.88,
+  "paper_f1": 77.41,
+  "seconds": 24.1
+ },
+ {
+  "method": "TRANS-FI",
+  "protocol": "inductive",
+  "acc": 74.83918128654972,
+  "acc_sd": 0.6409447431807892,
+  "macro_f1": 74.9381741338773,
+  "f1_sd": 0.8596573841741862,
+  "paper_acc": 77.88,
+  "paper_f1": 77.41,
+  "seconds": 36.2
+ },
+ {
+  "method": "Trans2Vec-JOI",
+  "protocol": "transductive",
+  "acc": 75.99415204678363,
+  "acc_sd": 0.4332027014628415,
+  "macro_f1": 75.40732116459746,
+  "f1_sd": 0.8044218414963163,
+  "paper_acc": 79.05,
+  "paper_f1": 78.31,
+  "seconds": 29.3
+ },
+ {
+  "method": "Trans2Vec-JOI",
+  "protocol": "inductive",
+  "acc": 76.50584795321639,
+  "acc_sd": 0.14472945813759533,
+  "macro_f1": 76.40079926734795,
+  "f1_sd": 0.2340706157101454,
+  "paper_acc": 79.05,
+  "paper_f1": 78.31,
+  "seconds": 55.8
+ }
+]

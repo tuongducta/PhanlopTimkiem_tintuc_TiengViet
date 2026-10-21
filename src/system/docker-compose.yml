@@ -1,0 +1,61 @@
+# Hệ thống Trans2Vec: MariaDB (nguồn dữ liệu gốc) + Manticore Search (chỉ mục phái sinh).
+# Chạy từ thư mục gốc dự án:  docker compose -f src/system/docker-compose.yml up -d
+# Mật khẩu chỉ dùng cho máy cá nhân; đổi trong file .env nếu cần.
+name: trans2vec
+
+services:
+  mariadb:
+    image: mariadb:11.8.9
+    container_name: t2v-mariadb
+    environment:
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD:-t2v_root}
+      MARIADB_DATABASE: ${MARIADB_DATABASE:-trans2vec}
+      MARIADB_USER: ${MARIADB_USER:-t2v}
+      MARIADB_PASSWORD: ${MARIADB_PASSWORD:-t2v_pass}
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_uca1400_ai_ci
+      - --innodb-buffer-pool-size=1G
+      - --max-allowed-packet=256M
+      - --mhnsw-max-cache-size=512M   # bộ nhớ cho VECTOR INDEX (HNSW)
+      # FULLTEXT cho tiếng Việt (E-DB1): âm tiết 1–2 ký tự ("đi", "ở"); bỏ danh sách stopword tiếng Anh mặc định
+      - --innodb-ft-min-token-size=1
+      - --innodb-ft-enable-stopword=0
+      - --innodb-ft-sort-pll-degree=4
+    ports:
+      - "127.0.0.1:${MARIADB_PORT:-3307}:3306"
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+
+  manticore:
+    image: manticoresearch/manticore:29.9.0
+    container_name: t2v-manticore
+    environment:
+      - EXTRA=1
+    ports:
+      - "127.0.0.1:${MANTICORE_SQL_PORT:-9306}:9306"   # giao thức MySQL
+      - "127.0.0.1:${MANTICORE_HTTP_PORT:-9308}:9308"  # HTTP JSON
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 65535
+        hard: 65535
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - manticore_data:/var/lib/manticore
+    healthcheck:
+      test: ["CMD", "mysql", "-h0", "-P9306", "-e", "SHOW STATUS"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+
+volumes:
+  mariadb_data:
+  manticore_data:

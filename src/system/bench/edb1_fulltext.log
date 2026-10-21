@@ -1,0 +1,11 @@
+dựng chỉ mục: {'innodb': {'build_s': 28.214537382125854, 'index_bytes': 134893568}, 'manticore': {'build_s': 22.181344747543335, 'index_bytes': 112560264, 'ram_bytes': 6806568}}
+innodb     kw   nDCG@10=0.5960 p50=8.8ms p95=44.9ms qps4=240
+manticore  kw   nDCG@10=0.6553 p50=1.2ms p95=2.7ms qps4=2498
+innodb     doc  nDCG@10=0.5968 p50=213.1ms p95=355.8ms qps4=14
+manticore  doc  nDCG@10=0.7389 p50=11.1ms p95=17.7ms qps4=244
+→ system/bench/results/edb1_fulltext.json
+engine                       |      query |       p@10 |    map@100 |    ndcg@10 |     p50_ms |     p95_ms | qps_4threads
+innodb                       |         kw |     0.5949 |     0.4005 |     0.5960 |     8.8125 |    44.9470 |   239.7212
+manticore                    |         kw |     0.6426 |     0.4189 |     0.6553 |     1.2379 |     2.7095 |  2497.7681
+innodb                       |        doc |     0.6003 |     0.4358 |     0.5968 |   213.1455 |   355.8042 |    13.5441
+manticore                    |        doc |     0.7334 |     0.5495 |     0.7389 |    11.1287 |    17.6789 |   244.4167

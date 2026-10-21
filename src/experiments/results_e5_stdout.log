@@ -1,0 +1,89 @@
+23:08:09 === Tải corpus 
+23:08:13 train=33759 test=50373
+23:08:13 === XONG
+23:08:13 === E5: bộ phân loại tinh chỉnh C bằng CV trên train
+23:08:27 View word k=50: {"vocab": 43777, "stopwords": 78, "delta": 0.00535, "n_fi": 3586, "n_fi_len": {"1": 2102, "2": 1069, "3": 415}, "mine_s": 2.6, "fi_per_doc_train": 38.00506531591576, "docs_without_fi2_test": 0.15317729736168184}
+23:09:14 [E5] TF-IDF (toàn văn)      word k=50 d=43777 seed=1 svm-tuned: acc=0.9228 macroF1=0.9028
+23:09:36 [E5] TF-IDF (toàn văn)      word k=50 d=43777 seed=1 lr-tuned: acc=0.9246 macroF1=0.9065
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+23:10:38 [E5] TRANS-IT               word k=50 d=128 seed=1 svm-tuned: acc=0.7884 macroF1=0.7542
+23:10:41 [E5] TRANS-IT               word k=50 d=128 seed=1 lr-tuned: acc=0.7790 macroF1=0.7482
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+23:11:20 [E5] TRANS-FI               word k=50 d=128 seed=1 svm-tuned: acc=0.7789 macroF1=0.7439
+23:11:22 [E5] TRANS-FI               word k=50 d=128 seed=1 lr-tuned: acc=0.7679 macroF1=0.7363
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+23:12:31 [E5] Trans2Vec-JOI          word k=50 d=128 seed=1 svm-tuned: acc=0.7816 macroF1=0.7406
+23:12:34 [E5] Trans2Vec-JOI          word k=50 d=128 seed=1 lr-tuned: acc=0.7749 macroF1=0.7423
+23:13:31 View word k=100: {"vocab": 43777, "stopwords": 78, "delta": 0.00535, "n_fi": 30866, "n_fi_len": {"1": 3232, "2": 19976, "3": 7658}, "mine_s": 14.9, "fi_per_doc_train": 282.34346396516486, "docs_without_fi2_test": 0.0007345204772397912}
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+23:15:06 [E5] TRANS-IT               word k=100 d=128 seed=1 svm-tuned: acc=0.8078 macroF1=0.7686
+23:15:08 [E5] TRANS-IT               word k=100 d=128 seed=1 lr-tuned: acc=0.8262 macroF1=0.7954
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'
+23:20:36 [E5] Trans2Vec-JOI          word k=100 d=128 seed=1 svm-tuned: acc=0.8519 macroF1=0.8213
+23:20:38 [E5] Trans2Vec-JOI          word k=100 d=128 seed=1 lr-tuned: acc=0.8541 macroF1=0.8250
+23:20:38 === E5 XONG

@@ -1,0 +1,52 @@
+numpy vét cạn: nDCG@10=0.8158, 1.91 ms/truy vấn (ma trận)
+mariadb vec_m6: {'build_s': 1.6562128067016602, 'index_bytes': 52436992}
+mariadb        M=6   ef=10   recall@10=0.8765 nDCG@10=0.8125 p50=0.44ms p95=0.77ms
+mariadb        M=6   ef=20   recall@10=0.9366 nDCG@10=0.8164 p50=0.34ms p95=0.46ms
+mariadb        M=6   ef=40   recall@10=0.9685 nDCG@10=0.8171 p50=0.36ms p95=0.74ms
+mariadb        M=6   ef=100  recall@10=0.9880 nDCG@10=0.8169 p50=0.57ms p95=1.98ms
+mariadb        M=6   ef=200  recall@10=0.9949 nDCG@10=0.8162 p50=0.49ms p95=0.80ms
+  EXPLAIN: ((1, 'SIMPLE', 'vec_m6', 'index', None, 'v', '514', None, '10', ''),)
+manticore vec_m6: {'build_s': 7.105535268783569, 'index_bytes': 38157153, 'ram_bytes': 18091048}
+manticore      M=6   ef=10   recall@10=0.8600 nDCG@10=0.8108 p50=0.78ms p95=1.33ms
+manticore      M=6   ef=20   recall@10=0.8600 nDCG@10=0.8108 p50=0.45ms p95=0.68ms
+manticore      M=6   ef=40   recall@10=0.8881 nDCG@10=0.8129 p50=0.52ms p95=0.81ms
+manticore      M=6   ef=100  recall@10=0.9561 nDCG@10=0.8161 p50=0.51ms p95=1.09ms
+manticore      M=6   ef=200  recall@10=0.9828 nDCG@10=0.8158 p50=0.59ms p95=0.83ms
+mariadb vec_m16: {'build_s': 7.0947840213775635, 'index_bytes': 57679872}
+mariadb        M=16  ef=10   recall@10=0.9846 nDCG@10=0.8176 p50=0.53ms p95=1.04ms
+mariadb        M=16  ef=20   recall@10=0.9932 nDCG@10=0.8178 p50=0.46ms p95=0.73ms
+mariadb        M=16  ef=40   recall@10=0.9974 nDCG@10=0.8170 p50=0.46ms p95=0.68ms
+mariadb        M=16  ef=100  recall@10=0.9995 nDCG@10=0.8159 p50=0.50ms p95=0.82ms
+mariadb        M=16  ef=200  recall@10=0.9998 nDCG@10=0.8158 p50=0.74ms p95=1.35ms
+  EXPLAIN: ((1, 'SIMPLE', 'vec_m16', 'index', None, 'v', '514', None, '10', ''),)
+manticore vec_m16: {'build_s': 8.373533010482788, 'index_bytes': 40820059, 'ram_bytes': 18091048}
+manticore      M=16  ef=10   recall@10=0.9289 nDCG@10=0.8164 p50=0.85ms p95=1.13ms
+manticore      M=16  ef=20   recall@10=0.9289 nDCG@10=0.8164 p50=0.56ms p95=0.80ms
+manticore      M=16  ef=40   recall@10=0.9397 nDCG@10=0.8175 p50=0.59ms p95=0.89ms
+manticore      M=16  ef=100  recall@10=0.9660 nDCG@10=0.8150 p50=0.52ms p95=0.87ms
+manticore      M=16  ef=200  recall@10=0.9868 nDCG@10=0.8154 p50=0.61ms p95=0.98ms
+mariadb-scan: recall@10=1.0000 p50=7.1ms
+→ system/bench/results/edb2_vector.json
+engine                       |          M |         ef |  recall@10 |    ndcg@10 | map@100_at100 |     p50_ms |     p95_ms |    build_s | index_bytes
+numpy-exact                  |            |            |     1.0000 |     0.8158 |     0.6808 |            |            |            |           
+mariadb                      |          6 |         10 |     0.8765 |     0.8125 |     0.6885 |     0.4363 |     0.7722 |     1.6562 |   52436992
+mariadb                      |          6 |         20 |     0.9366 |     0.8164 |     0.6885 |     0.3437 |     0.4627 |     1.6562 |   52436992
+mariadb                      |          6 |         40 |     0.9685 |     0.8171 |     0.6885 |     0.3570 |     0.7423 |     1.6562 |   52436992
+mariadb                      |          6 |        100 |     0.9880 |     0.8169 |     0.6885 |     0.5748 |     1.9802 |     1.6562 |   52436992
+mariadb                      |          6 |        200 |     0.9949 |     0.8162 |     0.6838 |     0.4867 |     0.8046 |     1.6562 |   52436992
+manticore                    |          6 |         10 |     0.8600 |     0.8108 |     0.6861 |     0.7764 |     1.3322 |     7.1055 |   38157153
+manticore                    |          6 |         20 |     0.8600 |     0.8108 |     0.6861 |     0.4480 |     0.6769 |     7.1055 |   38157153
+manticore                    |          6 |         40 |     0.8881 |     0.8129 |     0.6861 |     0.5209 |     0.8148 |     7.1055 |   38157153
+manticore                    |          6 |        100 |     0.9561 |     0.8161 |     0.6861 |     0.5079 |     1.0872 |     7.1055 |   38157153
+manticore                    |          6 |        200 |     0.9828 |     0.8158 |     0.6861 |     0.5925 |     0.8281 |     7.1055 |   38157153
+mariadb                      |         16 |         10 |     0.9846 |     0.8176 |     0.6818 |     0.5263 |     1.0404 |     7.0948 |   57679872
+mariadb                      |         16 |         20 |     0.9932 |     0.8178 |     0.6818 |     0.4618 |     0.7331 |     7.0948 |   57679872
+mariadb                      |         16 |         40 |     0.9974 |     0.8170 |     0.6818 |     0.4590 |     0.6761 |     7.0948 |   57679872
+mariadb                      |         16 |        100 |     0.9995 |     0.8159 |     0.6818 |     0.5007 |     0.8150 |     7.0948 |   57679872
+mariadb                      |         16 |        200 |     0.9998 |     0.8158 |     0.6809 |     0.7373 |     1.3515 |     7.0948 |   57679872
+manticore                    |         16 |         10 |     0.9289 |     0.8164 |     0.6840 |     0.8516 |     1.1341 |     8.3735 |   40820059
+manticore                    |         16 |         20 |     0.9289 |     0.8164 |     0.6840 |     0.5635 |     0.8001 |     8.3735 |   40820059
+manticore                    |         16 |         40 |     0.9397 |     0.8175 |     0.6840 |     0.5877 |     0.8880 |     8.3735 |   40820059
+manticore                    |         16 |        100 |     0.9660 |     0.8150 |     0.6840 |     0.5178 |     0.8654 |     8.3735 |   40820059
+manticore                    |         16 |        200 |     0.9868 |     0.8154 |     0.6840 |     0.6146 |     0.9828 |     8.3735 |   40820059
+mariadb-scan                 |            |            |     1.0000 |            |            |     7.0521 |     8.0289 |     0.2084 |   28315648

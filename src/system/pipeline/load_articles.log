@@ -1,0 +1,12 @@
+84132 bài; từ vựng train 135546 token, 43777 item, 78 từ dừng (8s)
+item: 135546 dòng (12s)
+  1000/84132 bài, 48491 dòng transaction (14s)
+  11000/84132 bài, 542292 dòng transaction (24s)
+  21000/84132 bài, 1035073 dòng transaction (34s)
+  31000/84132 bài, 1531712 dòng transaction (44s)
+  41000/84132 bài, 2029123 dòng transaction (56s)
+  51000/84132 bài, 2523850 dòng transaction (66s)
+  61000/84132 bài, 3010563 dòng transaction (76s)
+  71000/84132 bài, 3499595 dòng transaction (86s)
+  81000/84132 bài, 3993256 dòng transaction (96s)
+XONG: 84132 bài, 4146151 dòng article_item, 99s

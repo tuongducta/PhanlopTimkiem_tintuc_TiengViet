@@ -1,0 +1,16 @@
+# key<TAB>tài liệu theo IEEE. Bài báo đã xác minh qua api.crossref.org (21/10/2026); tài liệu web đã kiểm tra truy cập được.
+survey	Nhóm thực hiện, "Biểu diễn văn bản dựa trên mẫu phổ biến cho hệ thống tìm kiếm và phân loại chuyên mục tin tức tiếng Việt: Khảo sát và đề xuất hướng tiếp cận Trans2Vec," bài khảo sát môn Tri thức dữ liệu, Trường Đại học Công nghệ TP.HCM (HUTECH), 2026.
+trans2vec	D. Nguyen, T. D. Nguyen, W. Luo, and S. Venkatesh, "Trans2Vec: Learning transaction embedding via items and frequent itemsets," in *Advances in Knowledge Discovery and Data Mining (PAKDD 2018)*, LNAI vol. 10939, Springer, 2018, pp. 361–372, doi: 10.1007/978-3-319-93040-4_29.
+le2014	Q. Le and T. Mikolov, "Distributed representations of sentences and documents," in *Proc. 31st Int. Conf. Machine Learning (ICML)*, 2014, pp. 1188–1196.
+kleppmann2017	M. Kleppmann, *Designing Data-Intensive Applications: The Big Ideas Behind Reliable, Scalable, and Maintainable Systems*. Sebastopol, CA, USA: O'Reilly Media, 2017.
+mariadbvector	MariaDB Foundation, "Vectors," *MariaDB Server Documentation*. [Online]. Available: https://mariadb.com/docs/server/reference/sql-structure/vectors (truy cập 21/10/2026).
+mariadbpartition	MariaDB Foundation, "Partitioning overview," *MariaDB Server Documentation*. [Online]. Available: https://mariadb.com/docs/server/server-usage/partitioning-tables/partitioning-overview (truy cập 21/10/2026).
+manticoreknn	Manticore Software, "KNN vector search," *Manticore Search Manual*. [Online]. Available: https://manual.manticoresearch.com/Searching/KNN (truy cập 21/10/2026).
+manticoretoken	Manticore Software, "Low-level tokenization," *Manticore Search Manual*. [Online]. Available: https://manual.manticoresearch.com/Creating_a_table/NLP_and_tokenization/Low-level_tokenization (truy cập 21/10/2026).
+pyvi	V.-T. Tran, "Pyvi: Python Vietnamese core NLP toolkit," 2017. [Online]. Available: https://github.com/trungtv/pyvi (truy cập 21/10/2026).
+gensim	R. Řehůřek and P. Sojka, "Software framework for topic modelling with large corpora," in *Proc. LREC 2010 Workshop on New Challenges for NLP Frameworks*, Valletta, Malta, 2010, pp. 45–50.
+robertson2009	S. Robertson and H. Zaragoza, "The probabilistic relevance framework: BM25 and beyond," *Foundations and Trends in Information Retrieval*, vol. 3, no. 4, pp. 333–389, 2009, doi: 10.1561/1500000019.
+malkov2020	Y. A. Malkov and D. A. Yashunin, "Efficient and robust approximate nearest neighbor search using hierarchical navigable small world graphs," *IEEE Trans. Pattern Anal. Mach. Intell.*, vol. 42, no. 4, pp. 824–836, 2020, doi: 10.1109/TPAMI.2018.2889473.
+cormack2009	G. V. Cormack, C. L. A. Clarke, and S. Büttcher, "Reciprocal rank fusion outperforms Condorcet and individual rank learning methods," in *Proc. 32nd Int. ACM SIGIR Conf. Research and Development in Information Retrieval*, 2009, pp. 758–759, doi: 10.1145/1571941.1572114.
+houtsma1995	M. Houtsma and A. Swami, "Set-oriented mining for association rules in relational databases," in *Proc. 11th Int. Conf. Data Engineering (ICDE)*, 1995, pp. 25–33, doi: 10.1109/ICDE.1995.380413.
+sarawagi1998	S. Sarawagi, S. Thomas, and R. Agrawal, "Integrating association rule mining with relational database systems: Alternatives and implications," *ACM SIGMOD Record*, vol. 27, no. 2, pp. 343–354, 1998, doi: 10.1145/276305.276335.

@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(./**)",
+      "Edit(./contexte/**)",
+      "Edit(./livrables/**)",
+      "Edit(./src/**)",
+      "Edit(./PLAN.md)",
+      "Bash(scripts/build-docs.sh)",
+      "Bash(git status)",
+      "Bash(git diff:*)"
+    ],
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(./src/system/.env)",
+      "Edit(./sources/**)",
+      "Edit(./contexte/plans/KE_HOACH_SURVEY.md)",
+      "Bash(rm -rf:*)",
+      "Bash(git push --force:*)"
+    ]
+  }
+}

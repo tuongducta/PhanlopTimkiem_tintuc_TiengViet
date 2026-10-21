@@ -1,0 +1,152 @@
+22:27:52 === Tải corpus 
+22:27:55 train=33759 test=50373
+22:27:55 === E1: thực nghiệm chính (word, k=50, d=128)
+22:28:11 View word k=50: {"vocab": 43777, "stopwords": 78, "delta": 0.00535, "n_fi": 3586, "n_fi_len": {"1": 2102, "2": 1069, "3": 415}, "mine_s": 2.8, "fi_per_doc_train": 38.00506531591576, "docs_without_fi2_test": 0.15317729736168184}
+22:28:20 [E1] TF-IDF (toàn văn)      word k=full d=43777 seed=0 svm: acc=0.9228 macroF1=0.9028
+22:28:25 [E1] TF-IDF (toàn văn)      word k=full d=43777 seed=0 lr: acc=0.9231 macroF1=0.9065
+22:28:26 [E1] RET TF-IDF (toàn văn)  word doc: P@10=0.7308 MAP@100=0.5654 nDCG@10=0.7402
+22:28:57 [E1] BOW (toàn văn)         word k=full d=43777 seed=0 svm: acc=0.8990 macroF1=0.8742
+22:29:00 [E1] TF-IDF (top-k item)    word k=50 d=43777 seed=0 svm: acc=0.9107 macroF1=0.8887
+22:29:02 [E1] FI-BIN                 word k=50 d=3586 seed=0 svm: acc=0.8573 macroF1=0.8243
+22:29:06 [E1] FI-SUP                 word k=50 d=3586 seed=0 svm: acc=0.8217 macroF1=0.7884
+22:29:07 [E1] TF-IDF + χ² (128)      word k=full d=128 seed=0 svm: acc=0.7822 macroF1=0.7541
+22:29:38 [E1] MLP-128 có giám sát [7] word k=full d=128 seed=1 svm: acc=0.9212 macroF1=0.9025
+22:29:39 [E1] RET MLP-128 có giám sát [7] word doc: P@10=0.8887 MAP@100=0.8556 nDCG@10=0.8906
+22:30:46 [E1] LDA-100                word k=full d=100 seed=1 svm: acc=0.8511 macroF1=0.8271
+22:30:46 [E1] RET LDA-100            word doc: P@10=0.7601 MAP@100=0.6027 nDCG@10=0.7654
+22:31:38 [E1] TRANS-IT               word k=50 d=128 seed=1 svm: acc=0.8105 macroF1=0.7773
+22:31:38 [E1] RET TRANS-IT           word doc: P@10=0.7949 MAP@100=0.6713 nDCG@10=0.8001
+22:32:13 [E1] TRANS-FI               word k=50 d=128 seed=1 svm: acc=0.7928 macroF1=0.7586
+22:32:13 [E1] RET TRANS-FI           word doc: P@10=0.7821 MAP@100=0.6508 nDCG@10=0.7875
+22:33:14 [E1] Trans2Vec-JOI          word k=50 d=128 seed=1 svm: acc=0.8072 macroF1=0.7671
+22:33:14 [E1] Trans2Vec-JOI          word k=50 d=128 seed=1 lr: acc=0.8431 macroF1=0.8144
+22:33:15 [E1] RET Trans2Vec-JOI      word doc: P@10=0.8049 MAP@100=0.6863 nDCG@10=0.8094
+22:33:17 [E1] Trans2Vec-IND          word k=50 d=128 seed=1 svm: acc=0.8077 macroF1=0.7715
+22:33:17 [E1] RET Trans2Vec-IND      word doc: P@10=0.7952 MAP@100=0.6704 nDCG@10=0.7999
+22:34:13 [E1] TRANS-IT               word k=50 d=128 seed=2 svm: acc=0.8028 macroF1=0.7688
+22:34:50 [E1] TRANS-FI               word k=50 d=128 seed=2 svm: acc=0.7933 macroF1=0.7585
+22:35:50 [E1] Trans2Vec-JOI          word k=50 d=128 seed=2 svm: acc=0.8060 macroF1=0.7660
+22:35:51 [E1] Trans2Vec-IND          word k=50 d=128 seed=2 svm: acc=0.8015 macroF1=0.7667
+22:36:44 [E1] TRANS-IT               word k=50 d=128 seed=3 svm: acc=0.8009 macroF1=0.7667
+22:37:19 [E1] TRANS-FI               word k=50 d=128 seed=3 svm: acc=0.7891 macroF1=0.7550
+22:38:20 [E1] Trans2Vec-JOI          word k=50 d=128 seed=3 svm: acc=0.8046 macroF1=0.7661
+22:38:21 [E1] Trans2Vec-IND          word k=50 d=128 seed=3 svm: acc=0.8001 macroF1=0.7640
+22:38:24 [E1] JOI ⊕ TF-IDF (A5)      word k=50 d=128 seed=1 svm: acc=0.8914 macroF1=0.8671
+22:39:34 [E1] JOI – FI đóng (A3)     word k=50 d=128 seed=1 svm: acc=0.8080 macroF1=0.7695
+22:39:36 [E1] RET TF-IDF (toàn văn)  word 3 từ khóa – tất cả: P@10=0.6223 MAP@100=0.4202 nDCG@10=0.6339
+22:39:36 [E1] RET Trans2Vec-JOI      word 3 từ khóa – tất cả: P@10=0.6910 MAP@100=0.6021 nDCG@10=0.6922
+22:39:36 [E1] RET TF-IDF (toàn văn)  word 3 từ khóa – có FI: P@10=0.7946 MAP@100=0.6442 nDCG@10=0.8053
+22:39:37 [E1] RET Trans2Vec-JOI      word 3 từ khóa – có FI: P@10=0.8482 MAP@100=0.7633 nDCG@10=0.8516
+22:39:37 [E1] RET TF-IDF (toàn văn)  word 3 từ khóa – không FI: P@10=0.6121 MAP@100=0.4070 nDCG@10=0.6237
+22:39:37 [E1] RET Trans2Vec-JOI      word 3 từ khóa – không FI: P@10=0.6852 MAP@100=0.5955 nDCG@10=0.6862
+22:39:37 Đã ghi category_fis.md
+22:39:37 === E2 (A1): âm tiết, k=50, d=128
+22:40:11 View syl k=50: {"vocab": 19963, "stopwords": 149, "delta": 0.00535, "n_fi": 8984, "n_fi_len": {"1": 1991, "2": 5299, "3": 1694}, "mine_s": 3.8, "fi_per_doc_train": 95.72357001096005, "docs_without_fi2_test": 0.006312905723304151}
+22:40:20 [E2] TF-IDF (toàn văn)      syl k=full d=19963 seed=0 svm: acc=0.9115 macroF1=0.8907
+22:40:22 [E2] RET TF-IDF (toàn văn)  syl doc: P@10=0.7293 MAP@100=0.5557 nDCG@10=0.7390
+22:41:12 [E2] TRANS-IT               syl k=50 d=128 seed=1 svm: acc=0.7807 macroF1=0.7328
+22:41:12 [E2] RET TRANS-IT           syl doc: P@10=0.7729 MAP@100=0.6120 nDCG@10=0.7798
+22:42:25 [E2] TRANS-FI               syl k=50 d=128 seed=1 svm: acc=0.8090 macroF1=0.7742
+22:42:25 [E2] RET TRANS-FI           syl doc: P@10=0.7628 MAP@100=0.5975 nDCG@10=0.7675
+22:43:52 [E2] Trans2Vec-JOI          syl k=50 d=128 seed=1 svm: acc=0.8159 macroF1=0.7745
+22:43:52 [E2] RET Trans2Vec-JOI      syl doc: P@10=0.7798 MAP@100=0.6253 nDCG@10=0.7845
+22:43:54 FI 2 âm tiết trùng một từ của pyvi: 713/5299
+22:43:54 === E3 (A2): word, k=20
+22:44:14 View word k=20: {"vocab": 43777, "stopwords": 78, "delta": 0.00535, "n_fi": 575, "n_fi_len": {"1": 501, "2": 71, "3": 3}, "mine_s": 0.8, "fi_per_doc_train": 5.674249829675049, "docs_without_fi2_test": 0.7667202668096004}
+22:44:50 [E3] TRANS-IT               word k=20 d=128 seed=1 svm: acc=0.8049 macroF1=0.7660
+22:45:19 [E3] Trans2Vec-JOI          word k=20 d=128 seed=1 svm: acc=0.7993 macroF1=0.7611
+22:45:19 === E3 (A2): word, k=100
+22:46:17 View word k=100: {"vocab": 43777, "stopwords": 78, "delta": 0.00535, "n_fi": 30866, "n_fi_len": {"1": 3232, "2": 19976, "3": 7658}, "mine_s": 14.1, "fi_per_doc_train": 282.34346396516486, "docs_without_fi2_test": 0.0007345204772397912}
+22:47:48 [E3] TRANS-IT               word k=100 d=128 seed=1 svm: acc=0.8243 macroF1=0.7859
+22:52:25 [E3] Trans2Vec-JOI          word k=100 d=128 seed=1 svm: acc=0.8527 macroF1=0.8225
+22:52:25 === E4 (A4): word, k=50, d=64
+22:53:26 [E4] Trans2Vec-JOI          word k=50 d=64 seed=1 svm: acc=0.8129 macroF1=0.7750
+22:53:26 === E4 (A4): word, k=50, d=256
+22:55:11 [E4] Trans2Vec-JOI          word k=50 d=256 seed=1 svm: acc=0.8020 macroF1=0.7635
+22:55:11 === XONG
+22:55:30 === Tải corpus 
+22:55:34 train=33759 test=50373
+22:55:34 === XONG
+22:55:34 === E5: bộ phân loại tinh chỉnh C bằng CV trên train
+22:56:00 View word k=50: {"vocab": 43777, "stopwords": 78, "delta": 0.00535, "n_fi": 3586, "n_fi_len": {"1": 2102, "2": 1069, "3": 415}, "mine_s": 6.1, "fi_per_doc_train": 38.00506531591576, "docs_without_fi2_test": 0.15317729736168184}
+22:56:42 [E5] TF-IDF (toàn văn)      word k=50 d=43777 seed=1 svm-tuned: acc=0.9228 macroF1=0.9028
+22:57:02 [E5] TF-IDF (toàn văn)      word k=50 d=43777 seed=1 lr-tuned: acc=0.9246 macroF1=0.9065
+22:58:06 [E5] TRANS-IT               word k=50 d=128 seed=1 svm-tuned: acc=0.7879 macroF1=0.7521
+22:58:09 [E5] TRANS-IT               word k=50 d=128 seed=1 lr-tuned: acc=0.7935 macroF1=0.7620
+22:58:52 [E5] TRANS-FI               word k=50 d=128 seed=1 svm-tuned: acc=0.7740 macroF1=0.7386
+22:58:54 [E5] TRANS-FI               word k=50 d=128 seed=1 lr-tuned: acc=0.7824 macroF1=0.7506
+23:00:07 [E5] Trans2Vec-JOI          word k=50 d=128 seed=1 svm-tuned: acc=0.7810 macroF1=0.7406
+23:00:09 [E5] Trans2Vec-JOI          word k=50 d=128 seed=1 lr-tuned: acc=0.7942 macroF1=0.7611
+23:01:05 View word k=100: {"vocab": 43777, "stopwords": 78, "delta": 0.00535, "n_fi": 30866, "n_fi_len": {"1": 3232, "2": 19976, "3": 7658}, "mine_s": 15.3, "fi_per_doc_train": 282.34346396516486, "docs_without_fi2_test": 0.0007345204772397912}
+23:02:40 [E5] TRANS-IT               word k=100 d=128 seed=1 svm-tuned: acc=0.8068 macroF1=0.7679
+23:02:42 [E5] TRANS-IT               word k=100 d=128 seed=1 lr-tuned: acc=0.8462 macroF1=0.8171
+23:07:42 [E5] Trans2Vec-JOI          word k=100 d=128 seed=1 svm-tuned: acc=0.8544 macroF1=0.8242
+23:07:43 [E5] Trans2Vec-JOI          word k=100 d=128 seed=1 lr-tuned: acc=0.8560 macroF1=0.8271
+23:07:43 === E5 XONG
+23:08:09 === Tải corpus 
+23:08:13 train=33759 test=50373
+23:08:13 === XONG
+23:08:13 === E5: bộ phân loại tinh chỉnh C bằng CV trên train
+23:08:27 View word k=50: {"vocab": 43777, "stopwords": 78, "delta": 0.00535, "n_fi": 3586, "n_fi_len": {"1": 2102, "2": 1069, "3": 415}, "mine_s": 2.6, "fi_per_doc_train": 38.00506531591576, "docs_without_fi2_test": 0.15317729736168184}
+23:09:14 [E5] TF-IDF (toàn văn)      word k=50 d=43777 seed=1 svm-tuned: acc=0.9228 macroF1=0.9028
+23:09:36 [E5] TF-IDF (toàn văn)      word k=50 d=43777 seed=1 lr-tuned: acc=0.9246 macroF1=0.9065
+23:10:38 [E5] TRANS-IT               word k=50 d=128 seed=1 svm-tuned: acc=0.7884 macroF1=0.7542
+23:10:41 [E5] TRANS-IT               word k=50 d=128 seed=1 lr-tuned: acc=0.7790 macroF1=0.7482
+23:11:20 [E5] TRANS-FI               word k=50 d=128 seed=1 svm-tuned: acc=0.7789 macroF1=0.7439
+23:11:22 [E5] TRANS-FI               word k=50 d=128 seed=1 lr-tuned: acc=0.7679 macroF1=0.7363
+23:12:31 [E5] Trans2Vec-JOI          word k=50 d=128 seed=1 svm-tuned: acc=0.7816 macroF1=0.7406
+23:12:34 [E5] Trans2Vec-JOI          word k=50 d=128 seed=1 lr-tuned: acc=0.7749 macroF1=0.7423
+23:13:31 View word k=100: {"vocab": 43777, "stopwords": 78, "delta": 0.00535, "n_fi": 30866, "n_fi_len": {"1": 3232, "2": 19976, "3": 7658}, "mine_s": 14.9, "fi_per_doc_train": 282.34346396516486, "docs_without_fi2_test": 0.0007345204772397912}
+23:15:06 [E5] TRANS-IT               word k=100 d=128 seed=1 svm-tuned: acc=0.8078 macroF1=0.7686
+23:15:08 [E5] TRANS-IT               word k=100 d=128 seed=1 lr-tuned: acc=0.8262 macroF1=0.7954
+23:19:25 === Tải corpus 
+23:19:29 train=33759 test=50373
+23:19:29 === XONG
+23:19:30 === E6: vector train suy luận lại (nhất quán với test)
+23:19:48 View word k=50: {"vocab": 43777, "stopwords": 78, "delta": 0.00535, "n_fi": 3586, "n_fi_len": {"1": 2102, "2": 1069, "3": 415}, "mine_s": 2.7, "fi_per_doc_train": 38.00506531591576, "docs_without_fi2_test": 0.15317729736168184}
+23:20:36 [E5] Trans2Vec-JOI          word k=100 d=128 seed=1 svm-tuned: acc=0.8519 macroF1=0.8213
+23:20:38 [E5] Trans2Vec-JOI          word k=100 d=128 seed=1 lr-tuned: acc=0.8541 macroF1=0.8250
+23:20:38 === E5 XONG
+23:21:18 [E6] TRANS-IT (train suy luận lại) word k=50 d=128 seed=1 svm: acc=0.8700 macroF1=0.8412
+23:21:19 [E6] TRANS-IT (train suy luận lại) word k=50 d=128 seed=1 lr: acc=0.8740 macroF1=0.8473
+23:21:28 [E6] TRANS-IT (train suy luận lại) word k=50 d=128 seed=1 svm-tuned: acc=0.8700 macroF1=0.8412
+23:21:28 [E6] TRANS-IT (train suy luận lại) word k=50 d=128 seed=1 lr-tuned: acc=0.8761 macroF1=0.8491
+23:21:28 [E6] RET TRANS-IT (train suy luận lại) word doc: P@10=0.7989 MAP@100=0.6643 nDCG@10=0.8029
+23:22:13 [E6] TRANS-FI (train suy luận lại) word k=50 d=128 seed=1 svm: acc=0.8491 macroF1=0.8198
+23:22:13 [E6] TRANS-FI (train suy luận lại) word k=50 d=128 seed=1 lr: acc=0.8539 macroF1=0.8263
+23:22:20 [E6] TRANS-FI (train suy luận lại) word k=50 d=128 seed=1 svm-tuned: acc=0.8491 macroF1=0.8198
+23:22:20 [E6] TRANS-FI (train suy luận lại) word k=50 d=128 seed=1 lr-tuned: acc=0.8539 macroF1=0.8263
+23:22:20 [E6] RET TRANS-FI (train suy luận lại) word doc: P@10=0.7700 MAP@100=0.6225 nDCG@10=0.7749
+23:23:48 [E6] Trans2Vec-JOI (train suy luận lại) word k=50 d=128 seed=1 svm: acc=0.8708 macroF1=0.8424
+23:23:48 [E6] Trans2Vec-JOI (train suy luận lại) word k=50 d=128 seed=1 lr: acc=0.8749 macroF1=0.8487
+23:23:56 [E6] Trans2Vec-JOI (train suy luận lại) word k=50 d=128 seed=1 svm-tuned: acc=0.8708 macroF1=0.8424
+23:23:56 [E6] Trans2Vec-JOI (train suy luận lại) word k=50 d=128 seed=1 lr-tuned: acc=0.8779 macroF1=0.8519
+23:23:57 [E6] RET Trans2Vec-JOI (train suy luận lại) word doc: P@10=0.8062 MAP@100=0.6796 nDCG@10=0.8117
+23:24:51 View word k=100: {"vocab": 43777, "stopwords": 78, "delta": 0.00535, "n_fi": 30866, "n_fi_len": {"1": 3232, "2": 19976, "3": 7658}, "mine_s": 14.3, "fi_per_doc_train": 282.34346396516486, "docs_without_fi2_test": 0.0007345204772397912}
+23:26:48 [E6] TRANS-IT (train suy luận lại) word k=100 d=128 seed=1 svm: acc=0.8676 macroF1=0.8393
+23:26:49 [E6] TRANS-IT (train suy luận lại) word k=100 d=128 seed=1 lr: acc=0.8744 macroF1=0.8483
+23:26:55 [E6] TRANS-IT (train suy luận lại) word k=100 d=128 seed=1 svm-tuned: acc=0.8678 macroF1=0.8395
+23:26:55 [E6] TRANS-IT (train suy luận lại) word k=100 d=128 seed=1 lr-tuned: acc=0.8744 macroF1=0.8483
+23:26:55 [E6] RET TRANS-IT (train suy luận lại) word doc: P@10=0.7782 MAP@100=0.6226 nDCG@10=0.7854
+23:34:26 [E6] Trans2Vec-JOI (train suy luận lại) word k=100 d=128 seed=1 svm: acc=0.8657 macroF1=0.8384
+23:34:27 [E6] Trans2Vec-JOI (train suy luận lại) word k=100 d=128 seed=1 lr: acc=0.8704 macroF1=0.8452
+23:34:35 [E6] Trans2Vec-JOI (train suy luận lại) word k=100 d=128 seed=1 svm-tuned: acc=0.8657 macroF1=0.8384
+23:34:35 [E6] Trans2Vec-JOI (train suy luận lại) word k=100 d=128 seed=1 lr-tuned: acc=0.8704 macroF1=0.8452
+23:34:35 [E6] RET Trans2Vec-JOI (train suy luận lại) word doc: P@10=0.7640 MAP@100=0.5773 nDCG@10=0.7700
+23:35:18 View syl k=50: {"vocab": 19963, "stopwords": 149, "delta": 0.00535, "n_fi": 8984, "n_fi_len": {"1": 1991, "2": 5299, "3": 1694}, "mine_s": 4.1, "fi_per_doc_train": 95.72357001096005, "docs_without_fi2_test": 0.006312905723304151}
+23:36:20 [E6] TRANS-IT (train suy luận lại) syl k=50 d=128 seed=1 svm: acc=0.8385 macroF1=0.8091
+23:36:21 [E6] TRANS-IT (train suy luận lại) syl k=50 d=128 seed=1 lr: acc=0.8441 macroF1=0.8159
+23:36:28 [E6] TRANS-IT (train suy luận lại) syl k=50 d=128 seed=1 svm-tuned: acc=0.8385 macroF1=0.8091
+23:36:28 [E6] TRANS-IT (train suy luận lại) syl k=50 d=128 seed=1 lr-tuned: acc=0.8441 macroF1=0.8159
+23:36:28 [E6] RET TRANS-IT (train suy luận lại) syl doc: P@10=0.7471 MAP@100=0.5478 nDCG@10=0.7575
+23:38:08 [E6] TRANS-FI (train suy luận lại) syl k=50 d=128 seed=1 svm: acc=0.8339 macroF1=0.8045
+23:38:08 [E6] TRANS-FI (train suy luận lại) syl k=50 d=128 seed=1 lr: acc=0.8386 macroF1=0.8113
+23:38:14 [E6] TRANS-FI (train suy luận lại) syl k=50 d=128 seed=1 svm-tuned: acc=0.8338 macroF1=0.8042
+23:38:14 [E6] TRANS-FI (train suy luận lại) syl k=50 d=128 seed=1 lr-tuned: acc=0.8386 macroF1=0.8104
+23:38:15 [E6] RET TRANS-FI (train suy luận lại) syl doc: P@10=0.7498 MAP@100=0.5736 nDCG@10=0.7565
+23:40:18 [E6] Trans2Vec-JOI (train suy luận lại) syl k=50 d=128 seed=1 svm: acc=0.8460 macroF1=0.8180
+23:40:18 [E6] Trans2Vec-JOI (train suy luận lại) syl k=50 d=128 seed=1 lr: acc=0.8502 macroF1=0.8244
+23:40:26 [E6] Trans2Vec-JOI (train suy luận lại) syl k=50 d=128 seed=1 svm-tuned: acc=0.8460 macroF1=0.8178
+23:40:26 [E6] Trans2Vec-JOI (train suy luận lại) syl k=50 d=128 seed=1 lr-tuned: acc=0.8502 macroF1=0.8244
+23:40:26 [E6] RET Trans2Vec-JOI (train suy luận lại) syl doc: P@10=0.7712 MAP@100=0.6057 nDCG@10=0.7782
+23:40:27 === E6 XONG

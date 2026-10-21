@@ -1,0 +1,8 @@
+{"exp": "E6", "method": "TRANS-IT (train suy luận lại)", "view": "word", "query": "doc", "p@10": 0.7989, "map@100": 0.664335428592246, "ndcg@10": 0.8028670730737615}
+{"exp": "E6", "method": "TRANS-FI (train suy luận lại)", "view": "word", "query": "doc", "p@10": 0.77, "map@100": 0.6224838087363382, "ndcg@10": 0.7749496252841543}
+{"exp": "E6", "method": "Trans2Vec-JOI (train suy luận lại)", "view": "word", "query": "doc", "p@10": 0.8062, "map@100": 0.679617824225647, "ndcg@10": 0.811724014102186}
+{"exp": "E6", "method": "TRANS-IT (train suy luận lại)", "view": "word", "query": "doc", "p@10": 0.7782, "map@100": 0.6225831416937101, "ndcg@10": 0.7854342934820631}
+{"exp": "E6", "method": "Trans2Vec-JOI (train suy luận lại)", "view": "word", "query": "doc", "p@10": 0.764, "map@100": 0.5773397977016846, "ndcg@10": 0.7700391208087405}
+{"exp": "E6", "method": "TRANS-IT (train suy luận lại)", "view": "syl", "query": "doc", "p@10": 0.7471, "map@100": 0.5477620168749758, "ndcg@10": 0.7575376280241465}
+{"exp": "E6", "method": "TRANS-FI (train suy luận lại)", "view": "syl", "query": "doc", "p@10": 0.7498, "map@100": 0.5736346652325431, "ndcg@10": 0.7565300280998403}
+{"exp": "E6", "method": "Trans2Vec-JOI (train suy luận lại)", "view": "syl", "query": "doc", "p@10": 0.7712, "map@100": 0.6056741573147151, "ndcg@10": 0.7782150556009837}
