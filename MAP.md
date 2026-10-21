@@ -20,8 +20,10 @@
 | **`src/`** | **Mã nguồn** |
 | `src/experiments/` | Thực nghiệm Trans2Vec (`t2v.py`, `prepare.py`, `run_*.py`, `make_report.py`), kết quả ở `results/` |
 | `src/system/` | Hệ thống MariaDB + Manticore: `docker-compose.yml`, `db/` (DDL), `pipeline/` (nạp, huấn luyện, đồng bộ, RSS), `app/` (Streamlit), `bench/` (E-DB*), `models/` (mô hình đã huấn luyện), `README.md` |
-| `scripts/` | `build-docs.sh`, `run-app.sh`, `count-pages.sh` |
-| `docs/` | Ảnh mẫu cấu trúc `harness-project_template_demo.png` |
+| `scripts/` | `build-docs.sh`, `run-app.sh`, `count-pages.sh`, `init-git.sh` |
+| `docs/` | Ảnh mẫu cấu trúc `harness-project_template_demo.png`, `sync-guide.md` (commit và gộp nhánh) |
+| `WORKTREE.md` | Luật chạy nhiều phiên song song bằng git worktree; dùng chung CSDL nên có giới hạn |
+| `.git/` | Repo cục bộ, nhánh `main`, chưa có remote; dữ liệu lớn nằm ngoài git (`.gitignore`) |
 | `.claude/` | Cấu hình Claude Code: settings, rules, skills, agents |
 | `.streamlit/config.toml` | Giao diện sáng; Streamlit chỉ đọc file này khi chạy từ thư mục gốc |
 | `.venv-exp/` | Python 3.11, môi trường chính. `.venv/` (Python 3.14) không dùng cho dự án |

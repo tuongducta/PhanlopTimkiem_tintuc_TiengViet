@@ -17,4 +17,5 @@ Chi tiết từng giai đoạn ở `contexte/plans/`.
 
 ## Tổ chức dự án
 - [x] Dọn file thừa và tái cấu trúc theo mẫu Harness tầng 2 (21/10). Xem `KE_HOACH_TAI_CAU_TRUC.md`.
-- [ ] (Tùy chọn) Tầng 3: git và GitHub riêng tư.
+- [x] Tầng 3, git cục bộ: `WORKTREE.md`, `scripts/init-git.sh`, `docs/sync-guide.md`, commit đầu tiên (21/10).
+- [ ] (Tùy chọn) Đưa lên GitHub private: chỉ làm khi anh/chị yêu cầu.

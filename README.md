@@ -1,11 +1,12 @@
 # Trans2Vec cho tin tức tiếng Việt: khảo sát và hệ thống MariaDB + Manticore
 
-Dự án cho hai môn sau đại học ở HUTECH: **Tri thức dữ liệu** và **Hệ cơ sở dữ liệu nâng cao**. Cấu trúc thư mục theo mẫu *Claude Code Harness*, tầng 2 (xem `MAP.md` và `docs/harness-project_template_demo.png`).
+Dự án cho hai môn sau đại học ở HUTECH: **Tri thức dữ liệu** và **Hệ cơ sở dữ liệu nâng cao**. Cấu trúc thư mục theo mẫu *Claude Code Harness*, tầng 3 với git cục bộ, không có remote (xem `MAP.md` và `docs/harness-project_template_demo.png`).
 
 | Tầng | Nội dung |
 |---|---|
 | 1. Nền tảng | `CLAUDE.md`, `MAP.md`, `contexte/`, `livrables/` |
 | 2. Harness | + `CLAUDE.local.md`, `AGENTS.md`, `SPEC.md`, `PLAN.md`, `.mcp.json`, `.claude/`, `sources/`, `scripts/`, `docs/`, CI, `.env.example` |
+| 3. Đồng bộ | + `WORKTREE.md`, `scripts/init-git.sh`, `docs/sync-guide.md`, git cục bộ (nhánh `main`) |
 
 ## Cài đặt
 1. **Python 3.11** trong `.venv-exp/`. Các gói chính: gensim, scikit-learn, pyvi, pymysql, streamlit. Phải ghim numpy 2.2.6 và scipy 1.15.3, vì gensim lỗi với numpy 2.4.

@@ -203,5 +203,20 @@ Nhóm 2b giữ nguyên theo Q-R2.
 **Chưa làm hoặc lưu ý:**
 - `.idea/` (IntelliJ) có thể còn trỏ tới thư mục cũ; IDE thường tự cập nhật khi mở lại.
 - Bản nháp survey vẫn nhắc `experiments/RESULTS.md` dạng chữ; sẽ sửa khi làm GĐ11 (chờ Q5).
-- Tầng 3 (git) chưa làm.
+- Tầng 3: xem Mục 7.
+
+---
+
+## 7. Tầng 3, chỉ git cục bộ (21/10/2026, người dùng yêu cầu)
+
+**File mới:**
+- `WORKTREE.md`: luật chạy song song. Bổ sung so với mẫu: tạo liên kết tới dữ liệu và mô hình nằm ngoài git; cảnh báo các phiên dùng chung một CSDL.
+- `scripts/init-git.sh`: chỉ khởi tạo cục bộ. Bỏ phần `gh repo create` và push của mẫu; chạy lại được.
+- `docs/sync-guide.md`: quy ước commit và gộp nhánh khi chưa có remote.
+
+**Repo:**
+- `git init -b main`. Danh tính đặt riêng cho repo (`user.name` "Tạ Tường" lấy từ tài khoản macOS, `user.email` của người dùng); không đổi cấu hình toàn máy.
+- Commit đầu `3b93759`: 172 file, 5,8 MB, thư mục `.git` 5,3 MB.
+- Trước khi commit đã kiểm tra: không có `.env`, `.venv*`, `sources/data|papers|repos`, `src/system/models/`, `CLAUDE.local.md`, `.idea/`. Chỉ có mật khẩu mặc định cho máy cá nhân trong `docker-compose.yml`, đã ghi rõ trong README.
+- Chưa có remote, chưa push.
 
