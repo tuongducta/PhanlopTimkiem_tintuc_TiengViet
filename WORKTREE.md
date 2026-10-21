@@ -1,4 +1,4 @@
-# WORKTREE.md — Luật chạy song song (git cục bộ, không có remote)
+# WORKTREE.md — Luật chạy song song (git worktree; chỉ phiên chính push)
 
 - Mỗi phiên Claude chạy song song dùng 1 git worktree và 1 nhánh riêng:
   ```bash

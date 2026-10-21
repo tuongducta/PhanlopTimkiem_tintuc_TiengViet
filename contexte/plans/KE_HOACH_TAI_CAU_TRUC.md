@@ -215,8 +215,8 @@ Nhóm 2b giữ nguyên theo Q-R2.
 - `docs/sync-guide.md`: quy ước commit và gộp nhánh khi chưa có remote.
 
 **Repo:**
-- `git init -b main`. Danh tính đặt riêng cho repo (`user.name` "Tạ Tường" lấy từ tài khoản macOS, `user.email` của người dùng); không đổi cấu hình toàn máy.
-- Commit đầu `3b93759`: 172 file, 5,8 MB, thư mục `.git` 5,3 MB.
+- `git init -b main`. Danh tính đặt riêng cho repo (`user.name` "Tạ Tường" lấy từ tài khoản macOS, `user.email` = tuongduc.ta@gmail.com theo yêu cầu, đã viết lại tác giả cả 2 commit trước khi có remote); không đổi cấu hình toàn máy.
+- Commit đầu `169d4fc`: 172 file, 5,8 MB, thư mục `.git` 5,3 MB.
 - Trước khi commit đã kiểm tra: không có `.env`, `.venv*`, `sources/data|papers|repos`, `src/system/models/`, `CLAUDE.local.md`, `.idea/`. Chỉ có mật khẩu mặc định cho máy cá nhân trong `docker-compose.yml`, đã ghi rõ trong README.
-- Chưa có remote, chưa push.
+- Người dùng tạo repo và gửi link: remote `origin` = GitHub riêng tư `tuongducta/PhanlopTimkiem_tintuc_TiengViet` (riêng tư, đang trống, xác thực SSH bằng tài khoản `tuongducta`). **Chưa push.**
 

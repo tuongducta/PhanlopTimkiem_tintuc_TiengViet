@@ -15,7 +15,7 @@
 5. **Không sửa trực tiếp file đã build** (`livrables/**/*.md`, `.docx` cùng tên thư mục). Sửa `draft/` rồi build lại (xem `scripts/build-docs.sh`).
 6. Không đọc hay ghi `.env`, không in mật khẩu ra màn hình.
 7. Việc chạy lâu (huấn luyện, benchmark, dựng chỉ mục, xuất PDF) chạy nền.
-8. Xong mỗi bước thì cập nhật `PLAN.md` và kế hoạch chi tiết tương ứng, rồi commit nhỏ trên `main` (quy ước ở `docs/sync-guide.md`). Repo chỉ có ở máy này: không thêm remote, không push khi chưa được yêu cầu.
+8. Xong mỗi bước thì cập nhật `PLAN.md` và kế hoạch chi tiết tương ứng, rồi commit nhỏ trên `main` (quy ước ở `docs/sync-guide.md`). Remote `origin` = GitHub riêng tư `tuongducta/PhanlopTimkiem_tintuc_TiengViet`; **không push khi chưa được yêu cầu**. Email commit của repo: tuongduc.ta@gmail.com.
 
 ## Điều cấm và lưu ý đã thống nhất
 - Không sửa nội dung `contexte/plans/KE_HOACH_SURVEY.md` (bản v2).

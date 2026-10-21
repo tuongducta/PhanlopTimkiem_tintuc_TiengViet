@@ -1,6 +1,6 @@
 # Trans2Vec cho tin tức tiếng Việt: khảo sát và hệ thống MariaDB + Manticore
 
-Dự án cho hai môn sau đại học ở HUTECH: **Tri thức dữ liệu** và **Hệ cơ sở dữ liệu nâng cao**. Cấu trúc thư mục theo mẫu *Claude Code Harness*, tầng 3 với git cục bộ, không có remote (xem `MAP.md` và `docs/harness-project_template_demo.png`).
+Dự án cho hai môn sau đại học ở HUTECH: **Tri thức dữ liệu** và **Hệ cơ sở dữ liệu nâng cao**. Cấu trúc thư mục theo mẫu *Claude Code Harness*, tầng 3: git nhánh `main`, remote `origin` = GitHub riêng tư `tuongducta/PhanlopTimkiem_tintuc_TiengViet` (xem `MAP.md` và `docs/harness-project_template_demo.png`).
 
 | Tầng | Nội dung |
 |---|---|

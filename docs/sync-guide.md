@@ -1,6 +1,6 @@
 # Đồng bộ 3 bước (git cục bộ)
 
-Repo chỉ có ở máy này, chưa có remote. Vì vậy "đồng bộ" nghĩa là giữ lịch sử thay đổi gọn và gộp các nhánh song song.
+Remote `origin` = GitHub riêng tư `tuongducta/PhanlopTimkiem_tintuc_TiengViet`. Chỉ push khi người dùng yêu cầu. Trước khi push, kiểm tra không có `.env` và không có PDF có bản quyền.
 
 1. **Đầu phiên:** chạy `git status`. Phải sạch; nếu còn thay đổi dở thì commit hoặc `git stash` trước.
 2. **Làm và commit nhỏ:** mỗi bước trong `PLAN.md` là một commit, tiền tố `feat:`, `fix:`, `docs:`, `chore:`, `data:`. Ví dụ:
@@ -10,4 +10,4 @@ Repo chỉ có ở máy này, chưa có remote. Vì vậy "đồng bộ" nghĩa 
 
 **Không đưa vào git** (đã có trong `.gitignore`): `.env`, `CLAUDE.local.md`, `.venv*`, `sources/data|papers|repos`, `src/system/models/`. Những thứ này sao lưu riêng; mô hình sinh lại được bằng `train_models.py` và `train_variants.py`.
 
-**Khi muốn lên GitHub:** tạo repo **private**, rồi chạy `git remote add origin <url>` và `git push -u origin main`. Trước khi push, kiểm tra không có `.env` và không có PDF có bản quyền.
+**Đẩy lên:** `git push -u origin main` (lần đầu), sau đó `git push`.
