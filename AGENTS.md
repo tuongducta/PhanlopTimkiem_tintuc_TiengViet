@@ -7,6 +7,7 @@
   - `livrables/*/draft/` và `livrables/*/figures/` (nguồn của sản phẩm nộp);
   - `PLAN.md`.
 - Chỉ đọc: `sources/`, `.venv*/`.
+- Không tự `git commit` hay `git push`: người dùng tự làm. Chỉ gợi ý câu commit.
 - Không xóa file ngoài `livrables/` khi chưa được xác nhận. Không xóa bảng trong CSDL khi chưa được xác nhận.
 - Số liệu đưa vào tài liệu phải lấy từ kết quả thật (`src/system/bench/results/*.json`, `src/experiments/results/`, bảng `eval_result`). Không ước đoán.
 - Kết thúc task: tóm tắt 3–5 dòng thay đổi, kèm danh sách file đã sửa và cách đã kiểm tra.

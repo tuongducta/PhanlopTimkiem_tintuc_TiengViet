@@ -17,7 +17,11 @@
       "Edit(./sources/**)",
       "Edit(./contexte/plans/KE_HOACH_SURVEY.md)",
       "Bash(rm -rf:*)",
-      "Bash(git push --force:*)"
+      "Bash(git push:*)",
+      "Bash(git commit:*)",
+      "Bash(git rebase:*)",
+      "Bash(git merge:*)",
+      "Bash(git tag:*)"
     ]
   }
 }
