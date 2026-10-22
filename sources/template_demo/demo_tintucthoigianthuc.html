@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+
+<html class="h-full bg-[#080a0f] text-slate-200" lang="vi"><head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Tin mới nhất - Trans2Vec News</title>
+  <!-- Tailwind CSS CDN with forms and container queries plugins -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <!-- Tailwind Configuration -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            cyber: {
+              cyan: '#00f2fe',
+              violet: '#6366f1',
+              neon: '#38bdf8',
+            },
+            obsidian: {
+              950: '#07090e',
+              900: '#0c0f17',
+              850: '#111622',
+              800: '#161d2d',
+              700: '#1e293b'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style data-purpose="custom-ui-effects">
+    /* Tùy chỉnh thanh cuộn trang phong cách Cyber Dark */
+    .custom-scrollbar::-webkit-scrollbar,
+    ::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track,
+    ::-webkit-scrollbar-track {
+      background: rgba(15, 23, 42, 0.4);
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb,
+    ::-webkit-scrollbar-thumb {
+      background: rgba(99, 102, 241, 0.25);
+      border-radius: 9999px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover,
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(0, 242, 254, 0.4);
+    }
+    .glow-cyan {
+      box-shadow: 0 0 20px -3px rgba(0, 242, 254, 0.25);
+    }
+    .glow-indigo {
+      box-shadow: 0 0 25px -4px rgba(99, 102, 241, 0.35);
+    }
+    .ambient-bg {
+      background-image:
+              radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.12) 0px, transparent 50%),
+              radial-gradient(at 100% 0%, rgba(0, 242, 254, 0.08) 0px, transparent 40%),
+              radial-gradient(at 50% 100%, rgba(139, 92, 246, 0.06) 0px, transparent 60%);
+    }
+  </style>
+</head>
+<body class="h-full font-sans antialiased flex overflow-hidden bg-obsidian-950 text-slate-300 selection:bg-cyber-cyan selection:text-black">
+<!-- Ambient lighting layer -->
+<div class="fixed inset-0 pointer-events-none ambient-bg z-0 opacity-80"></div>
+<!-- BEGIN: LeftSidebar -->
+<aside class="w-72 flex-shrink-0 bg-obsidian-900/90 backdrop-blur-xl text-slate-300 flex flex-col justify-between border-r border-white/5 select-none z-30 min-h-screen">
+  <div class="flex flex-col h-full overflow-hidden">
+    <!-- Logo thương hiệu -->
+    <div class="p-6 pb-4 flex items-center gap-3.5 border-b border-white/5">
+      <div class="relative w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 via-indigo-500 to-cyan-400 flex items-center justify-center font-bold text-white shadow-lg shadow-indigo-500/20 ring-1 ring-white/20">
+        <span class="text-sm font-extrabold tracking-tight font-mono">T2V</span>
+        <span class="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-cyber-cyan shadow-[0_0_8px_#00f2fe]"></span>
+      </div>
+      <div>
+        <h1 class="font-bold text-white tracking-tight text-base flex items-center gap-1.5">
+          Trans2Vec News
+          <span class="px-1.5 py-0.5 text-[10px] font-mono font-semibold bg-indigo-500/15 text-cyan-300 rounded border border-cyan-400/20">v2.4</span>
+        </h1>
+        <p class="text-xs text-slate-400 font-medium">Phân loại &amp; tìm kiếm tin tức</p>
+      </div>
+    </div>
+    <!-- Menu chức năng -->
+    <div class="flex-1 overflow-y-auto px-4 py-5 custom-scrollbar">
+      <p class="px-3 text-[10px] font-mono uppercase tracking-wider text-slate-500 mb-3 font-semibold">Chức năng chính</p>
+      <nav class="space-y-1.5">
+        <!-- Phân loại bài báo -->
+        <a class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-400 hover:text-slate-100 hover:bg-white/[0.04] border border-transparent hover:border-white/5 transition duration-150 group" href="#">
+          <svg class="w-5 h-5 text-slate-500 group-hover:text-cyan-400 transition" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+            <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+          </svg>
+          <span class="text-sm font-medium">Phân loại bài báo</span>
+        </a>
+        <!-- Tìm kiếm -->
+        <a class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-400 hover:text-slate-100 hover:bg-white/[0.04] border border-transparent hover:border-white/5 transition duration-150 group" href="#">
+          <svg class="w-5 h-5 text-slate-500 group-hover:text-cyan-400 transition" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+          </svg>
+          <span class="text-sm font-medium">Tìm kiếm</span>
+        </a>
+        <!-- Dữ liệu và đánh giá -->
+        <a class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-400 hover:text-slate-100 hover:bg-white/[0.04] border border-transparent hover:border-white/5 transition duration-150 group" href="#">
+          <svg class="w-5 h-5 text-slate-500 group-hover:text-indigo-400 transition" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+            <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+          </svg>
+          <span class="text-sm font-medium">Dữ liệu và đánh giá</span>
+          <span class="ml-auto font-mono text-[10px] px-2 py-0.5 rounded bg-white/[0.05] text-cyan-300 border border-white/10">F1: 94.8%</span>
+        </a>
+        <!-- Tin mới nhất (ACTIVE - Cyber Glow) -->
+        <a class="relative group flex items-center gap-3 px-3.5 py-2.5 rounded-xl bg-gradient-to-r from-indigo-600/30 via-indigo-500/20 to-transparent border border-indigo-500/40 text-white font-medium shadow-lg shadow-indigo-600/10 transition duration-150" href="#">
+          <div class="w-1.5 h-4 rounded-full bg-cyber-cyan shadow-[0_0_8px_#00f2fe] absolute left-1.5"></div>
+          <svg class="w-5 h-5 text-cyan-400 ml-1.5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+            <path d="M6 5c7.18 0 13 5.82 13 13M6 11a7 7 0 017 7m-6 0a1 1 0 11-2 0 1 1 0 012 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+          </svg>
+          <span class="text-sm font-semibold tracking-wide">Tin mới nhất</span>
+          <span class="ml-auto w-2 h-2 rounded-full bg-cyan-400 ring-4 ring-cyan-400/20 shadow-[0_0_6px_#00f2fe]"></span>
+        </a>
+      </nav>
+    </div>
+    <!-- Thông tin kiến trúc dự kiến -->
+    <div class="p-4 m-3 bg-obsidian-850/80 border border-white/10 rounded-2xl backdrop-blur-md shadow-lg shadow-black/40 text-xs">
+      <div class="flex items-center justify-between mb-3">
+        <span class="text-[10px] font-mono font-bold uppercase tracking-wider text-cyan-400">Kiến trúc dự kiến</span>
+        <span class="flex items-center gap-1.5 text-[10px] text-emerald-400 font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_#34d399] animate-pulse"></span>
+  Trực tuyến
+</span>
+      </div>
+      <div class="space-y-2">
+        <div class="p-2.5 rounded-xl bg-obsidian-950/70 border border-white/5 hover:border-white/10 transition">
+          <div class="font-medium text-slate-200 flex items-center justify-between">
+            <span class="font-mono text-[11px] text-slate-200">MariaDB 11.8</span>
+            <span class="text-[10px] font-mono text-slate-500 bg-white/[0.03] px-1.5 py-0.5 rounded border border-white/5">SQL Base</span>
+          </div>
+          <p class="text-[11px] text-slate-400 mt-1">Nguồn dữ liệu gốc</p>
+        </div>
+        <div class="p-2.5 rounded-xl bg-obsidian-950/70 border border-white/5 hover:border-white/10 transition">
+          <div class="font-medium text-slate-200 flex items-center justify-between">
+            <span class="font-mono text-[11px] text-slate-200">Manticore Search</span>
+            <span class="text-[10px] font-mono text-cyan-400/90 bg-cyan-950/30 px-1.5 py-0.5 rounded border border-cyan-800/40">Vector Engine</span>
+          </div>
+          <p class="text-[11px] text-slate-400 mt-1">Chỉ mục BM25 và HNSW</p>
+        </div>
+        <div class="p-2.5 rounded-xl bg-obsidian-950/70 border border-white/5 hover:border-white/10 transition">
+          <div class="font-medium text-slate-200 flex items-center justify-between">
+            <span class="font-mono text-[11px] text-slate-200">Python</span>
+            <span class="text-[10px] text-indigo-400 font-mono bg-indigo-950/30 px-1.5 py-0.5 rounded border border-indigo-800/40">NLP</span>
+          </div>
+          <p class="text-[11px] text-slate-400 mt-1 font-mono">pyvi · gensim · LR</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</aside>
+<!-- END: LeftSidebar -->
+<!-- BEGIN: MainContentArea -->
+<main class="flex-1 flex flex-col min-w-0 overflow-hidden bg-transparent z-10">
+  <!-- BEGIN: TopBar -->
+  <header class="h-16 bg-obsidian-900/60 backdrop-blur-xl border-b border-white/5 px-6 lg:px-8 flex items-center justify-between gap-4 z-20 flex-shrink-0">
+    <div>
+      <nav class="flex items-center space-x-2 text-xs font-mono text-slate-400 mb-0.5">
+        <span class="hover:text-slate-200 transition">Bảng điều khiển</span>
+        <span class="text-slate-600">/</span>
+        <span class="text-white font-semibold flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-cyan-400 shadow-[0_0_6px_#00f2fe]"></span>
+  Tin mới nhất
+</span>
+      </nav>
+      <h2 class="text-lg font-bold text-white tracking-tight leading-tight">Tin mới nhất</h2>
+    </div>
+    <!-- Right Meta Status Pills -->
+    <div class="flex items-center gap-3">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-white/[0.03] text-slate-300 text-xs font-mono border border-white/10 backdrop-blur-md">
+        <span>Tập mẫu: <strong class="text-white font-mono">VNTC-10</strong></span>
+        <span class="text-white/20">|</span>
+        <span class="text-cyan-400 font-mono font-semibold">84.132 bài</span>
+      </div>
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-indigo-500/10 text-indigo-300 text-xs font-mono border border-indigo-500/30 glow-indigo backdrop-blur-md">
+        <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 shadow-[0_0_6px_#00f2fe]"></span>
+        <span>Mô hình: <strong class="text-white">Trans2Vec-JOI</strong></span>
+        <span class="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399] ml-1"></span>
+      </div>
+      <div class="h-5 w-px bg-white/10 mx-0.5 hidden sm:block"></div>
+      <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-indigo-600 to-cyan-500 text-white font-mono font-bold flex items-center justify-center text-xs shadow-md ring-1 ring-white/20">
+        AD
+      </div>
+    </div>
+  </header>
+  <!-- END: TopBar -->
+  <div class="flex-1 overflow-y-auto p-6 lg:p-8 space-y-6 custom-scrollbar">
+    <!-- BEGIN: NoticeBanner -->
+    <!-- Banner cảnh báo bản phác thảo giao diện -->
+    <div class="relative overflow-hidden rounded-2xl bg-amber-500/[0.03] border border-amber-500/20 p-4 lg:p-5 backdrop-blur-md text-xs text-amber-200/90 flex items-start gap-3.5">
+      <div class="absolute -top-12 -left-12 w-28 h-28 bg-amber-500/10 rounded-full blur-2xl pointer-events-none"></div>
+      <div class="p-2 rounded-xl bg-amber-500/10 text-amber-400 shrink-0 border border-amber-500/20 mt-0.5">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+          <path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+        </svg>
+      </div>
+      <p class="leading-relaxed relative z-10 font-light">
+        <strong class="font-semibold text-amber-300 font-mono mr-1">[Bản phác giao diện]:</strong> Bài mẫu, FI theo chuyên mục và mọi số liệu trong tab "Dữ liệu và đánh giá" lấy thật từ VNTC-10 và GĐ6. Dự đoán và điểm tìm kiếm do bộ mô phỏng đơn giản tính (đếm item và FI khớp), <strong class="text-amber-300 underline decoration-amber-500/60 font-medium">chưa phải mô hình thật</strong>.
+      </p>
+    </div>
+    <!-- END: NoticeBanner -->
+    <!-- BEGIN: RssSourceCards -->
+    <!-- 3 Thẻ trạng thái nguồn RSS -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+      <!-- Thẻ VnExpress -->
+      <div class="bg-obsidian-900/80 rounded-2xl p-5 border border-white/10 shadow-2xl shadow-black/80 backdrop-blur-xl flex flex-col justify-between relative overflow-hidden group hover:border-cyan-500/30 transition">
+        <div class="absolute -top-12 -right-12 w-24 h-24 bg-cyan-500/10 rounded-full blur-2xl pointer-events-none group-hover:bg-cyan-500/20 transition duration-500"></div>
+        <div>
+          <div class="flex items-center justify-between mb-1.5">
+            <h3 class="text-base font-bold text-white tracking-tight">VnExpress</h3>
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-mono font-semibold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 shadow-[0_0_10px_rgba(52,211,153,0.15)]">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_#34d399] animate-pulse"></span>
+  HTTP 200
+</span>
+          </div>
+          <p class="text-xs font-mono text-slate-400 truncate mb-4">vnexpress.net/rss/tin-moi-nhat.rss</p>
+        </div>
+        <div class="grid grid-cols-3 gap-2 pt-3 border-t border-white/5 text-center">
+          <div class="bg-obsidian-950/70 border border-white/5 rounded-xl p-2.5">
+            <div class="text-[11px] font-mono text-slate-400">Tin trong feed</div>
+            <div class="text-lg font-mono font-bold text-white mt-0.5">49</div>
+          </div>
+          <div class="bg-obsidian-950/70 border border-white/5 rounded-xl p-2.5">
+            <div class="text-[11px] font-mono text-slate-400">Tin mới</div>
+            <div class="text-lg font-mono font-bold text-cyan-300 mt-0.5">49</div>
+          </div>
+          <div class="bg-obsidian-950/70 border border-white/5 rounded-xl p-2.5">
+            <div class="text-[11px] font-mono text-slate-400">Độ trễ</div>
+            <div class="text-lg font-mono font-bold text-emerald-400 mt-0.5">116 <span class="text-xs font-normal text-slate-400">ms</span></div>
+          </div>
+        </div>
+      </div>
+      <!-- Thẻ Tuổi Trẻ -->
+      <div class="bg-obsidian-900/80 rounded-2xl p-5 border border-white/10 shadow-2xl shadow-black/80 backdrop-blur-xl flex flex-col justify-between relative overflow-hidden group hover:border-cyan-500/30 transition">
+        <div class="absolute -top-12 -right-12 w-24 h-24 bg-cyan-500/10 rounded-full blur-2xl pointer-events-none group-hover:bg-cyan-500/20 transition duration-500"></div>
+        <div>
+          <div class="flex items-center justify-between mb-1.5">
+            <h3 class="text-base font-bold text-white tracking-tight">Tuổi Trẻ</h3>
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-mono font-semibold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 shadow-[0_0_10px_rgba(52,211,153,0.15)]">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_#34d399] animate-pulse"></span>
+  HTTP 200
+</span>
+          </div>
+          <p class="text-xs font-mono text-slate-400 truncate mb-4">tuoitre.vn/rss/tin-moi-nhat.rss</p>
+        </div>
+        <div class="grid grid-cols-3 gap-2 pt-3 border-t border-white/5 text-center">
+          <div class="bg-obsidian-950/70 border border-white/5 rounded-xl p-2.5">
+            <div class="text-[11px] font-mono text-slate-400">Tin trong feed</div>
+            <div class="text-lg font-mono font-bold text-white mt-0.5">50</div>
+          </div>
+          <div class="bg-obsidian-950/70 border border-white/5 rounded-xl p-2.5">
+            <div class="text-[11px] font-mono text-slate-400">Tin mới</div>
+            <div class="text-lg font-mono font-bold text-cyan-300 mt-0.5">50</div>
+          </div>
+          <div class="bg-obsidian-950/70 border border-white/5 rounded-xl p-2.5">
+            <div class="text-[11px] font-mono text-slate-400">Độ trễ</div>
+            <div class="text-lg font-mono font-bold text-emerald-400 mt-0.5">118 <span class="text-xs font-normal text-slate-400">ms</span></div>
+          </div>
+        </div>
+      </div>
+      <!-- Thẻ Thanh Niên -->
+      <div class="bg-obsidian-900/80 rounded-2xl p-5 border border-white/10 shadow-2xl shadow-black/80 backdrop-blur-xl flex flex-col justify-between relative overflow-hidden group hover:border-cyan-500/30 transition">
+        <div class="absolute -top-12 -right-12 w-24 h-24 bg-cyan-500/10 rounded-full blur-2xl pointer-events-none group-hover:bg-cyan-500/20 transition duration-500"></div>
+        <div>
+          <div class="flex items-center justify-between mb-1.5">
+            <h3 class="text-base font-bold text-white tracking-tight">Thanh Niên</h3>
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-mono font-semibold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 shadow-[0_0_10px_rgba(52,211,153,0.15)]">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_#34d399] animate-pulse"></span>
+  HTTP 200
+</span>
+          </div>
+          <p class="text-xs font-mono text-slate-400 truncate mb-4">thanhnien.vn/rss/home.rss</p>
+        </div>
+        <div class="grid grid-cols-3 gap-2 pt-3 border-t border-white/5 text-center">
+          <div class="bg-obsidian-950/70 border border-white/5 rounded-xl p-2.5">
+            <div class="text-[11px] font-mono text-slate-400">Tin trong feed</div>
+            <div class="text-lg font-mono font-bold text-white mt-0.5">60</div>
+          </div>
+          <div class="bg-obsidian-950/70 border border-white/5 rounded-xl p-2.5">
+            <div class="text-[11px] font-mono text-slate-400">Tin mới</div>
+            <div class="text-lg font-mono font-bold text-cyan-300 mt-0.5">60</div>
+          </div>
+          <div class="bg-obsidian-950/70 border border-white/5 rounded-xl p-2.5">
+            <div class="text-[11px] font-mono text-slate-400">Độ trễ</div>
+            <div class="text-lg font-mono font-bold text-emerald-400 mt-0.5">338 <span class="text-xs font-normal text-slate-400">ms</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- END: RssSourceCards -->
+    <!-- BEGIN: FeedSection -->
+    <section class="bg-obsidian-900/80 border border-white/10 rounded-2xl p-6 lg:p-7 shadow-2xl shadow-black/80 backdrop-blur-xl space-y-6 relative overflow-hidden">
+      <div class="absolute top-0 right-0 w-96 h-96 bg-indigo-600/10 rounded-full blur-3xl pointer-events-none"></div>
+      <!-- Header & Action bar -->
+      <div class="relative z-10">
+        <h3 class="text-lg font-bold text-white tracking-tight flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_8px_#00f2fe]"></span>
+          Tin mới nhất từ RSS
+        </h3>
+        <p class="text-xs font-mono text-slate-400 mt-1">
+          Lần lấy gần nhất <span class="text-cyan-300 font-semibold">16:35 · 20/10/2026</span> · 159 tin mới, đang có 160 tin trong CSDL · tự lấy mỗi 15 phút
+        </p>
+      </div>
+      <!-- Filter tabs & Reload Button -->
+      <div class="flex flex-wrap items-center justify-between gap-3 pt-1 border-b border-white/5 pb-4 relative z-10">
+        <div class="flex items-center gap-2" id="filter-container">
+          <button class="px-3.5 py-1.5 text-xs font-mono font-semibold rounded-xl bg-cyan-950/40 border border-cyan-400/40 text-cyan-300 shadow-[0_0_12px_rgba(0,242,254,0.15)] transition" type="button">
+            Tất cả
+          </button>
+          <button class="px-3.5 py-1.5 text-xs font-mono font-medium rounded-xl bg-white/[0.03] hover:bg-white/[0.08] hover:text-white border border-white/10 text-slate-400 transition" type="button">
+            VnExpress
+          </button>
+          <button class="px-3.5 py-1.5 text-xs font-mono font-medium rounded-xl bg-white/[0.03] hover:bg-white/[0.08] hover:text-white border border-white/10 text-slate-400 transition" type="button">
+            Tuổi Trẻ
+          </button>
+          <button class="px-3.5 py-1.5 text-xs font-mono font-medium rounded-xl bg-white/[0.03] hover:bg-white/[0.08] hover:text-white border border-white/10 text-slate-400 transition" type="button">
+            Thanh Niên
+          </button>
+        </div>
+        <!-- Gradient Electric Button 'Lấy tin ngay' -->
+        <button class="group inline-flex items-center gap-2 px-5 py-2 text-xs font-bold rounded-xl bg-gradient-to-r from-cyan-500 via-indigo-600 to-indigo-700 text-white shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40 active:scale-[0.98] transition border border-white/20 relative overflow-hidden" type="button">
+          <span class="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity"></span>
+          <svg class="w-3.5 h-3.5 text-cyan-100 animate-spin" fill="none" stroke="currentColor" style="animation-duration: 4s;" viewbox="0 0 24 24">
+            <path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path>
+          </svg>
+          <span class="font-mono tracking-wide">Lấy tin ngay</span>
+        </button>
+      </div>
+      <!-- BEGIN: NewsList -->
+      <!-- Danh sách 12 bài viết tin tức mới nhất -->
+      <div class="space-y-3 relative z-10">
+        <!-- Bài viết 1 -->
+        <div class="p-4 rounded-xl bg-obsidian-950/60 border border-white/5 hover:border-cyan-500/30 hover:bg-obsidian-950/90 transition flex flex-col md:flex-row md:items-center justify-between gap-4 group">
+          <div class="space-y-1.5 pr-4">
+            <div class="flex items-center gap-2 text-xs font-mono text-slate-400">
+              <span class="font-semibold text-cyan-300">Thanh Niên</span>
+              <span class="text-slate-600">·</span>
+              <span>16:32 · 20/10/2026</span>
+            </div>
+            <h4 class="text-sm font-semibold text-white group-hover:text-cyan-300 cursor-pointer transition leading-snug">
+              Xổ số miền Nam ngày 20 tháng 10 - Kết quả xổ số hôm nay thứ ba
+            </h4>
+            <p class="text-xs text-slate-400 line-clamp-1 font-light">
+              Xem kết quả xổ số miền Nam ngày 20 tháng 10. Xổ số miền Bắc, xổ số miền Trung, xổ số điện toán trực tiếp nhanh hôm nay thứ ba ngày 20.10.2026.
+            </p>
+          </div>
+          <button class="self-start md:self-center shrink-0 px-3.5 py-1.5 rounded-xl border border-white/10 hover:border-cyan-400/50 bg-white/[0.02] hover:bg-cyan-500/10 text-xs font-mono font-medium text-slate-300 hover:text-cyan-300 hover:shadow-[0_0_12px_rgba(0,242,254,0.2)] transition" type="button">
+            Phân loại bài này
+          </button>
+        </div>
+        <!-- Bài viết 2 -->
+        <div class="p-4 rounded-xl bg-obsidian-950/60 border border-white/5 hover:border-cyan-500/30 hover:bg-obsidian-950/90 transition flex flex-col md:flex-row md:items-center justify-between gap-4 group">
+          <div class="space-y-1.5 pr-4">
+            <div class="flex items-center gap-2 text-xs font-mono text-slate-400">
+              <span class="font-semibold text-cyan-300">Thanh Niên</span>
+              <span class="text-slate-600">·</span>
+              <span>16:28 · 20/10/2026</span>
+            </div>
+            <h4 class="text-sm font-semibold text-white group-hover:text-cyan-300 cursor-pointer transition leading-snug">
+              Khởi công Nhà máy nhiệt điện LNG Quảng Trạch 2, tổng đầu tư 40.123 tỉ đồng
+            </h4>
+            <p class="text-xs text-slate-400 line-clamp-1 font-light">
+              Tập đoàn Điện lực Việt Nam (EVN) tổ chức khởi công Nhà máy nhiệt điện LNG Quảng Trạch 2, đồng thời công bố phát điện lên lưới điện quốc gia đối với Nhà máy nhiệt điện Quả...
+            </p>
+          </div>
+          <button class="self-start md:self-center shrink-0 px-3.5 py-1.5 rounded-xl border border-white/10 hover:border-cyan-400/50 bg-white/[0.02] hover:bg-cyan-500/10 text-xs font-mono font-medium text-slate-300 hover:text-cyan-300 hover:shadow-[0_0_12px_rgba(0,242,254,0.2)] transition" type="button">
+            Phân loại bài này
+          </button>
+        </div>
+        <!-- Bài viết 3 -->
+        <div class="p-4 rounded-xl bg-obsidian-950/60 border border-white/5 hover:border-cyan-500/30 hover:bg-obsidian-950/90 transition flex flex-col md:flex-row md:items-center justify-between gap-4 group">
+          <div class="space-y-1.5 pr-4">
+            <div class="flex items-center gap-2 text-xs font-mono text-slate-400">
+              <span class="font-semibold text-cyan-300">Thanh Niên</span>
+              <span class="text-slate-600">·</span>
+              <span>16:28 · 20/10/2026</span>
+            </div>
+            <h4 class="text-sm font-semibold text-white group-hover:text-cyan-300 cursor-pointer transition leading-snug">
+              Lịch thi đấu U.17 Việt Nam mới nhất: Chạm trán U.17 Hàn Quốc vào khung giờ 'lạ'
+            </h4>
+            <p class="text-xs text-slate-400 line-clamp-1 font-light">
+              U.17 Việt Nam sẽ so tài 3 đội bóng Hàn Quốc trong chuyến tập huấn tại Cheonan, trong đó, đáng chú ý nhất là cuộc đọ sức chủ nhà U.17 Hàn Quốc để tổng duyệt lực lượng cho...
+            </p>
+          </div>
+          <button class="self-start md:self-center shrink-0 px-3.5 py-1.5 rounded-xl border border-white/10 hover:border-cyan-400/50 bg-white/[0.02] hover:bg-cyan-500/10 text-xs font-mono font-medium text-slate-300 hover:text-cyan-300 hover:shadow-[0_0_12px_rgba(0,242,254,0.2)] transition" type="button">
+            Phân loại bài này
+          </button>
+        </div>
+        <!-- Bài viết 4 -->
+        <div class="p-4 rounded-xl bg-obsidian-950/60 border border-white/5 hover:border-cyan-500/30 hover:bg-obsidian-950/90 transition flex flex-col md:flex-row md:items-center justify-between gap-4 group">
+          <div class="space-y-1.5 pr-4">
+            <div class="flex items-center gap-2 text-xs font-mono text-slate-400">
+              <span class="font-semibold text-cyan-300">Thanh Niên</span>
+              <span class="text-slate-600">·</span>
+              <span>16:27 · 20/10/2026</span>
+            </div>
+            <h4 class="text-sm font-semibold text-white group-hover:text-cyan-300 cursor-pointer transition leading-snug">
+              Trường ĐH ở Vĩnh Long được công nhận là điểm du lịch mới
+            </h4>
+            <p class="text-xs text-slate-400 line-clamp-1 font-light">
+              UBND tỉnh Vĩnh Long đã ký quyết định công nhận Đại học Trà Vinh (Khu I) là điểm du lịch mới của tỉnh, mở ra hướng đi mới cho ngành du lịch địa phương khi kết hợp giữa khôn...
+            </p>
+          </div>
+          <button class="self-start md:self-center shrink-0 px-3.5 py-1.5 rounded-xl border border-white/10 hover:border-cyan-400/50 bg-white/[0.02] hover:bg-cyan-500/10 text-xs font-mono font-medium text-slate-300 hover:text-cyan-300 hover:shadow-[0_0_12px_rgba(0,242,254,0.2)] transition" type="button">
+            Phân loại bài này
+          </button>
+        </div>
+        <!-- Bài viết 5 -->
+        <div class="p-4 rounded-xl bg-obsidian-950/60 border border-white/5 hover:border-cyan-500/30 hover:bg-obsidian-950/90 transition flex flex-col md:flex-row md:items-center justify-between gap-4 group">
+          <div class="space-y-1.5 pr-4">
+            <div class="flex items-center gap-2 text-xs font-mono text-slate-400">
+              <span class="font-semibold text-cyan-300">Tuổi Trẻ</span>
+              <span class="text-slate-600">·</span>
+              <span>15:38 · 20/10/2026</span>
+            </div>
+            <h4 class="text-sm font-semibold text-white group-hover:text-cyan-300 cursor-pointer transition leading-snug">
+              Đại học 'săn' giảng viên, đưa tăng lương, có nơi 85 triệu đồng/tháng
+            </h4>
+            <p class="text-xs text-slate-400 line-clamp-1 font-light">
+              Nhiều trường đại học đưa ra mức thu nhập hấp dẫn, có nơi lên đến 85 triệu đồng/tháng cùng các khoản hỗ trợ tuyển dụng hàng trăm triệu đồng để thu hút giảng viên trình độ...
+            </p>
+          </div>
+          <button class="self-start md:self-center shrink-0 px-3.5 py-1.5 rounded-xl border border-white/10 hover:border-cyan-400/50 bg-white/[0.02] hover:bg-cyan-500/10 text-xs font-mono font-medium text-slate-300 hover:text-cyan-300 hover:shadow-[0_0_12px_rgba(0,242,254,0.2)] transition" type="button">
+            Phân loại bài này
+          </button>
+        </div>
+        <!-- Bài viết 6 -->
+        <div class="p-4 rounded-xl bg-obsidian-950/60 border border-white/5 hover:border-cyan-500/30 hover:bg-obsidian-950/90 transition flex flex-col md:flex-row md:items-center justify-between gap-4 group">
+          <div class="space-y-1.5 pr-4">
+            <div class="flex items-center gap-2 text-xs font-mono text-slate-400">
+              <span class="font-semibold text-cyan-300">Tuổi Trẻ</span>
+              <span class="text-slate-600">·</span>
+              <span>15:37 · 20/10/2026</span>
+            </div>
+            <h4 class="text-sm font-semibold text-white group-hover:text-cyan-300 cursor-pointer transition leading-snug">
+              Tặng 200 bộ tóc hơn 1 tỉ đồng, mong bệnh nhân ung thư kiên cường vượt qua bệnh tật
+            </h4>
+            <p class="text-xs text-slate-400 line-clamp-1 font-light">
+              Dịp 20-10, Myhair Việt Nam phối hợp cùng Hội Chữ thập đỏ TP.HCM tặng 200 bộ tóc cho bệnh nhân ung thư trong chương trình 'Sưởi ấm những trái tim quả cảm' tại Bệnh viện Un...
+            </p>
+          </div>
+          <button class="self-start md:self-center shrink-0 px-3.5 py-1.5 rounded-xl border border-white/10 hover:border-cyan-400/50 bg-white/[0.02] hover:bg-cyan-500/10 text-xs font-mono font-medium text-slate-300 hover:text-cyan-300 hover:shadow-[0_0_12px_rgba(0,242,254,0.2)] transition" type="button">
+            Phân loại bài này
+          </button>
+        </div>
+        <!-- Bài viết 7 -->
+        <div class="p-4 rounded-xl bg-obsidian-950/60 border border-white/5 hover:border-cyan-500/30 hover:bg-obsidian-950/90 transition flex flex-col md:flex-row md:items-center justify-between gap-4 group">
+          <div class="space-y-1.5 pr-4">
+            <div class="flex items-center gap-2 text-xs font-mono text-slate-400">
+              <span class="font-semibold text-cyan-300">Tuổi Trẻ</span>
+              <span class="text-slate-600">·</span>
+              <span>15:36 · 20/10/2026</span>
+            </div>
+            <h4 class="text-sm font-semibold text-white group-hover:text-cyan-300 cursor-pointer transition leading-snug">
+              Hội LHPN Việt Nam phấn đấu đưa hơn 2000 suất tầm soát ung thư về vùng xa
+            </h4>
+            <p class="text-xs text-slate-400 line-clamp-1 font-light">
+              Nhân kỷ niệm 96 năm Ngày thành lập Hội Liên hiệp Phụ nữ (LHPN) Việt Nam (20-10-1930 - 20-10-2026), Hội phối hợp cùng NAPAS, Mastercard và Payoo triển khai chương trình...
+            </p>
+          </div>
+          <button class="self-start md:self-center shrink-0 px-3.5 py-1.5 rounded-xl border border-white/10 hover:border-cyan-400/50 bg-white/[0.02] hover:bg-cyan-500/10 text-xs font-mono font-medium text-slate-300 hover:text-cyan-300 hover:shadow-[0_0_12px_rgba(0,242,254,0.2)] transition" type="button">
+            Phân loại bài này
+          </button>
+        </div>
+        <!-- Bài viết 8 -->
+        <div class="p-4 rounded-xl bg-obsidian-950/60 border border-white/5 hover:border-cyan-500/30 hover:bg-obsidian-950/90 transition flex flex-col md:flex-row md:items-center justify-between gap-4 group">
+          <div class="space-y-1.5 pr-4">
+            <div class="flex items-center gap-2 text-xs font-mono text-slate-400">
+              <span class="font-semibold text-cyan-300">Tuổi Trẻ</span>
+              <span class="text-slate-600">·</span>
+              <span>15:34 · 20/10/2026</span>
+            </div>
+            <h4 class="text-sm font-semibold text-white group-hover:text-cyan-300 cursor-pointer transition leading-snug">
+              Chứng khoán EVS bất ngờ lỗ hơn 42 tỉ đồng
+            </h4>
+            <p class="text-xs text-slate-400 line-clamp-1 font-light">
+              Sau khi báo lãi gần 198 tỉ đồng trong quý 2-2026, Chứng khoán EVS bất ngờ đảo chiều, lỗ hơn 42 tỉ đồng trong quý 3.
+            </p>
+          </div>
+          <button class="self-start md:self-center shrink-0 px-3.5 py-1.5 rounded-xl border border-white/10 hover:border-cyan-400/50 bg-white/[0.02] hover:bg-cyan-500/10 text-xs font-mono font-medium text-slate-300 hover:text-cyan-300 hover:shadow-[0_0_12px_rgba(0,242,254,0.2)] transition" type="button">
+            Phân loại bài này
+          </button>
+        </div>
+        <!-- Bài viết 9 -->
+        <div class="p-4 rounded-xl bg-obsidian-950/60 border border-white/5 hover:border-cyan-500/30 hover:bg-obsidian-950/90 transition flex flex-col md:flex-row md:items-center justify-between gap-4 group">
+          <div class="space-y-1.5 pr-4">
+            <div class="flex items-center gap-2 text-xs font-mono text-slate-400">
+              <span class="font-semibold text-cyan-300">VnExpress</span>
+              <span class="text-slate-600">·</span>
+              <span>14:53 · 20/10/2026</span>
+            </div>
+            <h4 class="text-sm font-semibold text-white group-hover:text-cyan-300 cursor-pointer transition leading-snug">
+              Kho túi hiệu của hoa hậu Thanh Thủy
+            </h4>
+            <p class="text-xs text-slate-400 line-clamp-1 font-light">
+              Hoa hậu Thanh Thủy tạo vẻ sang trọng bằng cách phối loạt túi xa xỉ của Chanel, Dior khi dạo phố hay dự sự kiện.
+            </p>
+          </div>
+          <button class="self-start md:self-center shrink-0 px-3.5 py-1.5 rounded-xl border border-white/10 hover:border-cyan-400/50 bg-white/[0.02] hover:bg-cyan-500/10 text-xs font-mono font-medium text-slate-300 hover:text-cyan-300 hover:shadow-[0_0_12px_rgba(0,242,254,0.2)] transition" type="button">
+            Phân loại bài này
+          </button>
+        </div>
+        <!-- Bài viết 10 -->
+        <div class="p-4 rounded-xl bg-obsidian-950/60 border border-white/5 hover:border-cyan-500/30 hover:bg-obsidian-950/90 transition flex flex-col md:flex-row md:items-center justify-between gap-4 group">
+          <div class="space-y-1.5 pr-4">
+            <div class="flex items-center gap-2 text-xs font-mono text-slate-400">
+              <span class="font-semibold text-cyan-300">VnExpress</span>
+              <span class="text-slate-600">·</span>
+              <span>14:48 · 20/10/2026</span>
+            </div>
+            <h4 class="text-sm font-semibold text-white group-hover:text-cyan-300 cursor-pointer transition leading-snug">
+              Dự đoán cứ 3 người Bắc Kinh sẽ có 1 người già vào năm 2035
+            </h4>
+            <p class="text-xs text-slate-400 line-clamp-1 font-light">
+              Bắc Kinh dự kiến bước vào giai đoạn xã hội siêu già vào năm 2035 khi cứ ba người dân lại có một người từ 60 tuổi trở lên.
+            </p>
+          </div>
+          <button class="self-start md:self-center shrink-0 px-3.5 py-1.5 rounded-xl border border-white/10 hover:border-cyan-400/50 bg-white/[0.02] hover:bg-cyan-500/10 text-xs font-mono font-medium text-slate-300 hover:text-cyan-300 hover:shadow-[0_0_12px_rgba(0,242,254,0.2)] transition" type="button">
+            Phân loại bài này
+          </button>
+        </div>
+        <!-- Bài viết 11 -->
+        <div class="p-4 rounded-xl bg-obsidian-950/60 border border-white/5 hover:border-cyan-500/30 hover:bg-obsidian-950/90 transition flex flex-col md:flex-row md:items-center justify-between gap-4 group">
+          <div class="space-y-1.5 pr-4">
+            <div class="flex items-center gap-2 text-xs font-mono text-slate-400">
+              <span class="font-semibold text-cyan-300">VnExpress</span>
+              <span class="text-slate-600">·</span>
+              <span>14:42 · 20/10/2026</span>
+            </div>
+            <h4 class="text-sm font-semibold text-white group-hover:text-cyan-300 cursor-pointer transition leading-snug">
+              Ronaldo viện dẫn 5 Quả Bóng Vàng để được giảm án
+            </h4>
+            <p class="text-xs text-slate-400 line-clamp-1 font-light">
+              Cristiano Ronaldo dùng 5 Quả Bóng Vàng, những đóng góp cho bóng đá và việc thừa nhận sai phạm làm căn cứ xin giảm nhẹ hình phạt, qua đó chỉ bị treo giò 30 ngày thay vì...
+            </p>
+          </div>
+          <button class="self-start md:self-center shrink-0 px-3.5 py-1.5 rounded-xl border border-white/10 hover:border-cyan-400/50 bg-white/[0.02] hover:bg-cyan-500/10 text-xs font-mono font-medium text-slate-300 hover:text-cyan-300 hover:shadow-[0_0_12px_rgba(0,242,254,0.2)] transition" type="button">
+            Phân loại bài này
+          </button>
+        </div>
+        <!-- Bài viết 12 -->
+        <div class="p-4 rounded-xl bg-obsidian-950/60 border border-white/5 hover:border-cyan-500/30 hover:bg-obsidian-950/90 transition flex flex-col md:flex-row md:items-center justify-between gap-4 group">
+          <div class="space-y-1.5 pr-4">
+            <div class="flex items-center gap-2 text-xs font-mono text-slate-400">
+              <span class="font-semibold text-cyan-300">VnExpress</span>
+              <span class="text-slate-600">·</span>
+              <span>14:33 · 20/10/2026</span>
+            </div>
+            <h4 class="text-sm font-semibold text-white group-hover:text-cyan-300 cursor-pointer transition leading-snug">
+              Vừa chia tay tôi phát hiện có thai, anh 'phải' luôn trách nhiệm
+            </h4>
+            <p class="text-xs text-slate-400 line-clamp-1 font-light">
+              Anh có luôn người yêu mới, cô ấy là cả tương lai tươi đẹp, anh sợ khi tôi giữ thai lại sẽ cản trở cuộc hôn nhân của anh.
+            </p>
+          </div>
+          <button class="self-start md:self-center shrink-0 px-3.5 py-1.5 rounded-xl border border-white/10 hover:border-cyan-400/50 bg-white/[0.02] hover:bg-cyan-500/10 text-xs font-mono font-medium text-slate-300 hover:text-cyan-300 hover:shadow-[0_0_12px_rgba(0,242,254,0.2)] transition" type="button">
+            Phân loại bài này
+          </button>
+        </div>
+      </div>
+      <!-- END: NewsList -->
+      <!-- Ghi chú chân trang danh sách -->
+      <div class="pt-4 border-t border-white/5 text-xs font-mono text-slate-500">
+        Chỉ đọc RSS công khai: tiêu đề, mô tả ngắn, link, ảnh. Không tải trang bài viết. Trùng lặp chặn bằng SHA-1 của URL.
+      </div>
+    </section>
+    <!-- END: FeedSection -->
+  </div>
+</main>
+<!-- END: MainContentArea -->
+<!-- Interactivity Script -->
+<script data-purpose="tab-filter-interaction">
+  document.addEventListener('DOMContentLoaded', () => {
+    // Source tabs click state switch
+    const filterButtons = document.querySelectorAll('#filter-container button');
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterButtons.forEach(b => {
+          b.className = "px-3.5 py-1.5 text-xs font-mono font-medium rounded-xl bg-white/[0.03] hover:bg-white/[0.08] hover:text-white border border-white/10 text-slate-400 transition";
+        });
+        btn.className = "px-3.5 py-1.5 text-xs font-mono font-semibold rounded-xl bg-cyan-950/40 border border-cyan-400/40 text-cyan-300 shadow-[0_0_12px_rgba(0,242,254,0.15)] transition";
+      });
+    });
+  });
+</script>
+</body></html>

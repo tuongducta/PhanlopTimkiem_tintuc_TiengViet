@@ -50,3 +50,50 @@ Sửa trong GĐ5, trước khi rà soát:
 | ℹ️ | Vài số liệu của Hoang 2007 (bản scan) và Vinh 2021 chỉ có trong hình | Bài đã chỉ trích các con số có trong phần văn bản; nêu ở 8.4 |
 | ℹ️ | Họ tên tác giả Việt trong danh mục (Vinh/To, Huong/Ho) | Thống nhất theo quy định trình bày của khoa |
 | ℹ️ | Độ dài ~13.800 từ (~25–30 trang A4) | Nếu bị giới hạn trang: rút gọn Phụ lục A và Bảng 6.1 trước |
+
+---
+
+# GĐ12 — Nhật ký rà soát bản survey v3
+
+**Ngày:** 22/10/2026 · **Bản rà soát:** `Survey_Trans2Vec_VN_News.md` v3 (build từ `livrables/survey/draft/`, 54 tài liệu, khoảng 24.300 từ)
+**Cách làm:**
+1. Agent `reviewer` đối chiếu từng con số ở các phần mới với `RESULTS.md`, `RESULTS_DB.md`, `he_thong_db.md`, `KE_HOACH_HE_THONG_DB.md` Mục 17, các file JSON kết quả và phiếu đọc K*.
+2. Kiểm tra tự động: số thập phân, thuật ngữ cũ, mã K* sót, thứ tự bảng và hình, mọi tham chiếu "Mục / Bảng / Hình".
+3. Xác minh lại ba nguồn mà agent dẫn: run TF-IDF dùng C = 10, độ trễ trong ứng dụng 50–170 ms, mức 1,5% của K29 là so với CARP.
+
+**Khớp nguồn, không sửa:** E8 (Bảng 7.4), E9 (Bảng 9.9), Bảng 9.3–9.6 và 9.8, sáu mô hình (Bảng 9.4), BM25, dấu thanh, chỉ mục, bài trùng, số liệu 8 bài K*, các phép đếm (6 RQ, 7 nhánh, M1–M10, H1–H8, T1–T8, 19 công trình chính).
+
+## Các lỗi đã sửa (24)
+
+| # | Vị trí | Loại | Trước | Sau |
+|---|---|---|---|---|
+| 1 | Tóm tắt | Nói quá | "Chọn FI đóng hay FI ổn định không tốt hơn ngẫu nhiên" | FI đóng không có tác dụng vì gần như mọi FI đã đóng (E8); chỉ FI ổn định được so với ngẫu nhiên (E9) |
+| 2 | 9.5 (i) | Sai số liệu | "+2,7 trên Snippets" (là FI − IT) | "+3,8" (JOI − IT, cùng đại lượng với Bảng 9.7) |
+| 3 | 9.5 | Sai đường dẫn | `src/experiments/RESULTS.md` | `contexte/results/` |
+| 4 | Bảng 8.1, 8.2 | Thiếu điều kiện | TF-IDF → LR 92,5% | ghi rõ C = 10 (run 7) |
+| 5 | Tóm tắt, 1.5, 8.4, 8.6, 10.1 | Mâu thuẫn | "bốn mối đe dọa đo được" | "sáu" (T1, T2, T4, T5, T7, T8) |
+| 6 | Bảng 8.4, T1 | Dẫn sai bằng chứng | 0,823 so với 0,766 (lệch do T2) | Snippets: transductive chênh inductive −0,5 đến +1,9 |
+| 7 | 7.3 điểm 7 | Nói quá | "transductive có lợi" | "có thể có lợi"; mức chênh không nhất quán |
+| 8 | Tóm tắt, 6.2, 9.5, 10.1 | Mâu thuẫn chi phí | "khoảng một phút" | "một đến hai phút"; thêm 98 s khi suy luận lại cả vector huấn luyện |
+| 9 | 10.1 RQ4 | Thiếu điều kiện | "tìm kiếm dưới 20 ms" | p50 trong benchmark; 50–170 ms trong ứng dụng |
+| 10 | 9.2 | Thiết kế lẫn hiện thực | M1 VnCoreNLP, M3 FP-Growth/LCM | thêm đoạn nêu 3 điểm khác của bản hiện thực |
+| 11 | 8.1, 8.2, Phụ lục A | Nhãn không thống nhất | "BoW + OCFS" | "TF-IDF + OCFS" theo phiếu [1] |
+| 12 | 9.5, A1 | So khác bộ phân loại | TF-IDF −1,2 so với JOI −2,5 | ghi rõ SVM và LR; thêm TRANS-IT −3,1 |
+| 13 | 9.5, hạn chế | Sai mô tả | "Bảng 9.7 mới chạy một seed" | cột "suy luận lại" một seed; E9 3 seed cho +0,25 ± 0,11 |
+| 14 | 7.1 | Đếm sai | "Ba nhận xét" | "Bốn nhận xét" |
+| 15 | 1.4 | Thiếu | 3 tài liệu tìm kiếm không thuộc vòng nào | thêm câu nêu BM25, HNSW, RRF |
+| 16 | Phụ lục A | Tên mục | "công trình nòng cốt" | "công trình chính (vòng 1 và vòng 3)" |
+| 17 | Bảng 8.4 | Tham chiếu dễ nhầm | "Mục 7", "Mục 6"… | "Điểm 7", "Điểm 6"… (của Mục 7.3) |
+| 18 | 7.3, T3 | Thiếu điểm giao thức | T3 trỏ tới điểm không có | thêm điểm 10 "chạy lại baseline trong cùng điều kiện" |
+| 19 | 9.5 | Hình không số | `fig_macro_f1.png` | Hình 9.3 |
+| 20 | 4.6, 6.1 | Gộp sai đối tượng so | "1,5% thời gian … so với GPT-3" | so với CARP; GPT-3 chỉ so accuracy |
+| 21 | 6.3 | Thiếu thành phần | "+0,3 nhờ BERT, RoBERTa" | thêm gộp đồng xuất hiện |
+| 22 | Bảng 7.3 | Thiếu nguồn | chỉ trích [li2022, minaee2021] | thêm [onan2023] cho số tài liệu R8, R52, 20NG |
+| 23 | 8.2 | Khẳng định quá | "Chênh lệch 3,7 điểm này đến từ" | "có thể đến từ" |
+| 24 | Phụ lục A, 4.7 | Thang đo | "74,63"; "98,75" | "0,7463"; "98,75%" |
+
+## Ghi chú
+- Ý kiến về thứ tự tác giả VNLP: `refs.tsv` đúng theo Crossref (Le, Do, Nguyen V.D., Nguyen T.D.). Phiếu K21 ghi sai và đã được sửa.
+- `he_thong_db.md` đã đánh dấu "đã chèn" (cả 6 mục). Hai chi tiết nhỏ không ráp: Macro-F1 0,765 trên các bài trùng, cách kiểm FI đóng bằng SQL.
+- Đoạn 2 của Tóm tắt đã tách câu dài.
+- Chưa sửa (ngoài phạm vi ghi của Claude): `SPEC.md` (ô "Survey bản v3" còn chưa đánh dấu, còn ghi "chờ chốt Q2–Q5"); `CLAUDE.md` và `.claude/rules/livrables.md` (còn điều cấm sửa draft khi Q5 chưa chốt).

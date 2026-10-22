@@ -29,3 +29,7 @@ livrables/**/_*_for_docx.md
 .vscode/
 .DS_Store
 out/
+
+# Transcript agent của /pipeline (lớn; xem lại tại máy, không đưa lên git)
+contexte/handoff/*/logs/*.jsonl
+contexte/handoff/*/logs/*.log

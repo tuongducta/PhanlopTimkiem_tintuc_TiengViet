@@ -709,3 +709,101 @@ Hybrid giữ cả nhánh vector với truy vấn không dấu chỉ đạt 0,473
 - báo cáo `livrables/report_db/`, gồm Mục 7.4, 7.5, 6.2, 6.4, tóm tắt, kết luận và Hình 7.4;
 - đoạn chèn survey.
 
+
+---
+
+## 21. Kế hoạch: áp dụng template HTML `sources/template_demo/` cho giao diện (22/10/2026, ✅ duyệt: Q-T1 = A, Q-T2 = nền tối, Q-T3 = giữ ảnh cũ)
+
+### 21.1 Hiện trạng
+
+Thư mục `sources/template_demo/` có 4 file HTML tĩnh, mỗi file ứng với một trang của app hiện tại:
+
+| Template | Trang Streamlit |
+|---|---|
+| `demo_phanloaibaibao.html` | Phân loại bài báo |
+| `demo_timkiemnangcao.html` | Tìm kiếm |
+| `demo_dulieuvadanhgia.html` | Dữ liệu và đánh giá |
+| `demo_tintucthoigianthuc.html` | Tin mới nhất |
+
+**Phong cách của template:**
+- Nền tối (#07090E), điểm nhấn cyan #00F2FE và indigo #6366F1, có hiệu ứng glow và gradient.
+- Font Plus Jakarta Sans và JetBrains Mono.
+- Tailwind qua CDN, thêm Font Awesome.
+
+**Bố cục:**
+- Thanh bên có logo T2V, 4 mục menu và thẻ "Kiến trúc hệ thống".
+- Thanh trên có đường dẫn trang, nhãn tập dữ liệu và nhãn mô hình.
+- Phần chính là banner ghi chú rồi tới các thẻ nội dung.
+
+**Mâu thuẫn với quy tắc hiện hành:**
+- CLAUDE.md và bộ nhớ đang ghi "giao diện bám bản phác artifact, nền sáng #1F4E99, Be Vietnam Pro".
+- Template có **số liệu giả**: F1 94,8%, mô hình FastText, mã `LABEL_LAW_04`, mã phân tích `TX-984102`, "v2.4", chuông thông báo, avatar "AD". Banner còn ghi "dự đoán do bộ mô phỏng tính". Theo AGENTS.md, số liệu phải lấy từ kết quả thật, nên **chỉ lấy phong cách và bố cục, không lấy số**.
+- Báo cáo CSDL (Chương 8) có 3 ảnh giao diện `fig_ui_*.png`. Ảnh được chụp từ giao diện sáng hiện tại.
+
+### 21.2 Phương án
+
+**A (đề xuất): giữ Streamlit, viết lại CSS và HTML theo template.**
+- Logic giữ nguyên: `classify.py`, `search.py`, các truy vấn SQL.
+- `st.html` không chạy script, nên không dùng được Tailwind CDN. Em sẽ dịch các lớp Tailwind cần dùng sang CSS thuần, đặt trong `streamlit_app.py`.
+- Đổi `.streamlit/config.toml` sang theme tối theo bảng màu của template.
+- Ưu điểm: không cài thư viện, AppTest vẫn chạy, Chương 8 báo cáo vẫn đúng ("ứng dụng Streamlit").
+- Hạn chế: một số widget Streamlit (selectbox, bảng `st.dataframe`) chỉ chỉnh được màu, không giống template 100%.
+
+**B: bỏ Streamlit, dùng FastAPI và trang HTML/Tailwind lấy từ template.**
+- Giống template gần như tuyệt đối.
+- Phải cài `fastapi` và `uvicorn` (chưa có trong `.venv-exp`).
+- Phải viết API và JavaScript cho cả 4 trang, sửa `run-app.sh`, sửa Chương 8 và sơ đồ kiến trúc.
+- Khối lượng lớn hơn A khoảng 3–4 lần.
+
+### 21.3 Ánh xạ từng trang (theo phương án A)
+
+| Trang | Lấy từ template | Giữ của app hiện tại (số thật) |
+|---|---|---|
+| Khung chung | Thanh bên tối với logo gradient và menu có vạch sáng ở mục đang chọn. Thẻ kiến trúc. Thanh trên có đường dẫn và các nhãn. | Nhãn "VNTC-10 · 84.132 bài". Bỏ chuông, avatar và "v2.4". |
+| Phân loại | Thẻ nhập có bộ đếm ký tự và từ. Chip ví dụ. Nút gradient. Khối kết quả 3 cột: chuyên mục chính với thanh xác suất, so sánh mô hình, phân bố top-5. | 6 mô hình thật với Macro-F1 lấy từ `eval_result`. FI khớp, item tf·idf, tô sáng. Bảng chi tiết. |
+| Tìm kiếm | 4 ô chỉ số. Thẻ truy vấn có chế độ, chuyên mục và số kết quả. Bố cục 7/5: bảng kết quả bên trái, chi tiết bài với điểm BM25/Vector/RRF bên phải. Phân bố chuyên mục. | Toàn bộ `Searcher`, ghi chú truy vấn không dấu, FI của truy vấn. |
+| Dữ liệu và đánh giá | 5 ô KPI, 2 bảng đánh giá, lưới FI theo chuyên mục dạng thẻ. | Số đọc từ MariaDB. Heatmap ma trận nhầm lẫn đổi sang màu tối. Bảng `v_corpus_stats`. Dòng nhật ký. |
+| Tin mới nhất | 3 thẻ nguồn RSS, thanh lọc và nút "Lấy tin ngay", danh sách tin dạng thẻ. | `fetch_news`, giới hạn tần suất, nút phân loại tin. |
+
+Banner ghi chú: thay câu "bộ mô phỏng" bằng ghi chú thật, ví dụ "Liên quan = cùng chuyên mục (proxy)".
+
+### 21.4 Các bước
+1. Sửa `.streamlit/config.toml` và khối CSS trong `src/system/app/streamlit_app.py`.
+2. Viết lại các hàm dựng HTML (`header`, `tiles`, `model_cards`, `hbars`) và từng trang theo 21.3.
+3. Kiểm thử: `py_compile`, AppTest đi qua 4 trang, chụp màn hình từng trang bằng Chrome headless rồi so với template.
+4. Xóa các dòng `search_log` và `classify_log` do kiểm thử sinh ra.
+5. Tùy Q-T3: chụp lại `fig_ui_*.png`, build báo cáo, đếm trang.
+6. Cập nhật CLAUDE.md, MAP.md, bộ nhớ và PLAN.md ("bám template `sources/template_demo/`").
+
+### 21.5 Cần anh/chị duyệt
+- **Q-T1:** chọn phương án A (đề xuất) hay B?
+- **Q-T2:** chuyển hẳn sang nền tối như template? Đề xuất: có, và sửa quy tắc "nền sáng, bám bản phác artifact" trong CLAUDE.md thành "bám template".
+- **Q-T3:** ảnh giao diện trong báo cáo CSDL xử lý thế nào? Đề xuất: chụp lại theo giao diện mới để báo cáo khớp với app. Ảnh nền tối in A4 vẫn đọc được nếu để rộng 62% như hiện tại. Phương án khác là giữ ảnh cũ.
+
+**Quyết định (22/10/2026):**
+- Q-T1: phương án A.
+- Q-T2: chuyển sang nền tối. `sources/template_demo/` chỉ để tham khảo, không sửa hay phát triển trong thư mục này.
+- Q-T3: giữ ảnh `fig_ui_*.png` cũ trong báo cáo, không chụp lại, không build lại báo cáo. Bỏ bước 5 của 21.4.
+
+### 21.6 Kết quả (22/10/2026)
+
+**Đã sửa:**
+- `.streamlit/config.toml`: theme tối (#07090E, primary #22D3EE, thanh bên #0C0F17).
+- `src/system/app/streamlit_app.py`: viết lại CSS và phần trình bày theo template. Logic, truy vấn SQL, `classify.py` và `search.py` giữ nguyên.
+  - Khung chung: thanh bên có logo gradient, menu có vạch sáng, thẻ "Kiến trúc hệ thống" với trạng thái kết nối. Thanh trên có đường dẫn trang, nhãn VNTC-10 (đếm từ CSDL) và mô hình cải tiến. Mỗi trang có banner ghi chú thật.
+  - Phân loại: thẻ nhập có bộ đếm ký tự và từ, chip ví dụ, 3 thẻ kết quả (chuyên mục chính, so sánh 6 mô hình, top-5), thẻ "Vì sao JOI chọn…".
+  - Tìm kiếm: 4 ô chỉ số; chế độ dạng segmented control, thêm lựa chọn Top 20; bảng kết quả HTML 7/5; thẻ chi tiết có ô BM25/Vector/RRF; phân bố chuyên mục.
+  - Dữ liệu: 5 ô KPI, 2 bảng đánh giá HTML (tô hàng JOI, in đậm giá trị tốt nhất), heatmap màu tối, bảng FI dạng chip.
+  - Tin mới nhất: 3 thẻ nguồn RSS, lọc theo nguồn (mới), danh sách tin dạng thẻ.
+  - Số thập phân dùng dấu phẩy như báo cáo.
+
+**Ghi chú kỹ thuật:**
+- `st.html` lọc bỏ `<svg>`, nên icon dùng font Material Symbols mà Streamlit đã nạp sẵn.
+- Container có `key="card_*"` / `"news_*"` được tạo kiểu bằng `.stVerticalBlock[class*="st-key-…"]` kèm `!important`.
+- Không được viết `*/` bên trong comment CSS: nó đóng comment sớm và làm hỏng rule ngay sau.
+
+**Kiểm thử:**
+- `py_compile` đạt.
+- AppTest đi qua 4 trang, gồm chạy phân loại và tìm kiếm có dấu lẫn không dấu, không có exception.
+- Chụp màn hình bằng Chrome headless (CDP, cổng 8502) cả 4 trang, có so với template.
+- Đã xóa 8 dòng `search_log` (id > 9) và 5 dòng `classify_log` (id > 15) do kiểm thử sinh ra.

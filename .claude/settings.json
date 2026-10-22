@@ -6,9 +6,16 @@
       "Edit(./livrables/**)",
       "Edit(./src/**)",
       "Edit(./PLAN.md)",
+      "Edit(./.claude/agents/**)",
+      "Edit(./.claude/skills/**)",
       "Bash(scripts/build-docs.sh)",
+      "Bash(scripts/run-app.sh)",
       "Bash(git status)",
-      "Bash(git diff:*)"
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(docker ps:*)",
+      "Bash(.venv-exp/bin/python -m py_compile:*)"
     ],
     "deny": [
       "Read(./.env)",

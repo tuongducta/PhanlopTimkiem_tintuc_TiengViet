@@ -5,7 +5,7 @@
 ## 1. Thông tin thư mục
 | | |
 |---|---|
-| **IEEE** | N. M. Le, V. D. Nguyen, B. N. Do, and T. D. Nguyen, "VNLP: An open source framework for Vietnamese natural language processing," in *Proc. 4th Symp. Information and Communication Technology (SoICT)*, Da Nang, Vietnam, Dec. 2013. *(Số trang và DOI cần tra Crossref ở GĐ11.)* |
+| **IEEE** | N. M. Le, B. N. Do, V. D. Nguyen, and T. D. Nguyen, "VNLP: An open source framework for Vietnamese natural language processing," in *Proc. 4th Symp. Information and Communication Technology (SoICT)*, Da Nang, Vietnam, Dec. 2013, pp. 88–93, doi: 10.1145/2542050.2542062. *(Đã xác minh Crossref 22/10; thứ tự tác giả theo Crossref.)* |
 | Đơn vị | Univ. of Trento; ePi Technologies; Univ. of Groningen |
 | File | `sources/papers/Paper_KDD_Data/21.pdf` |
 

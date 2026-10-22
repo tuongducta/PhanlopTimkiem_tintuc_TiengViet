@@ -77,7 +77,7 @@
 |---|---|
 | **A1** âm tiết so với từ | TF-IDF: 0,891 so với 0,903. TRANS-IT: 0,816 so với 0,847. JOI: 0,824 so với 0,849 (LR, suy luận lại). Không tách từ làm mất khoảng 1–3 điểm |
 | **A2** k | k = 100: 30.866 FI (gấp 9 lần k = 50), khai phá 14 s, JOI huấn luyện 56 s + suy luận 220 s (k = 50: 16 s + 42 s), mà không cải thiện khi đánh giá nhất quán |
-| **A3** chỉ FI đóng | 0,770 so với JOI 0,766 (model.dv). Bỏ FI không đóng không làm mất gì |
+| **A3** chỉ FI đóng | 0,770 so với JOI 0,766 (model.dv). *Đính chính 22/10:* ở cấu hình này mọi FI đều đóng, nên hai tập FI giống hệt nhau; chênh lệch là dao động ngẫu nhiên (Mục 7.1) |
 | **A4** d ∈ {64, 128, 256} | 0,775 / 0,767 / 0,764 (model.dv). Không tăng theo d, khớp với quan sát của [13] |
 | **A5** JOI ghép thẳng với TF-IDF | 0,867 < TF-IDF 0,903. Hai khối lệch thang đo; cần chuẩn hóa hoặc gán trọng số |
 
@@ -147,7 +147,7 @@ gensim không build được trên Python 3.14. Bản đầu trên Python 3.11 (
 |---|---|
 | **RQ3 — FI có làm giàu embedding trên tin tức tiếng Việt?** | **Gần như không cho phân loại**: JOI − IT = −0,3 đến +0,9 điểm khi đánh giá nhất quán. Mức +2,7 của [13] trên Snippets không tái hiện được trên VNTC, **và cũng không tái hiện được trên chính Snippets** với dữ liệu và mã nguồn của tác giả (JOI − IT: +0,7 so với +3,8, Mục 2.5). Lợi ích của FI nằm ở **diễn giải** (FI chuyên mục đọc được, tự sửa lỗi tách từ) và ở **tìm kiếm**, nơi JOI tốt nhất trong các biểu diễn không giám sát (nDCG@10 0,809 so với IT 0,800, TF-IDF 0,740) |
 | **H1 (mất tần suất)** | Được xác nhận: TF-IDF (có tần suất) 0,903 so với embedding tập hợp 0,849. Cách ghép thẳng (A5) chưa khai thác được; cần phương án khác |
-| **H2 (bùng nổ FI)** | Được xác nhận định lượng: k = 50 → 3.586 FI; k = 100 → 30.866 FI, tổng thời gian huấn luyện + suy luận gấp khoảng 4,7 lần (275 s so với 58 s), không cải thiện. Top-k ≈ 50 và FI đóng là đủ |
+| **H2 (bùng nổ FI)** | Được xác nhận định lượng: k = 50 → 3.586 FI; k = 100 → 30.866 FI, tổng thời gian huấn luyện + suy luận gấp khoảng 4,7 lần (275 s so với 58 s), không cải thiện. Top-k ≈ 50 là đủ. *Đính chính 22/10:* lọc FI đóng không có tác dụng ở cấu hình này vì mọi FI đều đóng (Mục 7.1) |
 | **H5 (truy vấn)** | `infer_vector` xử lý được truy vấn 3 từ. 94% truy vấn không chứa FI nhưng JOI vẫn hơn TF-IDF, nên lợi thế chủ yếu đến từ biểu diễn dày |
 | **H7 (chi phí)** | Rẻ: khai phá FI 3 s, huấn luyện JOI 16 s, suy luận 50.373 bài 42 s, toàn bộ trên CPU (k = 50) |
 | **A1 (từ so với âm tiết)** | Không tách từ mất 1–3 điểm với mọi biểu diễn. FI chỉ bù được một phần nhỏ (+0,9) |
@@ -168,4 +168,74 @@ gensim không build được trên Python 3.14. Bản đầu trên Python 3.11 (
 .venv-exp/bin/python src/experiments/run_consistent.py   # E6, ~20 phút
 .venv-exp/bin/python src/experiments/replicate_snippets.py # E7, ~5 phút (cần repo sources/repos/Trans2Vec)
 .venv-exp/bin/python src/experiments/make_report.py      # bảng + hình
+.venv-exp/bin/python src/experiments/run_e8_profile.py   # E8, ~7 phút
+.venv-exp/bin/python src/experiments/run_e9_fi_types.py --delta 0.002 --skip-closed  # E9, ~1–2 giờ
 ```
+
+## 7. GĐ10 (22/10/2026): E8 và E9
+
+Thiết kế ở `contexte/plans/KE_HOACH_SURVEY_v3.md` Mục 10. Số liệu gốc: `src/experiments/results/e8_profile.json`, `e9_fi_types.json`.
+
+### 7.1 E8 — Hồ sơ dữ liệu giao dịch theo K26
+
+`src/experiments/run_e8_profile.py`, chỉ tập train. Ở mỗi δ, bỏ item có support < δ rồi tính độ đo (như K26). Độ đo theo K26 Eq. 1–12:
+- Density, IT, |T|, |B| tái tạo đúng Bảng 3 của K26 (kiểm bằng phép tính trên Chess, Mushrooms, Retail).
+- Similarity, ID, IS cài theo công thức in trong bài, nhưng công thức đó không cho ra số trong Bảng 3. Vì vậy ba độ đo này chỉ dùng để so giữa các corpus ở đây. "Sim %" là số item một giao dịch chia sẻ trung bình với một giao dịch khác, tính theo % độ dài giao dịch.
+
+**Bảng 6.** Hồ sơ giao dịch trước khi lọc (δ = 0) và ở δ dùng trong thực nghiệm
+
+| Cấu hình | δ | \|T\| | \|B\| | IT (± std) | Density | Sim % | FI (≤ 3) | FI dài ≥ 2 / bài | Bài không có FI dài ≥ 2 | FI không đóng | JOI − IT (đánh giá nhất quán) |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| Snippets | 0 | 10.060 | 20.302 | 13,0 ± 3,6 | 6,4×10⁻⁴ | 1,56 | — | — | — | — | |
+| Snippets | 0,2% (δ của [13]) | 10.047 | 1.125 | 8,7 ± 2,9 | 7,7×10⁻³ | 2,23 | 2.740 | 5,7 | 14% | 3,4% | **+3,07** (E7 inductive) |
+| VNTC từ, k = 50 | 0 | 33.759 | 43.572 | 49,0 ± 4,0 | 1,1×10⁻³ | 1,10 | — | — | — | — | |
+| VNTC từ, k = 50 | 0,535% | 33.759 | 2.102 | 26,0 ± 7,5 | 1,2×10⁻² | 1,88 | 3.586 | 12,0 | 14% | 0% | **+0,1** (E6) |
+| VNTC từ, k = 100 | 0,535% | 33.759 | 3.232 | 59,6 ± 16,1 | 1,8×10⁻² | 3,57 | 30.866 | 222,7 | 0% | 0,02% | **−0,3** (E6) |
+| VNTC âm tiết, k = 50 | 0,535% | 33.759 | 1.991 | 39,0 ± 7,5 | 2,0×10⁻² | 3,12 | 8.984 | 56,8 | 1% | 0,01% | **+0,9** (E6) |
+| VNTC từ, không lọc top-k | 0 | 33.759 | 43.777 | 138,0 ± 92,2 | 3,2×10⁻³ | 6,82 | — | — | — | — | |
+| *Retail (K26, Bảng 3)* | 0 | 88.162 | 16.470 | 10,3 ± 8,2 | 6,3×10⁻⁴ | — | | | | | |
+
+Hai mức δ của nhóm phải đọc khác nhau: 0,2% là δ do tác giả [13] chọn cho Snippets, còn 0,535% là δ do elbow của nhóm chọn cho VNTC. Ở δ = 0,2%, VNTC từ k = 50 có 22.291 FI, k = 100 có 284.384 FI, âm tiết có 84.097 FI.
+
+**Nhận xét:**
+1. **Hồ sơ dữ liệu không giải thích được vì sao FI giúp Snippets mà không giúp VNTC.**
+   - Trước khi lọc, hai corpus cùng loại *thưa*: density 6,4×10⁻⁴ so với 1,1×10⁻³, cả hai cùng bậc với Retail. Sim % cũng gần nhau (1,56 so với 1,10).
+   - Ở δ dùng trong thực nghiệm, tỉ lệ bài không có FI dài ≥ 2 bằng nhau (14%).
+   - Khác biệt rõ nhất là **độ dài giao dịch**: 13 item so với 49. Vì vậy FI chiếm tỉ trọng token khác nhau trong JOI: khoảng 30% với Snippets (5,7 trên 13 + 5,7), khoảng 20% với VNTC k = 50.
+   - Nhưng trong chính VNTC, tỉ trọng FI tăng lên khoảng 54% (âm tiết) và 72% (k = 100) mà JOI − IT vẫn chỉ +0,9 và −0,3. Lượng FI vì thế cũng không giải thích được.
+   - Giả thuyết ở `synthesis_v3.md` §5.3 ("thưa so với dày") **không được ủng hộ**. Các khả năng còn lại chưa kiểm chứng: văn bản ngắn hưởng lợi vì FI làm dài thêm "câu" huấn luyện cho vector bài; độ khó của tác vụ (Snippets accuracy khoảng 75%, VNTC Macro-F1 khoảng 0,85); khác ngôn ngữ (tiếng Anh đã stem so với tiếng Việt đã tách từ).
+2. **δ làm đổi hồ sơ dữ liệu rất mạnh, đúng như K26.** Với VNTC k = 50, từ δ = 0 lên 2%: |B| giảm từ 43.572 xuống 268, density tăng 28 lần, Sim % từ 1,10 lên 3,60. Một corpus "thưa" thành "dày vừa" chỉ vì đổi ngưỡng. Hệ quả: δ phải được báo cáo kèm hồ sơ dữ liệu.
+3. **FI không đóng rất hiếm trong giao dịch văn bản.**
+   - Tỉ lệ cao nhất là 3,4% (Snippets, δ = 0,2%). VNTC từ k = 50 chỉ 0,17% ở δ = 0,2%, và bằng 0 ở mọi δ ≥ 0,535%.
+   - Các FI không đóng hầu hết là cụm cố định hoặc chữ mẫu: {dir, yahoo} → {dir, directori, yahoo}; {wiki, …} → {…, wikipedia}; {games, đội} → {games, sea, đội}; {a, milan} → {a, milan, serie}; {hoátiêu} → {ban_văn, hoátiêu} (dòng ghi chuyên mục bị tách từ sai).
+   - Lý do: một tập và tập cha của nó chỉ cùng support khi các item *luôn* đi cùng nhau, mà trong văn bản tự nhiên điều này chỉ xảy ra với cụm cố định.
+   - **Hệ quả cho K25:** lợi ích nén của closed FI gần như không có với văn bản đã lọc top-k và FI dài ≤ 3. Đóng góp có thể dùng được của K25 cho đề tài nằm ở CICFI (E9), không nằm ở closed FI. Ablation A3 (Mục 2.3) so hai tập FI giống hệt nhau.
+4. **Bùng nổ FI (H2) đo được theo δ:** VNTC từ k = 100 ở δ = 0,2% sinh 284.384 FI, trung bình 941 FI dài ≥ 2 mỗi bài.
+5. **Kiểm tra chéo:** hàm khai phá của nhóm cho 2.740 FI trên Snippets ở δ = 0,2%, gần với 2.667 FI trong dữ liệu tác giả cung cấp. Phần chênh có thể do mã gốc không giới hạn độ dài FI.
+
+### 7.2 E9 — Loại FI: all, ổn định (CICFI), ngẫu nhiên
+
+`src/experiments/run_e9_fi_types.py --delta 0.002 --skip-closed`. VNTC từ, k = 50; JOI so với TRANS-IT; giao thức E6 (train và test cùng `infer_vector`, LR C = 1); **3 seed**; tìm kiếm 1.000 truy vấn bài báo.
+- Bỏ biến thể closed, vì ở δ = 0,2% chỉ 0,17% FI là không đóng (Mục 7.1).
+- Lần chạy đầu bị dừng và sửa thiết kế: ngưỡng "cận dưới Wilson ≥ δ trong từng chuyên mục" giữ lại cả 17.349/17.349 FI. Thay bằng ba biến thể **cùng cỡ** (10.374 FI dài ≥ 2), chỉ khác tiêu chí chọn.
+- CICFI toàn cục tương đương nâng δ lên 0,249% (support ≥ 84 bài); điều này được kiểm bằng `assert` trong script.
+- Ba tập cùng cỡ trùng nhau một phần: ổn định chuyên mục trùng 8.054/10.374 với CICFI toàn cục, ngẫu nhiên trùng 6.209/10.374.
+
+**Bảng 7.** Kết quả E9 (trung bình ± độ lệch chuẩn qua 3 seed; Δ so với TRANS-IT cùng seed)
+
+| Biến thể | FI dài ≥ 2 | FI dài ≥ 2 / bài | Macro-F1 | Δ Macro-F1 | nDCG@10 | Δ nDCG@10 | Thời gian huấn luyện + suy luận |
+|---|---|---|---|---|---|---|---|
+| TRANS-IT (không FI) | 0 | 0 | 0,8473 ± 0,0001 | — | 0,8090 ± 0,0024 | — | 98 s |
+| JOI, all FI, δ = 0,535% (cấu hình chính) | 1.484 | 12,0 | 0,8498 ± 0,0010 | +0,0025 ± 0,0011 | 0,8107 | +0,0018 | 98 s |
+| **JOI, all FI, δ = 0,2%** | 17.349 | 57,0 | **0,8535 ± 0,0007** | **+0,0062 ± 0,0007** | 0,8164 | +0,0074 | 194 s |
+| JOI, CICFI toàn cục (≡ δ' = 0,249%) | 10.374 | 41,6 | 0,8526 ± 0,0013 | +0,0053 ± 0,0011 | 0,8143 | +0,0054 | 147 s |
+| JOI, ổn định theo chuyên mục (có giám sát) | 10.374 | 39,9 | 0,8534 ± 0,0002 | +0,0061 ± 0,0002 | 0,8175 | +0,0085 | 138 s |
+| JOI, ngẫu nhiên cùng cỡ | 10.374 | 25,4 | 0,8533 ± 0,0006 | +0,0059 ± 0,0005 | 0,8179 | +0,0089 | 114 s |
+
+Thời gian là trung bình 3 seed. Seed 1 của hai dòng đầu chạy chồng với E8, nên thời gian của chúng có thể bị đội lên.
+
+**Nhận xét:**
+1. **Hạ δ giúp, nhưng rất ít.** Từ 0,535% xuống 0,2%, số FI tăng 12 lần. Đóng góp của FI tăng từ +0,0025 lên +0,0062 Macro-F1 và từ +0,0018 lên +0,0074 nDCG@10. Mức tăng nhất quán qua 3 seed (độ lệch chuẩn ≤ 0,001) nên là thật, nhưng chỉ khoảng 0,6 điểm. Đổi lại, thời gian gấp đôi. JOI tốt nhất (0,8535) vẫn kém TF-IDF (0,907) khoảng 0,05.
+2. **Tiêu chí chọn FI không quan trọng.** Ở cùng cỡ 10.374 FI, ba cách chọn cho kết quả ngang nhau trong vùng nhiễu: support toàn cục (+0,0053), ổn định theo chuyên mục dù dùng nhãn (+0,0061), và ngẫu nhiên (+0,0059). Bộ ngẫu nhiên thậm chí ít FI mỗi bài hơn (25,4 so với khoảng 40) mà vẫn ngang. Vậy **CICFI của K25 không đem lại gì thêm** so với chọn ngẫu nhiên cùng số lượng. Tín hiệu đến từ việc *có thêm* token đồng xuất hiện, không đến từ việc chọn *đúng* FI.
+3. **Trả lời RQ3 (loại FI):** với tin tức tiếng Việt đã lọc top-k, closed FI không tạo khác biệt vì gần như mọi FI đã đóng (E8), và CICFI không hơn ngẫu nhiên (E9). Khuyến nghị cho hệ thống: giữ FI đầy đủ, chọn δ theo ngân sách tính toán. Không cần bước lọc FI đóng hay lọc theo khoảng tin cậy.
+4. **Liên hệ E8:** ngay cả khi FI chiếm khoảng 54% token (57 FI dài ≥ 2 trên 49 item), JOI chỉ hơn IT 0,6 điểm. Như vậy mức +3 điểm trên Snippets không đến từ số lượng FI.

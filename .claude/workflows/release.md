@@ -1,4 +1,5 @@
 # Workflow: hoàn thiện và giao nộp
+0. Task còn sửa code: chạy `/pipeline <task>` cho xong (đủ phiếu duyệt, review và test đạt) rồi mới sang bước 1.
 1. Chạy skill `build-docs` (build, kiểm tra trích dẫn, đếm trang).
 2. Chạy agent `reviewer` trên `livrables/`.
 3. Sửa các điểm chưa đạt trong `draft/`, rồi build lại.

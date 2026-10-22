@@ -1,0 +1,28 @@
+--- contexte/handoff/ui-contrast-fix/logs/streamlit_app.before_v2.py	2026-10-22 17:04:48
++++ src/system/app/streamlit_app.py	2026-10-22 17:06:21
+@@ -302,6 +302,7 @@
+ .t2v-table .tt { color: #E2E8F0; font-weight: 600; line-height: 1.4; }
+ .t2v-table .sn { font-size: 11px; color: #94A3B8; margin-top: 2px; }
+ .t2v-table .fl { font: 11px 'JetBrains Mono', monospace; color: #94A3B8; margin-top: 2px; }
++.t2v-table .fl.path { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 420px; }
+ .t2v-table .sc { font: 700 12px 'JetBrains Mono', monospace; color: #E2E8F0; }
+ .t2v-table tr.sel .sc { color: #67E8F9; }
+ .t2v-tfoot { display: flex; justify-content: space-between; padding: 11px 18px; font: 500 11px 'JetBrains Mono', monospace;
+@@ -347,7 +348,7 @@
+ 
+ # ===================================================================== tiện ích HTML
+ e = lambda x: html.escape(str(x))
+-txt = lambda x: x if isinstance(x, str) else ""  # Bỏ NaN vì NaN truthy nhưng không phải mô tả.
++txt = lambda x: x if isinstance(x, str) else ""  # summary NULL ra None/NaN/pd.NA; NaN truthy nên "or" không chặn được và str(NaN) thành "nan"
+ vn = lambda x, d=3: f"{x:.{d}f}".replace(".", ",")  # số thập phân dấu phẩy như trong báo cáo
+ pct = lambda x: f"{x * 100:.1f}%".replace(".", ",")
+ num = lambda n: f"{int(n):,}".replace(",", ".")
+@@ -636,7 +637,7 @@
+         snip = d["snippet"].replace("\n", " ")
+         trs += (f'<tr class="{"sel" if sel else ""}"><td class="c n">{h["rank"]}</td>'
+                 f'<td><div class="tt">{e(d["title"])}</div><div class="sn">{e(snip[:90])}…</div>'
+-                f'<div class="fl">{e(d["file"])}</div></td><td>{cat_chip(d["code"], d["category"])}</td>'
++                f'<div class="fl path" title="{e(d["file"])}">{e(d["file"])}</div></td><td>{cat_chip(d["code"], d["category"])}</td>'
+                 f'<td class="n" style="font-size:10px;color:#94A3B8">{e(", ".join(d["fi"][:2])) or "—"}</td>'
+                 f'<td class="r"><span class="sc">{vn(h["score"], 4)}</span>'
+                 f'{bar(h["score"] / top, "" if sel else "mid", "thin")}'

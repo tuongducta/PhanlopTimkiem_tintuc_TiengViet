@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "receiptId": "ce0ed38e-03e1-49c1-8e43-d88fbb9e29d4",
+  "status": "current",
+  "command": "deliver",
+  "type": "architecture",
+  "input": "/Users/ductuongta/Documents/Sau_dai_hoc_Hutech/Tri-thuc-du-lieu/TriThucDuLieu_BaiTap2.nosync/.archify/architecture-he-thong-t2v-20261022-141345/candidate.json",
+  "output": "/Users/ductuongta/Documents/Sau_dai_hoc_Hutech/Tri-thuc-du-lieu/TriThucDuLieu_BaiTap2.nosync/.archify/architecture-he-thong-t2v-20261022-141345/he-thong-t2v.html",
+  "specification": {
+    "sha256": "29b0d3d2858c99d2b6920a6339cab8e352eb8419e7f2459eb849f96ececf6647",
+    "bytes": 8075
+  },
+  "artifact": {
+    "sha256": "5b6ae50aa2d804b3bbd94861904f66a880e75981a642e8df8d4aeb50354d611e",
+    "bytes": 838961
+  }
+}

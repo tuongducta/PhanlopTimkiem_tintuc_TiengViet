@@ -1,0 +1,3 @@
+Đã thực hiện hai yêu cầu trong [streamlit_app.py](/Users/ductuongta/Documents/Sau_dai_hoc_Hutech/Tri-thuc-du-lieu/TriThucDuLieu_BaiTap2.nosync/src/system/app/streamlit_app.py): thêm CSS rút gọn đường dẫn, cập nhật thẻ đường dẫn có `title`, và thay comment của `txt`; biểu thức lambda được giữ nguyên.
+
+`py_compile` chạy thành công. `git diff --check` báo dòng trống thừa ở cuối `contexte/plans/KE_HOACH_SURVEY_v3.md`; tôi không sửa file đó. File đích đã có nhiều thay đổi từ trước trong working tree.

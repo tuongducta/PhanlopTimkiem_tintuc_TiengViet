@@ -1,7 +1,7 @@
 # KẾ HOẠCH SURVEY v3: Tái cấu trúc quanh đề tài, bổ sung 8 bài trong `Paper_KDD_Data/`
 
 **Đề tài:** Hệ thống tìm kiếm và phân loại chuyên mục tin tức tiếng Việt với biểu diễn Trans2Vec
-**Ngày lập:** 18/10/2026 · **Trạng thái:** ✅ Q1 đã duyệt (18/10): tổ chức lại theo đường ống · ✅ GĐ8 xong (8 phiếu `contexte/survey-notes/K*.md`) · Q2–Q5 chưa chốt, đang dùng mặc định: giữ mã K, chưa đổi tên/xóa PDF, chưa chạy thực nghiệm, chưa sửa `livrables/survey/draft/`.
+**Ngày lập:** 18/10/2026 · **Trạng thái:** ✅ Q1 đã duyệt (18/10): tổ chức lại theo đường ống · ✅ GĐ8 xong (8 phiếu `contexte/survey-notes/K*.md`) · ✅ GĐ9 xong (22/10): `contexte/survey-notes/synthesis_v3.md` · ✅ Q2–Q5 chốt 22/10 (Mục 10): giữ mã K; không đổi tên PDF; chạy E8 + E9 bản sửa, bỏ E10; sửa thẳng `livrables/survey/draft/`.
 **Quan hệ với bản cũ:** file này thay thế vai trò "kế hoạch đang dùng". `KE_HOACH_SURVEY.md` (v2) **giữ nguyên, không sửa**. Bản survey hiện tại (`livrables/survey/Survey_Trans2Vec_VN_News.docx`, build ngày 08/10) cũng giữ nguyên. Mọi thay đổi chỉ bắt đầu sau khi anh/chị duyệt bản này.
 
 > **Liên kết (20/10):** hệ thống demo kết hợp môn *Hệ CSDL nâng cao* (MariaDB + Manticore Search) được lập kế hoạch riêng trong `KE_HOACH_HE_THONG_DB.md`. Hệ quả cho survey: RQ6 thêm baseline BM25 và hybrid; Chương 9 vẽ lại kiến trúc (xem Mục 6 của file đó).
@@ -188,6 +188,8 @@ Biểu diễn văn bản cho phân loại và tìm kiếm tin tức tiếng Vi�
 | **E9** | ~~closed FI thay cho all FI~~ (**đã có**: ablation A3 của GĐ6, 0,770 so với 0,766). Còn lại: chỉ giữ FI có CI Wilson hẹp (K25), ước lượng theo chuyên mục; đánh giá cả Macro-F1 lẫn nDCG | H2, H8: ít token FI hơn mà Macro-F1/nDCG không giảm, hoặc tăng | Trung bình (~30–60 phút, tái dùng pipeline E6) |
 | **E10** | Baseline embedding câu đóng băng (BGE-M3 hoặc multilingual-e5) + LR cho phân loại, cosine cho tìm kiếm | RQ6 và trần trên theo mô thức K29 | Cao (tải mô hình khoảng 1–2 GB, suy luận CPU trên ~84k bài có thể mất vài giờ; có thể lấy mẫu con) |
 
+> **Đính chính (22/10):** dòng E9 ở trên viết "closed FI đã có (A3)" là **sai**. Ở cấu hình chính mọi FI đều đóng (phát hiện GĐ-H3), nên A3 không kiểm chứng gì. Thiết kế E9 mới ở Mục 10.3.
+
 Cả ba đều chạy trong `.venv-exp`, kết quả ghi thêm vào `contexte/results/RESULTS.md` (mục mới, không sửa số liệu E1–E7).
 
 ---
@@ -207,7 +209,45 @@ Cả ba đều chạy trong `.venv-exp`, kết quả ghi thêm vào `contexte/re
 | Giai đoạn | Công việc | Sản phẩm |
 |---|---|---|
 | GĐ8 ✅ | Phiếu đọc chi tiết 8 bài theo mẫu sẵn có | `contexte/survey-notes/K25_…md` … (8 file mới) + cập nhật `notes/README.md` |
-| GĐ9 | Ma trận tổng hợp v3 (taxonomy v3 × bài, RQ6) | `livrables/survey/synthesis_v3.md` (file mới, giữ `synthesis.md`) |
-| GĐ10 | (Tùy chọn) E8, E9, E10 | script mới trong `src/experiments/` + mục mới trong `RESULTS.md` |
-| GĐ11 | Sửa các chương theo Mục 6; thêm 8 mục vào `refs.tsv` | bản survey v3 (.md/.docx), bản v2 đã sao lưu |
-| GĐ12 | Rà soát: số liệu, tham chiếu chéo, trích dẫn | cập nhật `contexte/survey-notes/review_log.md`, `contexte/archive/TIEP_TUC.md` |
+| GĐ9 ✅ | Ma trận tổng hợp v3 (taxonomy v3 × bài, RQ6) | `contexte/survey-notes/synthesis_v3.md` (file mới, giữ `synthesis.md`; đặt ở `contexte/` theo cấu trúc 21/10) |
+| GĐ10 | E8, E9 bản sửa (Mục 10) | script mới trong `src/experiments/` + mục mới trong `RESULTS.md` |
+| GĐ11 ✅ (22/10) | Sửa các chương theo Mục 6; thêm 8 mục K* + 3 mục tìm kiếm (BM25, HNSW, RRF) vào `refs.tsv`, xác minh Crossref | bản survey v3 (.md/.docx), bản v2 đã sao lưu |
+| GĐ12 ✅ (22/10) | Rà soát: số liệu, tham chiếu chéo, trích dẫn | `contexte/survey-notes/review_log.md` (24 lỗi đã sửa) |
+
+---
+
+## 10. Quyết định ngày 22/10 và thiết kế GĐ10
+
+### 10.1 Quyết định (anh/chị trả lời "theo đề xuất")
+
+| Câu | Quyết định | Lý do |
+|---|---|---|
+| Q2 | Giữ mã K.. | Danh mục cuối bài tự đánh số; không phải đổi tên 8 phiếu |
+| Q3 | Không đổi tên PDF trong `Paper_KDD_Data/`; `31.pdf` để anh/chị tự xử lý | `sources/` chỉ đọc |
+| Q4 | Chạy **E8** và **E9 bản sửa**; **bỏ E10** | E10 cần cài torch và chạy nhiều giờ |
+| Q5 | Sửa thẳng `livrables/survey/draft/` | Script build đọc sẵn thư mục này; bản v2 nằm trong git (anh/chị commit/tag trước khi GĐ11 bắt đầu) |
+
+### 10.2 E8 — Hồ sơ dữ liệu giao dịch (K26)
+
+- **Script:** `src/experiments/run_e8_profile.py` → `src/experiments/results/e8_profile.json`.
+- **Dữ liệu (chỉ tập train):**
+  - Snippets: 10.060 dòng đầu của `snippets.txt` (dữ liệu tác giả [13]); mỗi đoạn là một giao dịch.
+  - VNTC-10: từ k = 20, 50, 100; âm tiết k = 50; từ không lọc top-k.
+- **Mức δ:** không lọc, 0,2% (δ của tác giả trên Snippets), 0,535% (δ của nhóm trên VNTC), 1%, 2%. Theo K26, ở mỗi δ bỏ các item có support < δ rồi mới tính độ đo.
+- **Độ đo:** 8 độ đo của K26 (Eq. 1–12). Density, IT, |T|, |B|, ||T|| khớp Bảng 3 của K26 (đã thử bằng phép tính trên Chess, Mushrooms, Retail). Similarity, ID và IS được cài theo công thức in trong bài, nhưng công thức này không tái tạo được số trong Bảng 3. Vì vậy ba độ đo này chỉ dùng để so giữa các corpus của nhóm. Similarity báo hai dạng: số item chung trung bình (Eq. 3) và tỉ lệ % so với độ dài giao dịch.
+- **Thống kê FI kèm theo** (FI dài ≤ 3, cùng hàm `t2v.mine_fi`): số FI, số FI theo độ dài, FI dài ≥ 2 trung bình mỗi bài, tỉ lệ bài không có FI dài ≥ 2, **tỉ lệ FI không đóng**. Riêng cấu hình không lọc top-k thì bỏ phần FI, vì quá nặng.
+- **Đối chiếu:** đặt hồ sơ cạnh mức JOI − IT đã đo khi đánh giá nhất quán: Snippets inductive +3,07; VNTC từ k = 50 +0,1; k = 100 −0,3; âm tiết +0,9. Chỉ có 4 điểm nên chỉ mô tả, không tính tương quan.
+
+### 10.3 E9 bản sửa — Loại FI: all, closed, ổn định
+
+- **Bước A (nằm trong E8):** đo tỉ lệ FI không đóng theo δ. Nếu tỉ lệ này vẫn gần 0 ở mọi δ, kết luận rằng với giao dịch văn bản đã lọc top-k, closed FI không tạo khác biệt. Đây cũng là một kết quả, và khi đó bỏ nhánh closed của bước B.
+- **Bước B:** VNTC từ k = 50, δ thấp nhất mà khai phá còn chạy được. Các biến thể JOI:
+  1. all FI;
+  2. closed FI (chỉ khi bước A cho tỉ lệ không đóng ≥ 5%);
+  3. **CICFI toàn cục:** giữ FI có cận dưới Wilson 95% ≥ δ. Với một N chung, bộ lọc này tương đương nâng δ, nên so với đối chứng "nâng δ để còn đúng số FI đó";
+  4. **CICFI theo chuyên mục:** giữ FI có cận dưới Wilson ≥ δ trong ít nhất một chuyên mục (N = số bài train của chuyên mục). Biến thể này dùng nhãn train, tương tự FI phân biệt (S13), nên phải ghi rõ là *có giám sát*;
+  5. đối chứng ngẫu nhiên: lấy ngẫu nhiên đúng bằng số FI của biến thể 4.
+- **Giao thức:** như E6: vector train và test đều sinh bằng `infer_vector`, LR C = 1, **3 seed** (chênh 0,005 là trong vùng nhiễu nếu chỉ có 1 seed). Đo Macro-F1 và nDCG@10 (1.000 truy vấn bài báo).
+- **Script:** `src/experiments/run_e9_fi_types.py` → `results/e9_fi_types.json`. Chạy nền, ghi kết quả sau từng biến thể để chạy tiếp được nếu bị ngắt.
+- **Ước tính:** 30–60 phút.
+

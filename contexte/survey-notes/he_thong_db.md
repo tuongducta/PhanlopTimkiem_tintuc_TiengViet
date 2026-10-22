@@ -1,6 +1,6 @@
 # Đoạn chèn vào survey từ hệ thống MariaDB + Manticore (GĐ-H7, 21/10/2026)
 
-**Trạng thái:** soạn sẵn, **chưa chèn** vào `livrables/survey/draft/`. Q5 của `KE_HOACH_SURVEY_v3.md` chưa chốt, nên sẽ ráp vào khi làm GĐ11 của v3 (anh/chị duyệt Q-H7b ngày 21/10).
+**Trạng thái:** ✅ đã chèn vào `livrables/survey/draft/` ở GĐ11 (22/10/2026): §1 → Mục 9.1 và Hình 9.2; §2 → Bảng 9.6 và Mục 2.2; §3 → Bảng 9.4; §4 → đoạn "Đính chính" ở Mục 9.5; §5 → Mục 7.1; §6 → `refs.tsv`.
 
 **Nguồn số liệu:**
 - `contexte/results/RESULTS_DB.md`;

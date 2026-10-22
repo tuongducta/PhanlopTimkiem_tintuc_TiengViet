@@ -25,7 +25,7 @@
 
 ## Tiêu chí hoàn thành
 - [x] Survey bản v2 build được (Times New Roman 13, A4, mục lục tự động).
-- [ ] Survey bản v3: ráp phiếu đọc K* và các đoạn chèn ở `contexte/survey-notes/he_thong_db.md` (chờ chốt Q2–Q5 của `KE_HOACH_SURVEY_v3.md`).
+- [x] Survey bản v3: ráp phiếu đọc K* và các đoạn chèn ở `contexte/survey-notes/he_thong_db.md`; đã rà soát (GĐ12, 22/10, xem `contexte/survey-notes/review_log.md`).
 - [x] Báo cáo CSDL: 10 chương, trong giới hạn **25–30 trang** (hiện 30).
 - [x] Mọi số liệu trong tài liệu lấy từ kết quả chạy thật và tái lập được bằng script trong `src/`.
 - [x] Ứng dụng chạy được trên dữ liệu thật; kiểm thử AppTest đạt cả 4 trang.

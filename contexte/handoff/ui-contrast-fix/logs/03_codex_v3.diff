@@ -1,0 +1,11 @@
+--- contexte/handoff/ui-contrast-fix/logs/streamlit_app.before_v3.py	2026-10-22 17:38:00
++++ src/system/app/streamlit_app.py	2026-10-22 17:38:23
+@@ -302,7 +302,7 @@
+ .t2v-table .tt { color: #E2E8F0; font-weight: 600; line-height: 1.4; }
+ .t2v-table .sn { font-size: 11px; color: #94A3B8; margin-top: 2px; }
+ .t2v-table .fl { font: 11px 'JetBrains Mono', monospace; color: #94A3B8; margin-top: 2px; }
+-.t2v-table .fl.path { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 420px; }
++.t2v-table .fl.path { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 0; min-width: 100%; } /* width: 0 tránh làm tăng min-content của cột */
+ .t2v-table .sc { font: 700 12px 'JetBrains Mono', monospace; color: #E2E8F0; }
+ .t2v-table tr.sel .sc { color: #67E8F9; }
+ .t2v-tfoot { display: flex; justify-content: space-between; padding: 11px 18px; font: 500 11px 'JetBrains Mono', monospace;

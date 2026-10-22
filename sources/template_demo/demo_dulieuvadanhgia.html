@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+
+<html class="h-full bg-[#080a0f] text-slate-200" lang="vi"><head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Dữ liệu và đánh giá - Trans2Vec News</title>
+    <!-- Tailwind CSS CDN with forms and container-queries -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+    <!-- Font Awesome for crisp icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    },
+                    colors: {
+                        cyber: {
+                            cyan: '#00f2fe',
+                            violet: '#6366f1',
+                            neon: '#38bdf8',
+                        },
+                        obsidian: {
+                            950: '#07090e',
+                            900: '#0c0f17',
+                            850: '#111622',
+                            800: '#161d2d',
+                            700: '#1e293b'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style data-purpose="custom-ui-effects">
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 5px;
+            height: 5px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(15, 23, 42, 0.4);
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(99, 102, 241, 0.25);
+            border-radius: 9999px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: rgba(0, 242, 254, 0.4);
+        }
+        .glow-cyan {
+            box-shadow: 0 0 20px -3px rgba(0, 242, 254, 0.25);
+        }
+        .glow-indigo {
+            box-shadow: 0 0 25px -4px rgba(99, 102, 241, 0.35);
+        }
+        .ambient-bg {
+            background-image:
+                    radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.12) 0px, transparent 50%),
+                    radial-gradient(at 100% 0%, rgba(0, 242, 254, 0.08) 0px, transparent 40%),
+                    radial-gradient(at 50% 100%, rgba(139, 92, 246, 0.06) 0px, transparent 60%);
+        }
+    </style>
+</head>
+<body class="h-full flex overflow-hidden bg-obsidian-950 text-slate-300 antialiased selection:bg-cyber-cyan selection:text-black">
+<!-- Ambient lighting layer -->
+<div class="fixed inset-0 pointer-events-none ambient-bg z-0 opacity-80"></div>
+<!-- BEGIN: LeftSidebar -->
+<aside class="w-72 flex-shrink-0 bg-obsidian-900/90 backdrop-blur-xl text-slate-300 flex flex-col justify-between border-r border-white/5 select-none z-30" data-purpose="sidebar">
+    <div class="flex flex-col h-full overflow-hidden">
+        <!-- App Brand & Identity -->
+        <div class="p-6 pb-4 flex items-center gap-3.5 border-b border-white/5">
+            <div class="relative w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 via-indigo-500 to-cyan-400 flex items-center justify-center font-bold text-white shadow-lg shadow-indigo-500/20 ring-1 ring-white/20">
+                <span class="text-sm font-extrabold tracking-tight font-mono">T2V</span>
+                <span class="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-cyber-cyan shadow-[0_0_8px_#00f2fe]"></span>
+            </div>
+            <div>
+                <h1 class="font-bold text-white tracking-tight text-base flex items-center gap-1.5">
+                    Trans2Vec News
+                    <span class="px-1.5 py-0.5 text-[10px] font-mono font-semibold bg-indigo-500/15 text-cyan-300 rounded border border-cyan-400/20">v2.4</span>
+                </h1>
+                <p class="text-xs text-slate-400 font-medium">Phân loại &amp; tìm kiếm tin tức</p>
+            </div>
+        </div>
+        <!-- Main Navigation Menu -->
+        <div class="flex-1 overflow-y-auto px-4 py-5 custom-scrollbar">
+            <p class="px-3 text-[10px] font-mono uppercase tracking-wider text-slate-500 mb-3 font-semibold">Chức năng chính</p>
+            <nav class="space-y-1.5">
+                <!-- Item 1: Phân loại bài báo -->
+                <a class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-400 hover:text-slate-100 hover:bg-white/[0.04] border border-transparent hover:border-white/5 transition duration-150 group" href="#">
+                    <i class="fa-regular fa-newspaper text-slate-500 group-hover:text-cyan-400 transition w-5 text-center text-sm"></i>
+                    <span class="text-sm font-medium">Phân loại bài báo</span>
+                </a>
+                <!-- Item 2: Tìm kiếm -->
+                <a class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-400 hover:text-slate-100 hover:bg-white/[0.04] border border-transparent hover:border-white/5 transition duration-150 group" href="#">
+                    <i class="fa-solid fa-magnifying-glass text-slate-500 group-hover:text-cyan-400 transition w-5 text-center text-sm"></i>
+                    <span class="text-sm font-medium">Tìm kiếm nâng cao</span>
+                </a>
+                <!-- Item 3: Dữ liệu và đánh giá (Active) -->
+                <a class="relative group flex items-center gap-3 px-3.5 py-2.5 rounded-xl bg-gradient-to-r from-indigo-600/30 via-indigo-500/20 to-transparent border border-indigo-500/40 text-white font-medium shadow-lg shadow-indigo-600/10 transition duration-150" href="#">
+                    <div class="w-1.5 h-4 rounded-full bg-cyber-cyan shadow-[0_0_8px_#00f2fe] absolute left-1.5"></div>
+                    <i class="fa-solid fa-chart-simple text-cyan-400 ml-1.5 w-5 text-center text-sm"></i>
+                    <span class="text-sm font-semibold tracking-wide">Dữ liệu &amp; Đánh giá</span>
+                    <span class="ml-auto font-mono text-[10px] px-2 py-0.5 rounded bg-cyan-400/15 text-cyan-300 border border-cyan-400/30">F1: 94.8%</span>
+                </a>
+                <!-- Item 4: Tin mới nhất -->
+                <a class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-400 hover:text-slate-100 hover:bg-white/[0.04] border border-transparent hover:border-white/5 transition duration-150 group" href="#">
+                    <i class="fa-solid fa-rss text-slate-500 group-hover:text-pink-400 transition w-5 text-center text-sm"></i>
+                    <span class="text-sm font-medium">Tin tức thời gian thực</span>
+                    <span class="ml-auto text-[10px] px-2 py-0.5 rounded-full bg-rose-500/15 text-rose-300 font-semibold border border-rose-500/30">Mới</span>
+                </a>
+            </nav>
+        </div>
+        <!-- Architecture Card Widget (Kiến trúc dự kiến) -->
+        <div class="p-4 m-3 bg-obsidian-850/80 border border-white/10 rounded-2xl backdrop-blur-md shadow-lg shadow-black/40">
+            <div class="flex items-center justify-between mb-3">
+                <span class="text-[10px] font-mono font-bold uppercase tracking-wider text-cyan-400">Kiến trúc hệ thống</span>
+                <span class="flex items-center gap-1.5 text-[10px] text-emerald-400 font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_#34d399] animate-pulse"></span>
+            Trực tuyến
+          </span>
+            </div>
+            <div class="space-y-2 text-xs">
+                <!-- MariaDB -->
+                <div class="p-2.5 rounded-xl bg-obsidian-950/70 border border-white/5 hover:border-white/10 transition">
+                    <div class="font-medium text-slate-200 flex items-center justify-between">
+                        <span class="font-mono text-[11px] text-slate-200">MariaDB 11.8</span>
+                        <span class="text-[10px] font-mono text-slate-500 bg-white/[0.03] px-1.5 py-0.5 rounded border border-white/5">SQL Base</span>
+                    </div>
+                    <p class="text-[11px] text-slate-400 mt-1">Kho lưu trữ dữ liệu gốc</p>
+                </div>
+                <!-- Manticore Search -->
+                <div class="p-2.5 rounded-xl bg-obsidian-950/70 border border-white/5 hover:border-white/10 transition">
+                    <div class="font-medium text-slate-200 flex items-center justify-between">
+                        <span class="font-mono text-[11px] text-slate-200">Manticore Search</span>
+                        <span class="text-[10px] font-mono text-cyan-400/90 bg-cyan-950/30 px-1.5 py-0.5 rounded border border-cyan-800/40">Vector Engine</span>
+                    </div>
+                    <p class="text-[11px] text-slate-400 mt-1">Chỉ mục BM25 &amp; HNSW Vector</p>
+                </div>
+                <!-- Python stack -->
+                <div class="p-2.5 rounded-xl bg-obsidian-950/70 border border-white/5 hover:border-white/10 transition">
+                    <div class="font-medium text-slate-200 flex items-center justify-between">
+                        <span class="font-mono text-[11px] text-slate-200">Python Pipeline</span>
+                        <span class="text-[10px] text-indigo-400 font-mono bg-indigo-950/30 px-1.5 py-0.5 rounded border border-indigo-800/40">NLP</span>
+                    </div>
+                    <p class="text-[11px] text-slate-400 mt-1 font-mono">pyvi · gensim · LR</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</aside>
+<!-- END: LeftSidebar -->
+<!-- BEGIN: MainContentWrapper -->
+<div class="flex-1 flex flex-col min-w-0 overflow-hidden bg-transparent z-10">
+    <!-- BEGIN: TopNavigationBar -->
+    <header class="h-16 bg-obsidian-900/60 backdrop-blur-xl border-b border-white/5 px-6 flex items-center justify-between gap-4 z-20" data-purpose="topbar">
+        <!-- Breadcrumb & Title Area -->
+        <div class="flex items-center gap-3">
+            <nav aria-label="Breadcrumb" class="flex items-center space-x-2 text-xs font-mono text-slate-400">
+                <span class="hover:text-slate-200 transition cursor-pointer">Bảng điều khiển</span>
+                <span class="text-slate-600">/</span>
+                <span class="text-white font-semibold flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-cyan-400 shadow-[0_0_6px_#00f2fe]"></span>
+  Dữ liệu và đánh giá
+</span>
+            </nav>
+        </div>
+        <!-- Status badges and Profile area -->
+        <div class="flex items-center gap-3">
+            <!-- Dataset Metric Badge -->
+            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/[0.03] border border-white/10 text-xs text-slate-300 backdrop-blur-md">
+                <svg class="w-3.5 h-3.5 text-cyan-400" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                    <path d="M4 7v10c0 2 1.5 3 3.5 3s3.5-1 3.5-3V7c0-2-1.5-3-3.5-3S4 5 4 7zm0 5c0 2 1.5 3 3.5 3s3.5-1 3.5-3m7-5v10c0 2 1.5 3 3.5 3s3.5-1 3.5-3V7c0-2-1.5-3-3.5-3S11 5 11 7zm0 5c0 2 1.5 3 3.5 3s3.5-1 3.5-3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                </svg>
+                <span class="text-slate-400">Tập mẫu: <strong class="text-white font-mono">VNTC-10</strong></span>
+                <span class="text-white/20">|</span>
+                <span class="text-cyan-400 font-mono font-semibold">84.132 bài</span>
+            </div>
+            <!-- Cyber Model Badge -->
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-indigo-500/10 border border-indigo-500/30 text-xs text-indigo-300 glow-indigo backdrop-blur-md">
+                <svg class="w-3.5 h-3.5 text-cyan-400 animate-spin" fill="none" stroke="currentColor" style="animation-duration: 7s;" viewbox="0 0 24 24">
+                    <path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                </svg>
+                <span class="font-mono">Mô hình: <strong class="text-white">Trans2Vec-JOI active</strong> <span class="text-cyan-400 text-[10px]">v2.4</span></span>
+                <span class="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399]"></span>
+            </div>
+            <div class="h-5 w-px bg-white/10 mx-1"></div>
+            <!-- Notification Bell -->
+            <button class="p-2 text-slate-400 hover:text-white hover:bg-white/[0.05] rounded-xl transition border border-transparent hover:border-white/5 relative" title="Thông báo hệ thống" type="button">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                    <path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                </svg>
+                <span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-rose-500 shadow-[0_0_6px_#f43f5e]"></span>
+            </button>
+            <!-- User Profile Avatar Pill -->
+            <div class="flex items-center gap-2 pl-1">
+                <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-indigo-600 to-cyan-500 text-white font-mono font-bold flex items-center justify-center text-xs shadow-md ring-1 ring-white/20">
+                    AD
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- END: TopNavigationBar -->
+    <!-- BEGIN: ScrollableMainArea -->
+    <main class="flex-1 overflow-y-auto p-6 lg:p-8 space-y-6 custom-scrollbar">
+        <!-- Page Title Header -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div>
+                <h1 class="text-2xl font-black tracking-tight text-white flex items-center gap-2.5">
+                    <span class="inline-block w-2.5 h-2.5 rounded-full bg-cyan-400 shadow-[0_0_8px_#00f2fe]"></span>
+                    Dữ liệu và đánh giá
+                </h1>
+                <p class="text-xs text-slate-400 mt-1 font-mono">Số liệu thực nghiệm, đánh giá phân loại văn bản và trích xuất đặc trưng tập từ điển.</p>
+            </div>
+            <div class="flex items-center gap-2 font-mono text-xs">
+                <span class="px-2.5 py-1 rounded-lg bg-obsidian-900 border border-white/10 text-slate-400">Trạng thái: <span class="text-emerald-400">Khớp kiểm thử</span></span>
+            </div>
+        </div>
+        <!-- BEGIN: NoticeBanner (Cyber Disclaimer) -->
+        <section data-purpose="disclaimer-banner">
+            <div class="relative overflow-hidden rounded-2xl bg-amber-500/[0.04] border border-amber-500/25 p-4 lg:p-5 backdrop-blur-md">
+                <div class="absolute -top-12 -left-12 w-28 h-28 bg-amber-500/10 rounded-full blur-2xl pointer-events-none"></div>
+                <div class="flex items-start gap-3.5 relative z-10">
+                    <div class="p-2 rounded-xl bg-amber-500/10 text-amber-400 shrink-0 border border-amber-500/20">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                            <path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                        </svg>
+                    </div>
+                    <div class="text-sm leading-relaxed text-amber-200/90 font-light">
+                        <strong class="font-semibold text-amber-300 font-mono mr-1.5">[Bản phác giao diện]:</strong>
+                        Bài mẫu, FI theo chuyên mục và mọi số liệu trong tab <em>"Dữ liệu và đánh giá"</em> lấy thật từ <strong class="text-white font-mono">VNTC-10</strong> và <strong class="text-white font-mono">GĐ6</strong>. Dự đoán và điểm tìm kiếm do bộ mô phỏng đơn giản tính (đếm item và FI khớp), <span class="font-semibold text-amber-300 underline decoration-amber-400">chưa phải mô hình thật</span>.
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- END: NoticeBanner -->
+        <!-- BEGIN: Dataset Metrics Overview -->
+        <section class="bg-obsidian-900/70 rounded-2xl border border-white/10 shadow-2xl shadow-black/80 backdrop-blur-xl p-6 lg:p-7 relative overflow-hidden" data-purpose="dataset-kpi-cards">
+            <div class="absolute top-0 right-0 w-80 h-80 bg-cyan-500/5 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="flex items-center justify-between mb-5 relative z-10">
+                <div class="text-xs font-mono font-bold text-white uppercase tracking-wider flex items-center space-x-2">
+                    <span class="w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_6px_#00f2fe]"></span>
+                    <span>Dữ liệu VNTC-10</span>
+                </div>
+                <span class="px-2.5 py-0.5 text-[10px] font-mono font-bold bg-white/[0.04] text-cyan-300 rounded border border-white/10 uppercase">Metadata</span>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-4 relative z-10">
+                <!-- Metric 1: Chuyên mục -->
+                <div class="p-4 rounded-xl bg-obsidian-950/70 border border-white/5 hover:border-cyan-500/30 transition group">
+                    <span class="text-xs text-slate-400 block font-mono">Chuyên mục</span>
+                    <div class="mt-2 text-3xl font-extrabold text-white tracking-tight font-mono group-hover:text-cyan-300 transition">10</div>
+                    <span class="text-[11px] text-slate-400 mt-1 block">Nhãn đa dạng</span>
+                </div>
+                <!-- Metric 2: Bài train / test -->
+                <div class="p-4 rounded-xl bg-obsidian-950/70 border border-white/5 hover:border-cyan-500/30 transition group">
+                    <span class="text-xs text-slate-400 block font-mono">Bài train / test</span>
+                    <div class="mt-2 text-xl font-extrabold text-white tracking-tight font-mono">
+                        33.759 <span class="text-slate-600 font-light">/</span> 50.373
+                    </div>
+                    <span class="text-[11px] text-slate-400 mt-1 block">Tỷ lệ ~ 40/60</span>
+                </div>
+                <!-- Metric 3: Item mỗi bài -->
+                <div class="p-4 rounded-xl bg-obsidian-950/70 border border-white/5 hover:border-cyan-500/30 transition group">
+                    <span class="text-xs text-slate-400 block font-mono">Item mỗi bài (top-k)</span>
+                    <div class="mt-2 text-3xl font-extrabold text-white tracking-tight font-mono group-hover:text-cyan-300 transition">50</div>
+                    <span class="text-[11px] text-slate-400 mt-1 block">Top từ khoá đặc trưng</span>
+                </div>
+                <!-- Metric 4: Ngưỡng delta -->
+                <div class="p-4 rounded-xl bg-obsidian-950/70 border border-white/5 hover:border-cyan-500/30 transition group">
+                    <span class="text-xs text-slate-400 block font-mono">Ngưỡng δ (elbow)</span>
+                    <div class="mt-2 text-3xl font-extrabold text-white tracking-tight font-mono text-cyan-400">0,535%</div>
+                    <span class="text-[11px] text-slate-400 mt-1 block">Tối ưu điểm cong</span>
+                </div>
+                <!-- Metric 5: Số FI -->
+                <div class="p-4 rounded-xl bg-obsidian-950/70 border border-white/5 hover:border-emerald-500/30 transition group">
+                    <span class="text-xs text-slate-400 block font-mono">Số FI (độ dài ≤ 3)</span>
+                    <div class="mt-2 text-3xl font-extrabold text-white tracking-tight font-mono">3.586</div>
+                    <span class="text-[11px] text-emerald-400 font-mono font-medium mt-1 block flex items-center">
+<i class="fa-solid fa-arrow-up-right-dots mr-1.5"></i> Khai phá hoàn tất
+        </span>
+                </div>
+            </div>
+        </section>
+        <!-- END: Dataset Metrics Overview -->
+        <!-- BEGIN: Evaluation Tables Section -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <!-- Table 1: Phân loại Macro-F1 -->
+            <section class="bg-obsidian-900/70 rounded-2xl border border-white/10 shadow-2xl shadow-black/80 backdrop-blur-xl p-6 relative overflow-hidden" data-purpose="classification-benchmark-table">
+                <div class="flex items-center justify-between mb-4">
+                    <div>
+                        <h2 class="text-sm font-bold text-white tracking-tight flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_6px_#00f2fe]"></span>
+                            Phân loại · Macro-F1 trên 50.373 bài test
+                        </h2>
+                        <p class="text-[11px] text-slate-400 mt-0.5">So sánh hiệu năng đa nhãn giữa các kỹ thuật vector hoá và bộ phân loại</p>
+                    </div>
+                    <span class="px-2.5 py-1 text-[10px] font-mono font-bold bg-white/[0.04] text-cyan-300 rounded border border-white/10">Metric: Macro-F1</span>
+                </div>
+                <div class="overflow-x-auto rounded-xl border border-white/5 bg-obsidian-950/60">
+                    <table class="w-full text-left text-xs border-collapse font-sans">
+                        <thead>
+                        <tr class="border-b border-white/10 bg-white/[0.02] text-slate-400 font-mono font-semibold uppercase text-[10px] tracking-wider">
+                            <th class="py-3 px-4">Biểu diễn</th>
+                            <th class="py-3 px-4 text-center">SVM</th>
+                            <th class="py-3 px-4 text-center">LR</th>
+                        </tr>
+                        </thead>
+                        <tbody class="divide-y divide-white/5 text-slate-300">
+                        <tr class="hover:bg-white/[0.03] transition">
+                            <td class="py-3 px-4 font-medium text-slate-200">TF-IDF toàn văn</td>
+                            <td class="py-3 px-4 text-center font-mono text-slate-300">0,903</td>
+                            <td class="py-3 px-4 text-center font-mono font-bold text-white">0,907</td>
+                        </tr>
+                        <tr class="hover:bg-white/[0.03] transition">
+                            <td class="py-3 px-4 font-medium text-slate-200">BOW toàn văn</td>
+                            <td class="py-3 px-4 text-center font-mono text-slate-300">0,874</td>
+                            <td class="py-3 px-4 text-center text-slate-600 font-mono">—</td>
+                        </tr>
+                        <tr class="hover:bg-white/[0.03] transition">
+                            <td class="py-3 px-4 font-medium text-slate-200">LDA-100</td>
+                            <td class="py-3 px-4 text-center font-mono text-slate-300">0,827</td>
+                            <td class="py-3 px-4 text-center text-slate-600 font-mono">—</td>
+                        </tr>
+                        <tr class="hover:bg-white/[0.03] transition">
+                            <td class="py-3 px-4 font-medium text-slate-200">TRANS-IT (≡ Doc2Vec PV-DBOW)</td>
+                            <td class="py-3 px-4 text-center font-mono text-slate-300">0,841</td>
+                            <td class="py-3 px-4 text-center font-mono text-slate-300">0,847</td>
+                        </tr>
+                        <tr class="hover:bg-white/[0.03] transition">
+                            <td class="py-3 px-4 font-medium text-slate-200">TRANS-FI</td>
+                            <td class="py-3 px-4 text-center font-mono text-slate-300">0,820</td>
+                            <td class="py-3 px-4 text-center font-mono text-slate-300">0,826</td>
+                        </tr>
+                        <!-- Highlight row Trans2Vec-JOI -->
+                        <tr class="bg-indigo-950/40 text-cyan-300 border-t-2 border-cyan-500/40 font-semibold shadow-[inset_0_0_15px_rgba(0,242,254,0.08)]">
+                            <td class="py-3.5 px-4 font-bold flex items-center space-x-2 text-white">
+                                <span class="w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_8px_#00f2fe] animate-pulse"></span>
+                                <span class="font-mono text-cyan-300">Trans2Vec-JOI</span>
+                            </td>
+                            <td class="py-3.5 px-4 text-center font-mono font-bold text-cyan-300">0,842</td>
+                            <td class="py-3.5 px-4 text-center font-mono font-black text-cyan-300 text-sm">0,849</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            <!-- Table 2: Tìm kiếm 1.000 truy vấn -->
+            <section class="bg-obsidian-900/70 rounded-2xl border border-white/10 shadow-2xl shadow-black/80 backdrop-blur-xl p-6 relative overflow-hidden" data-purpose="search-benchmark-table">
+                <div class="flex items-center justify-between mb-4">
+                    <div>
+                        <h2 class="text-sm font-bold text-white tracking-tight flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full bg-indigo-500 shadow-[0_0_6px_#6366f1]"></span>
+                            Tìm kiếm · 1.000 truy vấn là bài báo
+                        </h2>
+                        <p class="text-[11px] text-slate-400 mt-0.5">Đo lường độ chính xác xếp hạng tìm kiếm tương đồng trên tập kiểm thử</p>
+                    </div>
+                    <span class="px-2.5 py-1 text-[10px] font-mono font-bold bg-white/[0.04] text-indigo-300 rounded border border-white/10">Ranking Evaluation</span>
+                </div>
+                <div class="overflow-x-auto rounded-xl border border-white/5 bg-obsidian-950/60">
+                    <table class="w-full text-left text-xs border-collapse font-sans">
+                        <thead>
+                        <tr class="border-b border-white/10 bg-white/[0.02] text-slate-400 font-mono font-semibold uppercase text-[10px] tracking-wider">
+                            <th class="py-3 px-4">Biểu diễn</th>
+                            <th class="py-3 px-4 text-center">P@10</th>
+                            <th class="py-3 px-4 text-center">MAP@100</th>
+                            <th class="py-3 px-4 text-center">NDCG@10</th>
+                        </tr>
+                        </thead>
+                        <tbody class="divide-y divide-white/5 text-slate-300">
+                        <tr class="hover:bg-white/[0.03] transition">
+                            <td class="py-3 px-4 font-medium text-slate-200">TF-IDF toàn văn</td>
+                            <td class="py-3 px-4 text-center font-mono text-slate-300">0,731</td>
+                            <td class="py-3 px-4 text-center font-mono text-slate-300">0,565</td>
+                            <td class="py-3 px-4 text-center font-mono text-slate-300">0,740</td>
+                        </tr>
+                        <tr class="hover:bg-white/[0.03] transition">
+                            <td class="py-3 px-4 font-medium text-slate-200">LDA-100</td>
+                            <td class="py-3 px-4 text-center font-mono text-slate-300">0,760</td>
+                            <td class="py-3 px-4 text-center font-mono text-slate-300">0,603</td>
+                            <td class="py-3 px-4 text-center font-mono text-slate-300">0,765</td>
+                        </tr>
+                        <tr class="hover:bg-white/[0.03] transition">
+                            <td class="py-3 px-4 font-medium text-slate-200">TRANS-FI</td>
+                            <td class="py-3 px-4 text-center font-mono text-slate-300">0,782</td>
+                            <td class="py-3 px-4 text-center font-mono text-slate-300">0,651</td>
+                            <td class="py-3 px-4 text-center font-mono text-slate-300">0,788</td>
+                        </tr>
+                        <tr class="hover:bg-white/[0.03] transition">
+                            <td class="py-3 px-4 font-medium text-slate-200">TRANS-IT</td>
+                            <td class="py-3 px-4 text-center font-mono text-slate-300">0,795</td>
+                            <td class="py-3 px-4 text-center font-mono text-slate-300">0,671</td>
+                            <td class="py-3 px-4 text-center font-mono text-slate-300">0,800</td>
+                        </tr>
+                        <!-- Highlight row Trans2Vec-JOI -->
+                        <tr class="bg-indigo-950/40 text-cyan-300 border-t-2 border-cyan-500/40 font-semibold shadow-[inset_0_0_15px_rgba(0,242,254,0.08)]">
+                            <td class="py-3.5 px-4 font-bold flex items-center space-x-2 text-white">
+                                <span class="w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_8px_#00f2fe] animate-pulse"></span>
+                                <span class="font-mono text-cyan-300">Trans2Vec-JOI</span>
+                            </td>
+                            <td class="py-3.5 px-4 text-center font-mono font-bold text-cyan-300">0,805</td>
+                            <td class="py-3.5 px-4 text-center font-mono font-bold text-cyan-300">0,686</td>
+                            <td class="py-3.5 px-4 text-center font-mono font-black text-cyan-300 text-sm">0,809</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="mt-3.5 pt-3 border-t border-white/5 text-[11px] text-slate-400 font-mono flex items-center space-x-1.5">
+                    <i class="fa-solid fa-circle-info text-cyan-400 text-xs"></i>
+                    <span>"Liên quan" = cùng chuyên mục (proxy), chưa phải nhãn liên quan do người đánh giá.</span>
+                </div>
+            </section>
+        </div>
+        <!-- END: Evaluation Tables Section -->
+        <!-- BEGIN: FI Characteristics per Category -->
+        <section class="bg-obsidian-900/70 rounded-2xl border border-white/10 shadow-2xl shadow-black/80 backdrop-blur-xl p-6 lg:p-7 space-y-5" data-purpose="fi-category-embeddings">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                <div>
+                    <h2 class="text-sm font-bold text-white tracking-tight flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_6px_#00f2fe]"></span>
+                        FI đặc trưng của từng chuyên mục (Trans2Vec-JOI)
+                    </h2>
+                    <p class="text-[11px] text-slate-400 mt-0.5">Top-10 Frequent Itemsets có khoảng cách cosin gần tâm biểu diễn cụm chuyên mục nhất</p>
+                </div>
+                <span class="text-xs font-mono text-cyan-400 bg-cyan-950/30 px-2.5 py-1 rounded-lg border border-cyan-800/40 w-fit">10/10 Chuyên mục hoàn tất</span>
+            </div>
+            <div class="overflow-hidden border border-white/10 rounded-xl bg-obsidian-950/60">
+                <table class="w-full text-left text-xs border-collapse">
+                    <thead>
+                    <tr class="bg-white/[0.03] border-b border-white/10 text-slate-400 font-mono font-semibold uppercase text-[10px] tracking-wider">
+                        <th class="py-3 px-5 w-48 font-bold">Chuyên mục</th>
+                        <th class="py-3 px-5 font-bold">10 FI gần tâm chuyên mục nhất</th>
+                    </tr>
+                    </thead>
+                    <tbody class="divide-y divide-white/5">
+                    <!-- Category 1: Chính trị - Xã hội -->
+                    <tr class="hover:bg-white/[0.02] transition">
+                        <td class="py-3.5 px-5 font-bold text-white align-top">
+                            <div class="flex items-center gap-2">
+                                <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+                                <span>Chính trị – Xã hội</span>
+                            </div>
+                        </td>
+                        <td class="py-3.5 px-5">
+                            <div class="flex flex-wrap gap-1.5">
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{hcm, thành_phố}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{tp, tỉnh}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{nlđ, tp}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{tỉnh, địa_phương}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{huyện, quận}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{hcm, sở}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{tp, tổ_chức}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{nlđ, tỉnh}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{hcm, quận}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{ban, tổ_chức}</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <!-- Category 2: Đời sống -->
+                    <tr class="hover:bg-white/[0.02] transition">
+                        <td class="py-3.5 px-5 font-bold text-white align-top">
+                            <div class="flex items-center gap-2">
+                                <span class="w-1.5 h-1.5 rounded-full bg-indigo-400"></span>
+                                <span>Đời sống</span>
+                            </div>
+                        </td>
+                        <td class="py-3.5 px-5">
+                            <div class="flex flex-wrap gap-1.5">
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{bạn, nhau}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{bạn, em}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{bạn, nó}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{bạn, gia_đình}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{rồi, tôi}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{bạn, hãy}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{con, nó}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{chị, em}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{bạn, muốn}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{bạn, ta}</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <!-- Category 3: Khoa học -->
+                    <tr class="hover:bg-white/[0.02] transition">
+                        <td class="py-3.5 px-5 font-bold text-white align-top">
+                            <div class="flex items-center gap-2">
+                                <span class="w-1.5 h-1.5 rounded-full bg-indigo-400"></span>
+                                <span>Khoa học</span>
+                            </div>
+                        </td>
+                        <td class="py-3.5 px-5">
+                            <div class="flex flex-wrap gap-1.5">
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{chúng, nghiên_cứu}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{nghiên_cứu, nhóm}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{chúng, loài}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{khoa_học, nhóm}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{nghiên_cứu, thấy}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{con, loài}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{chúng, con}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{loại, nghiên_cứu}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{khoa_học, nghiên_cứu}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{mỹ, nghiên_cứu}</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <!-- Category 4: Kinh doanh -->
+                    <tr class="hover:bg-white/[0.02] transition">
+                        <td class="py-3.5 px-5 font-bold text-white align-top">
+                            <div class="flex items-center gap-2">
+                                <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+                                <span>Kinh doanh</span>
+                            </div>
+                        </td>
+                        <td class="py-3.5 px-5">
+                            <div class="flex flex-wrap gap-1.5">
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{doanh_nghiệp, thị_trường}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{doanh_nghiệp, sản_xuất}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{thương_mại, thị_trường}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{doanh_nghiệp, giá}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{tỷ, đạt}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{thị_trường, vn}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{doanh_nghiệp, nhập_khẩu}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{tỷ, usd}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{doanh_nghiệp, vn}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{doanh_nghiệp, tăng}</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <!-- Category 5: Pháp luật -->
+                    <tr class="hover:bg-white/[0.02] transition">
+                        <td class="py-3.5 px-5 font-bold text-white align-top">
+                            <div class="flex items-center gap-2">
+                                <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+                                <span>Pháp luật</span>
+                            </div>
+                        </td>
+                        <td class="py-3.5 px-5">
+                            <div class="flex flex-wrap gap-1.5">
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{công_an, tội}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{công_an, hành_vi}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{bắt, án}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{khai, vụ}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{hành_vi, vụ}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{công_an, tài_sản}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{tp, vụ}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{cán_bộ, công_an}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{tỉnh, điều_tra}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{hành_vi, án}</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <!-- Category 6: Sức khỏe -->
+                    <tr class="hover:bg-white/[0.02] transition">
+                        <td class="py-3.5 px-5 font-bold text-white align-top">
+                            <div class="flex items-center gap-2">
+                                <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+                                <span>Sức khỏe</span>
+                            </div>
+                        </td>
+                        <td class="py-3.5 px-5">
+                            <div class="flex flex-wrap gap-1.5">
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{bệnh, gây}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{bệnh, chữa}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{bệnh, dùng}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{bệnh, uống}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{chữa, thuốc}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{bệnh, máu}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{bệnh, loại}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{bệnh, thường}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{dùng, thuốc}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{bệnh, triệu_chứng}</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <!-- Category 7: Thế giới -->
+                    <tr class="hover:bg-white/[0.02] transition">
+                        <td class="py-3.5 px-5 font-bold text-white align-top">
+                            <div class="flex items-center gap-2">
+                                <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+                                <span>Thế giới</span>
+                            </div>
+                        </td>
+                        <td class="py-3.5 px-5">
+                            <div class="flex flex-wrap gap-1.5">
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{iraq, mỹ}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{cuộc, mỹ}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{baghdad, iraq}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{mỹ, tổng_thống}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{bush, tổng_thống}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{mỹ, washington}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{bush, mỹ}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{cuộc, tổng_thống}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{bầu_cử, tổng_thống}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{mỹ, vụ}</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <!-- Category 8: Thể thao -->
+                    <tr class="hover:bg-white/[0.02] transition">
+                        <td class="py-3.5 px-5 font-bold text-white align-top">
+                            <div class="flex items-center gap-2">
+                                <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+                                <span>Thể thao</span>
+                            </div>
+                        </td>
+                        <td class="py-3.5 px-5">
+                            <div class="flex flex-wrap gap-1.5">
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{cúp, đội}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{thi_đấu, vô_địch}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{chung_kết, đội}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{đối_thủ, đội}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{bóng_đá, trận}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{bóng, bóng_đá}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{vô_địch, đội}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{chúng_tôi, đội}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{bán_kết, đội}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{giải, hlv}</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <!-- Category 9: Văn hóa -->
+                    <tr class="hover:bg-white/[0.02] transition">
+                        <td class="py-3.5 px-5 font-bold text-white align-top">
+                            <div class="flex items-center gap-2">
+                                <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+                                <span>Văn hóa</span>
+                            </div>
+                        </td>
+                        <td class="py-3.5 px-5">
+                            <div class="flex flex-wrap gap-1.5">
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{ca_sĩ, cô}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{khán_giả, tôi}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{sân_khấu, tôi}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{nghệ, tôi}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{diễn, tôi}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{diễn, diễn_viên}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{ca_sĩ, khán_giả}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{bài, tôi}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{cô, diễn_viên}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{album, ca_sĩ}</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <!-- Category 10: Vi tính -->
+                    <tr class="hover:bg-white/[0.02] transition">
+                        <td class="py-3.5 px-5 font-bold text-white align-top">
+                            <div class="flex items-center gap-2">
+                                <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+                                <span>Vi tính</span>
+                            </div>
+                        </td>
+                        <td class="py-3.5 px-5">
+                            <div class="flex flex-wrap gap-1.5">
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{internet, mạng}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{máy_tính, phần_mềm}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{máy, máy_tính}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{dịch_vụ, internet}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{dịch_vụ, mạng}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{e, mail}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{dịch_vụ, sử_dụng}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{dịch_vụ, khách_hàng}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{máy, sử_dụng}</span>
+                                <span class="px-2.5 py-1 bg-obsidian-850/90 text-cyan-300 border border-cyan-500/30 rounded-lg font-mono text-[11px] shadow-[0_0_6px_rgba(0,242,254,0.06)]">{cung_cấp, dịch_vụ}</span>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        <!-- END: FI Characteristics per Category -->
+        <!-- Footer Info -->
+        <footer class="pt-4 pb-8 text-center text-xs text-slate-500 font-mono">
+            Trans2Vec News Experimental Dashboard · Nghiên cứu Khai phá Dữ liệu &amp; Học biểu diễn Văn bản Tiếng Việt
+        </footer>
+    </main>
+    <!-- END: ScrollableMainArea -->
+</div>
+<!-- END: MainContentWrapper -->
+</body></html>

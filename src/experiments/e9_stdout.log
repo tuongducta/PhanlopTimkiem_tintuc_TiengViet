@@ -1,0 +1,22 @@
+09:29:06 Tải corpus
+09:29:32 Khai phá FI ở δ = 0.00535 và δ = 0.002
+09:29:43 Trùng với CICFI toàn cục: ổn định chuyên mục 8054/10374, ngẫu nhiên 6209/10374
+09:29:43 Số FI dài ≥ 2: {"IT": 0, "all δ=0.00535": 1484, "all δ=0.002": 17349, "CICFI toàn cục": 10374, "ổn định theo chuyên mục": 10374, "ngẫu nhiên (cùng cỡ)": 10374}
+09:29:43 CICFI toàn cục ≡ support ≥ 84 bài (δ' = 0.2488%)
+09:33:41 all δ=0.002                      seed=1 MF1=0.8542 nDCG=0.8154 (39.4+177.6 s)
+09:36:31 CICFI toàn cục                   seed=1 MF1=0.8527 nDCG=0.8123 (21.9+129.4 s)
+09:39:15 ổn định theo chuyên mục          seed=1 MF1=0.8532 nDCG=0.8193 (28.7+118.5 s)
+09:41:28 ngẫu nhiên (cùng cỡ)             seed=1 MF1=0.8527 nDCG=0.8150 (19.1+98.0 s)
+09:42:47 IT                               seed=2 MF1=0.8472 nDCG=0.8107 (14.0+62.2 s)
+09:44:30 all δ=0.00535                    seed=2 MF1=0.8506 nDCG=0.8110 (14.9+74.8 s)
+09:47:56 all δ=0.002                      seed=2 MF1=0.8528 nDCG=0.8188 (31.0+154.8 s)
+09:50:46 CICFI toàn cục                   seed=2 MF1=0.8513 nDCG=0.8157 (27.8+122.5 s)
+09:53:07 ổn định theo chuyên mục          seed=2 MF1=0.8535 nDCG=0.8149 (22.4+107.0 s)
+09:55:09 ngẫu nhiên (cùng cỡ)             seed=2 MF1=0.8533 nDCG=0.8188 (18.7+92.2 s)
+09:56:29 IT                               seed=3 MF1=0.8474 nDCG=0.8100 (15.4+62.3 s)
+09:58:18 all δ=0.00535                    seed=3 MF1=0.8487 nDCG=0.8086 (14.6+84.5 s)
+10:01:33 all δ=0.002                      seed=3 MF1=0.8536 nDCG=0.8149 (34.6+144.5 s)
+10:04:03 CICFI toàn cục                   seed=3 MF1=0.8538 nDCG=0.8150 (24.5+115.3 s)
+10:06:29 ổn định theo chuyên mục          seed=3 MF1=0.8535 nDCG=0.8183 (23.2+113.0 s)
+10:08:37 ngẫu nhiên (cùng cỡ)             seed=3 MF1=0.8538 nDCG=0.8198 (19.9+94.3 s)
+10:08:37 Đã ghi src/experiments/results/e9_fi_types.json

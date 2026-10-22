@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Kiến trúc hệ thống tìm kiếm và phân loại tin tức Trans2Vec",
+    "locale": "vi",
+    "output": ".archify/architecture-he-thong-t2v-20261022-141345/he-thong-t2v.html",
+    "quality_profile": "showcase",
+    "repository": {
+      "url": "git@github.com:tuongducta/PhanlopTimkiem_tintuc_TiengViet.git",
+      "provider": "github",
+      "link_mode": "local-only",
+      "revision": "2332c0715754eecc3e9ef24b3fddf0e97b9501dc"
+    }
+  },
+  "components": [
+    { "id": "manticore", "type": "database", "label": "Manticore 29.9", "sublabel": "bảng news · BM25 + HNSW", "tag": ":9306", "pos": [510, 40], "size": [160, 64],
+      "sources": [ { "path": "src/system/db/manticore.sql", "line": 15, "end_line": 26, "label": "bảng news" },
+                   { "path": "src/system/docker-compose.yml", "line": 35, "end_line": 42, "label": "container" } ] },
+    { "id": "sync", "type": "backend", "label": "sync_manticore.py", "sublabel": "dựng lại chỉ mục", "pos": [800, 40], "size": [160, 64],
+      "sources": [ { "path": "src/system/pipeline/sync_manticore.py", "line": 58, "end_line": 80, "label": "DROP + REPLACE" } ] },
+    { "id": "searcher", "type": "backend", "label": "Searcher", "sublabel": "BM25 · KNN · RRF k=60", "pos": [510, 170], "size": [160, 64],
+      "sources": [ { "path": "src/system/app/search.py", "line": 64, "end_line": 86, "label": "khởi tạo, nạp mô hình JOI" },
+                   { "path": "src/system/app/search.py", "line": 168, "end_line": 205, "label": "search()" },
+                   { "path": "src/system/app/search.py", "line": 142, "end_line": 152, "label": "knn()" } ] },
+    { "id": "user", "type": "external", "label": "Người dùng", "sublabel": "trình duyệt", "pos": [40, 300], "size": [120, 64] },
+    { "id": "streamlit", "type": "frontend", "label": "Streamlit app", "sublabel": "4 trang giao diện", "tag": ":8501", "pos": [260, 300], "size": [160, 64],
+      "sources": [ { "path": "src/system/app/streamlit_app.py", "line": 158, "end_line": 161, "label": "load(): Searcher + Classifier" },
+                   { "path": "src/system/app/streamlit_app.py", "line": 380, "end_line": 409, "label": "trang Tin mới nhất" },
+                   { "path": "src/system/app/streamlit_app.py", "line": 433, "end_line": 439, "label": "phân loại tin RSS" } ] },
+    { "id": "classifier", "type": "backend", "label": "Classifier", "sublabel": "6 mô hình phân loại", "pos": [510, 430], "size": [160, 64],
+      "sources": [ { "path": "src/system/app/classify.py", "line": 28, "end_line": 60, "label": "nạp mô hình theo model_run" },
+                   { "path": "src/system/app/classify.py", "line": 111, "end_line": 119, "label": "ghi classify_log" } ] },
+    { "id": "mariadb", "type": "database", "label": "MariaDB 11.8", "sublabel": "nguồn dữ liệu gốc", "tag": ":3307", "pos": [800, 170], "size": [160, 324],
+      "sources": [ { "path": "src/system/db/schema.sql", "line": 1, "end_line": 8, "label": "lược đồ lõi" },
+                   { "path": "src/system/db/feed.sql", "line": 5, "end_line": 35, "label": "bảng RSS" },
+                   { "path": "src/system/config.py", "line": 9, "end_line": 18, "label": "kết nối" } ] },
+    { "id": "rss", "type": "external", "label": "RSS 3 báo", "sublabel": "VnExpress · TT · TN", "pos": [1040, 170], "size": [150, 64],
+      "sources": [ { "path": "src/system/pipeline/fetch_news.py", "line": 28, "end_line": 33, "label": "danh sách nguồn" } ] },
+    { "id": "fetch", "type": "backend", "label": "fetch_news.py", "sublabel": "đọc RSS", "pos": [1040, 300], "size": [150, 64],
+      "sources": [ { "path": "src/system/pipeline/fetch_news.py", "line": 102, "end_line": 111, "label": "HTTP GET" },
+                   { "path": "src/system/pipeline/fetch_news.py", "line": 125, "end_line": 150, "label": "ghi feed_item, fetch_log" } ] },
+    { "id": "models", "type": "database", "label": "models/", "sublabel": "tệp .model · .pkl", "pos": [510, 560], "size": [160, 64],
+      "sources": [ { "path": "src/system/pipeline/train_models.py", "line": 160, "end_line": 172, "label": "lưu mô hình" } ] },
+    { "id": "pipeline", "type": "backend", "label": "Pipeline ngoại tuyến", "sublabel": "nạp · FI · huấn luyện", "pos": [800, 560], "size": [160, 64],
+      "sources": [ { "path": "src/system/pipeline/load_articles.py", "line": 1, "end_line": 11, "label": "nạp VNTC" },
+                   { "path": "src/system/pipeline/train_models.py", "line": 1, "end_line": 13, "label": "FI, Trans2Vec, LR" },
+                   { "path": "src/system/pipeline/train_variants.py", "line": 1, "end_line": 14, "label": "mốc gốc, CAT" } ] },
+    { "id": "vntc", "type": "external", "label": "Bộ dữ liệu VNTC-10", "sublabel": "corpus.tsv.gz + raw", "pos": [800, 690], "size": [160, 64],
+      "sources": [ { "path": "src/system/pipeline/load_articles.py", "line": 27, "end_line": 28, "label": "đường dẫn dữ liệu" } ] }
+  ],
+  "boundaries": [
+    { "kind": "region", "label": "Một tiến trình Streamlit", "wraps": ["streamlit", "searcher", "classifier"] }
+  ],
+  "connections": [
+    { "id": "user-app", "from": "user", "to": "streamlit", "label": "HTTP", "variant": "emphasis" },
+    { "id": "app-search", "from": "streamlit", "to": "searcher", "label": "search()", "variant": "emphasis" },
+    { "id": "app-classify", "from": "streamlit", "to": "classifier", "label": "predict()", "variant": "emphasis" },
+    { "id": "search-mc", "from": "searcher", "to": "manticore", "label": "MATCH · knn()", "variant": "emphasis" },
+    { "id": "search-db", "from": "searcher", "to": "mariadb", "label": "chi tiết bài" },
+    { "id": "app-db", "from": "streamlit", "to": "mariadb", "label": "eval_result · feed_item" },
+    { "id": "clf-db", "from": "classifier", "to": "mariadb", "label": "classify_log" },
+    { "id": "clf-models", "from": "classifier", "to": "models", "label": "nạp mô hình" },
+    { "id": "db-sync", "from": "mariadb", "to": "sync", "label": "bài + vector JOI", "variant": "dashed" },
+    { "id": "sync-mc", "from": "sync", "to": "manticore", "label": "nạp lại", "variant": "dashed" },
+    { "id": "vntc-pipe", "from": "vntc", "to": "pipeline", "label": "đọc tệp", "variant": "dashed" },
+    { "id": "pipe-db", "from": "pipeline", "to": "mariadb", "label": "ghi kết quả", "variant": "dashed" },
+    { "id": "pipe-models", "from": "pipeline", "to": "models", "label": "lưu mô hình", "variant": "dashed" },
+    { "id": "rss-fetch", "from": "rss", "to": "fetch", "label": "RSS XML", "variant": "dashed" },
+    { "id": "fetch-db", "from": "fetch", "to": "mariadb", "label": "feed_item", "variant": "dashed" }
+  ],
+  "cards": [
+    { "dot": "cyan", "title": "Luồng trực tuyến", "items": [
+      "Streamlit nạp Searcher và Classifier một lần (st.cache_resource), dùng chung một kết nối MariaDB",
+      "Searcher cũng nạp mô hình Trans2Vec-JOI và tập FI từ models/ để suy luận vector truy vấn",
+      "Truy vấn gõ không dấu: hybrid bỏ nhánh vector, BM25 chạy trên trường đã gộp dấu",
+      "Kết quả tìm kiếm và phân loại ghi vào search_log, classify_log" ] },
+    { "dot": "violet", "title": "Lưu trữ", "items": [
+      "MariaDB là nguồn gốc: bài viết, từ vựng, FI, vector, dự đoán, eval_result, bảng RSS",
+      "Manticore là chỉ mục phái sinh, sync_manticore.py xóa và dựng lại hoàn toàn từ MariaDB",
+      "Cả hai chạy bằng Docker, chỉ mở cổng trên 127.0.0.1" ] },
+    { "dot": "amber", "title": "Chạy ngoại tuyến (nét đứt)", "items": [
+      "load_articles → train_models → train_variants chạy tay theo thứ tự",
+      "fetch_news.py chạy một lần hoặc --loop; nút \"Lấy tin ngay\" trên giao diện gọi cùng hàm fetch_all",
+      "Tin RSS được Classifier gán chuyên mục, ghi vào feed_item.pred_category" ] }
+  ]
+}

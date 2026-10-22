@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "command": "finalize",
+  "status": "pass",
+  "type": "architecture",
+  "quality": "showcase",
+  "specification": {
+    "path": "/Users/ductuongta/Documents/Sau_dai_hoc_Hutech/Tri-thuc-du-lieu/TriThucDuLieu_BaiTap2.nosync/.archify/architecture-he-thong-t2v-20261022-141345/candidate.json",
+    "sha256": "29b0d3d2858c99d2b6920a6339cab8e352eb8419e7f2459eb849f96ececf6647",
+    "bytes": 8075
+  },
+  "artifact": {
+    "path": "/Users/ductuongta/Documents/Sau_dai_hoc_Hutech/Tri-thuc-du-lieu/TriThucDuLieu_BaiTap2.nosync/.archify/architecture-he-thong-t2v-20261022-141345/he-thong-t2v.html",
+    "sha256": "5b6ae50aa2d804b3bbd94861904f66a880e75981a642e8df8d4aeb50354d611e",
+    "bytes": 838961
+  },
+  "gates": {
+    "validate": "pass",
+    "deliver": "pass",
+    "check": "pass",
+    "browser-check": "pass"
+  },
+  "diagnostics": [
+    {
+      "code": "i18n/locale-fallback",
+      "severity": "warning",
+      "message": "meta.locale \"vi\" has no bundled catalog and no usable meta.translations; the Viewer chrome and <html lang> fall back to English.",
+      "subject": {
+        "diagramType": "architecture",
+        "path": "/meta/locale"
+      },
+      "evidence": {
+        "locale": "vi",
+        "bundledLocales": [
+          "en",
+          "zh-CN",
+          "zh-TW",
+          "es",
+          "ko",
+          "ar"
+        ]
+      },
+      "supportedFixes": [
+        "Supply meta.translations for this locale.",
+        "Use a bundled locale: en, zh-CN, zh-TW, es, ko, ar."
+      ]
+    }
+  ],
+  "diagnosticSummary": {
+    "total": 1,
+    "shown": 1,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "/Users/ductuongta/Documents/Sau_dai_hoc_Hutech/Tri-thuc-du-lieu/TriThucDuLieu_BaiTap2.nosync/.archify/architecture-he-thong-t2v-20261022-141345/he-thong-t2v.finalize.json",
+    "summaryReceipt": "/Users/ductuongta/Documents/Sau_dai_hoc_Hutech/Tri-thuc-du-lieu/TriThucDuLieu_BaiTap2.nosync/.archify/architecture-he-thong-t2v-20261022-141345/he-thong-t2v.finalize-summary.json",
+    "browserCheckReceipt": "/Users/ductuongta/Documents/Sau_dai_hoc_Hutech/Tri-thuc-du-lieu/TriThucDuLieu_BaiTap2.nosync/.archify/architecture-he-thong-t2v-20261022-141345/he-thong-t2v.browser-check.json"
+  },
+  "update": {
+    "status": "current",
+    "installedVersion": "3.2.0",
+    "availableVersion": "3.2.0",
+    "releaseNotes": null,
+    "checkedAt": "2026-10-22T07:14:29.241Z",
+    "source": "cache",
+    "noticeRequired": false,
+    "noticeText": null
+  },
+  "visualReview": "not-requested",
+  "durationMs": 2863,
+  "browserCheck": {
+    "requested": true,
+    "ran": true
+  }
+}

@@ -1,0 +1,42 @@
+const { chromium } = require('playwright');
+const out = process.argv[2];
+const wait = async (p) => { await p.waitForTimeout(800);
+  await p.waitForFunction(() => document.querySelector('.stApp')?.getAttribute('data-test-script-state') === 'notRunning' && !/Running/.test(document.body.innerText), null, {timeout: 180000}).catch(()=>{});
+  await p.waitForTimeout(1500); };
+const tall = async (p, f) => { const v = p.viewportSize(); await p.setViewportSize({width:v.width,height:3000}); await p.waitForTimeout(1200); await p.screenshot({path:`${out}/${f}.png`}); await p.setViewportSize(v); await p.waitForTimeout(400); };
+const nav = async (p,i)=>{ await p.locator('[data-testid="stSidebar"] label[data-testid="stRadioOption"]').nth(i).click(); await wait(p); };
+(async () => {
+  const b = await chromium.launch();
+  const p = await b.newPage({ viewport: { width: 1440, height: 900 } });
+  const errs=[]; p.on('pageerror',e=>errs.push(String(e)));
+  await p.goto('http://127.0.0.1:8501/'); await p.waitForSelector('[data-testid="stSidebar"]',{state:'attached',timeout:90000}); await wait(p);
+  await nav(p,0);
+  await p.screenshot({path:`${out}/classify-empty.png`});
+  console.log('sec style', await p.evaluate(()=>{const e=document.querySelector('.t2v-sec'); const s=getComputedStyle(e); return [s.color,s.fontSize]}));
+  const bt = p.locator('button', {hasText:'Thể thao'}); await bt.click(); await wait(p);
+  const go = p.locator('button', {hasText:'Phân loại ngay'});
+  console.log('btn bg', await go.evaluate(e=>{const s=getComputedStyle(e); return [s.backgroundImage,s.color]}));
+  await go.hover(); await p.waitForTimeout(500);
+  await p.screenshot({path:`${out}/classify-btn-hover.png`, clip:{x:0,y:0,width:1440,height:900}});
+  console.log('hover filter', await go.evaluate(e=>getComputedStyle(e).filter));
+  await go.click(); await wait(p);
+  console.log('cfoot', await p.evaluate(()=>{const e=document.querySelector('.t2v-cfoot'); if(!e) return null; const s=getComputedStyle(e); return [s.color,s.fontSize]}));
+  await tall(p,'classify-result');
+  // focus
+  await p.evaluate(()=>document.activeElement.blur());
+  await go.focus(); await p.keyboard.press('Tab'); await p.keyboard.press('Shift+Tab'); await p.waitForTimeout(400);
+  await p.screenshot({path:`${out}/classify-btn-focus.png`});
+  await nav(p,1);
+  await p.locator('button',{hasText:'giá vàng tăng mạnh'}).click(); await wait(p);
+  console.log('fl/sc3', await p.evaluate(()=>['.t2v-table .fl','.t2v-sc3 small'].map(q=>{const e=document.querySelector(q); if(!e) return null; const s=getComputedStyle(e); return [q,s.color,s.fontSize,e.getBoundingClientRect().height]})));
+  await tall(p,'search-result');
+  await nav(p,2); await tall(p,'data-eval');
+  console.log('data cfoot', await p.evaluate(()=>document.querySelectorAll('.t2v-cfoot').length));
+  await nav(p,3); await tall(p,'news-full');
+  const info = await p.evaluate(()=>({nan:/\bnan\b/i.test(document.body.innerText), nsum:[...document.querySelectorAll('.t2v-nsum')].length, empty:[...document.querySelectorAll('.t2v-nsum')].filter(e=>!e.innerText.trim()).length, nanSum:[...document.querySelectorAll('.t2v-nsum')].filter(e=>/nan/i.test(e.innerText)&&e.innerText.trim().toLowerCase()==='nan').length, tb:/Traceback|Exception/.test(document.body.innerText)}));
+  console.log('news', JSON.stringify(info));
+  const emp = p.locator('[class*="st-key-news_"]').filter({has:p.locator('.t2v-nsum:empty')}).first();
+  if (await emp.count()) { await emp.scrollIntoViewIfNeeded(); await emp.screenshot({path:`${out}/news-null-summary-card.png`}); }
+  console.log('errs',errs);
+  await b.close();
+})().catch(e=>{console.error(e);process.exit(1)});

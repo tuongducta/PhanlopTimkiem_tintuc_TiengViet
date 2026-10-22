@@ -2,7 +2,7 @@
 
 ### 4.1 Khung phân loại
 
-Các phương pháp được khảo sát được tổ chức thành sáu nhánh (Hình 4.1):
+Các phương pháp được khảo sát được tổ chức thành bảy nhánh (Hình 4.1):
 
 ```
 Biểu diễn văn bản tiếng Việt cho phân loại / tìm kiếm
@@ -10,20 +10,26 @@ Biểu diễn văn bản tiếng Việt cho phân loại / tìm kiếm
 │   ├── A1. Theo âm tiết: bag-of-syllables, n-gram LM
 │   └── A2. Theo từ: BoW, TF-IDF
 ├── B. Giảm chiều / chọn đặc trưng
-│   ├── B1. Thống kê: IG, χ², MI, OR, GSS, OCFS
+│   ├── B1. Thống kê: IG, χ², MI, OR, GSS, OCFS; SVD
 │   ├── B2. Lọc bằng từ điển
 │   └── B3. Trích từ khóa: KeywordScore, TextRank
-├── C. Biểu diễn dày học có giám sát (mạng nơ-ron trích đặc trưng)
+├── C. Biểu diễn dày học có giám sát: MLP trích đặc trưng; LSTM, CNN trên túi từ
 ├── D. Embedding không giám sát
 │   ├── D1. Mức từ: Word2Vec, GloVe
 │   ├── D2. Mức tài liệu: Doc2Vec (PV-DM / PV-DBOW)
 │   └── D3. Mô hình chủ đề: LDA, Top2Vec, BERTopic
-├── E. Biểu diễn dựa trên mẫu phổ biến            ← trọng tâm (Chương 5)
+├── E. Biểu diễn dựa trên mẫu phổ biến                 ← trọng tâm (Chương 5)
 │   ├── E1. FI làm đặc trưng / cụm / luật
-│   └── E2. FI làm đơn vị học embedding (Trans2Vec và họ phương pháp)
-└── F. Mô hình ngôn ngữ tiền huấn luyện: PhoBERT, XLM-R, …
+│   ├── E2. FI làm đơn vị học embedding (Trans2Vec và họ phương pháp)
+│   └── E3. Chọn loại mẫu: FI đóng, FI ổn định, theo hồ sơ dữ liệu
+├── F. Mô hình ngôn ngữ tiền huấn luyện
+│   ├── F1. Tinh chỉnh (fine-tune): PhoBERT, XLM-R, …
+│   └── F2. Embedding đóng băng + bộ phân loại nhẹ
+└── G. Mạng đồ thị: TextGCN và các biến thể; đồ thị phân cấp + BERT
 ```
-*Hình 4.1. Khung phân loại sáu nhánh.*
+*Hình 4.1. Khung phân loại bảy nhánh.*
+
+**Đối chiếu với hai bài tổng quan lớn.** Nhánh A–D, F1 và G đều có tương ứng trong khung phân loại của Li và cộng sự (mô hình truyền thống, MLP, RNN, CNN, mô hình tiền huấn luyện, mạng đồ thị) [@li2022] và của Minaee và cộng sự [@minaee2021]. **Nhánh E không có tương ứng nào.** Hai bài tổng quan này cũng không có mục nào về luật kết hợp hay mẫu phổ biến cho phân loại văn bản, dù đây là hướng kinh điển của khai phá dữ liệu [@liu1998; @cheng2007]. Nhánh F2 chưa xuất hiện vì cả hai bài dừng ở năm 2021–2022.
 
 **Bảng 4.1.** Ma trận nhánh × công trình (● trọng tâm, ○ dùng làm baseline hoặc đề cập)
 
@@ -44,6 +50,17 @@ Biểu diễn văn bản tiếng Việt cho phân loại / tìm kiếm
 *Các cột theo thứ tự: Hoang 2007, Nguyen 2009, Pham Van 2017, Duong 2019, Huynh 2020, Vinh 2021, Huong 2022, Nguyen 2025, Pham 2020 / Luu 2024, Trans2Vec 2018.*
 
 Ô **E2 × tiếng Việt** trống hoàn toàn. Nhánh E1 có đúng một tiền lệ tiếng Việt: Đỗ Phúc dùng tập phổ biến và luật kết hợp để phân loại tóm tắt bài báo khoa học CNTT [@dophuc2006], không có thành phần embedding.
+
+**Bảng 4.2.** Các nhánh được bổ sung từ vòng tài liệu thứ ba
+
+| Nhánh | Công trình | Nội dung | Có trên tiếng Việt? |
+|---|---|---|---|
+| A2, B1, C | [@hien2024] | BoW, TF-IDF (+SVD) → LR, cây quyết định, SVM, LSTM, CNN trên VNTC | Có |
+| E3 | [@zhang2025; @trasierras2024] | FI đóng và FI ổn định; chọn thuật toán theo hồ sơ dữ liệu | Không |
+| F2 | [@liu2024] | Embedding đóng băng của mô hình ngôn ngữ lớn + bộ phân loại nhẹ | Không |
+| G | [@onan2023] | Đồ thị phân cấp có tri thức miền + hợp nhất với BERT | Không |
+
+Ba ô E3, F2, G đều trống ở tiếng Việt. Trong ba ô này, chỉ E3 thuộc phạm vi đề tài. F2 là đối chứng tự nhiên của Trans2Vec (Mục 4.6). G ít phù hợp với tiếng Việt vì phụ thuộc vào công cụ ngôn ngữ sâu (Mục 4.7).
 
 ### 4.2 Nhánh A – Biểu diễn thưa
 
@@ -68,6 +85,11 @@ Vinh và Kha thay bước *chọn* đặc trưng bằng bước *học* đặc t
 
 Công trình này là mắt xích chuyển tiếp từ biểu diễn thưa sang biểu diễn dày trong tài liệu tiếng Việt. Nó cũng là **đối chứng trực tiếp nhất với Trans2Vec**: cùng 128 chiều, cùng SVM, cùng miền tin tức nhiều chuyên mục. Khác biệt căn bản nằm ở chỗ đặc trưng của Vinh và Kha **gắn với nhãn**, nên không dùng được cho tài liệu chưa gán nhãn, cho phân cụm hay cho tìm kiếm.
 
+Hien và cộng sự là công trình mới nhất trên VNTC trong tài liệu khảo sát [@hien2024]. Họ tách từ bằng vnTokenizer, bỏ khoảng 2.000 từ dừng, biểu diễn bằng BoW hoặc TF-IDF (có giảm chiều bằng SVD), rồi so năm bộ phân loại. Trên VNTC 10 chuyên mục, LSTM trên BoW đạt accuracy cao nhất, 94,52%, còn SVM trên TF-IDF đạt 93,60%. Tác giả kết luận học sâu tốt hơn học máy truyền thống. Kết luận này cần đọc thận trọng vì ba lý do:
+1. **Đầu vào của LSTM và CNN là một vector túi từ** sau khi chọn hoặc giảm chiều, không phải chuỗi từ. Mô hình gọi là "LSTM" vì vậy không mô hình hóa thứ tự từ, mà chỉ là một bộ phân loại phi tuyến trên đặc trưng túi từ. Về bản chất, nó cùng nhánh C với [@vinh2021].
+2. **Mức chênh rất nhỏ:** với TF-IDF, LSTM chỉ hơn SVM 0,15 điểm (10 chuyên mục) và 0,08 điểm (27 chuyên mục), không có độ lệch chuẩn hay kiểm định.
+3. **Chỉ báo accuracy** trên dữ liệu mất cân bằng, và không công bố siêu tham số của mạng.
+
 ### 4.5 Nhánh D – Embedding không giám sát
 
 **D1–D2.** Huong và cộng sự so sánh TF-IDF, Word2Vec, GloVe và Doc2Vec trên hai tập bình luận cảm xúc. TF-IDF thắng tuyệt đối; Word2Vec và Doc2Vec chỉ đạt khoảng 50% [@huong2022]. Nguyen và cộng sự cũng ghi nhận Word2Vec kém túi từ một chút trên review Shopee (Macro-F1 tốt nhất 0,88 so với 0,91) [@nguyen2025]. Hai kết quả này mâu thuẫn với kết quả của PV-DBOW trên dữ liệu Snippets [@trans2vec]. Mục 8.3 sẽ phân tích mâu thuẫn này.
@@ -86,11 +108,25 @@ PhoBERT là mô hình RoBERTa đơn ngữ tiếng Việt. Dữ liệu tiền hu�
 - Các phương pháp tăng cường dữ liệu và hàm mất mát cho dữ liệu mất cân bằng chỉ cải thiện 1–2 điểm [@luu2024].
 - Trên review Shopee, PhoBERT kết hợp hồi quy logistic đạt Macro-F1 0,96, vượt mọi biểu diễn khác ít nhất 5 điểm. Đổi lại, nó cần GPU và khoảng 41 phút huấn luyện, so với khoảng 22 giây của TF-IDF trên CPU [@nguyen2025].
 
-### 4.7 Nhận xét chung
+**F2 – Embedding đóng băng.** Liu và cộng sự dùng mô hình ngôn ngữ lớn theo một cách khác: không sinh văn bản, không tinh chỉnh, mà lấy biểu diễn ẩn làm đặc trưng [@liu2024]. Phương pháp LLMEmbed đóng băng LLaMA2-7B, lấy trung bình vector token ở năm tầng cuối, ghép với vector câu của BERT và RoBERTa, rồi đưa vào một bộ phân loại nhẹ. Họ còn dùng **gộp đồng xuất hiện** (co-occurrence pooling), tức tích ngoài của vector với chính nó, để nắm tương tác bậc hai giữa các chiều. Accuracy trung bình trên năm benchmark tiếng Anh đạt 0,962 (AG News 0,958), ngang cách dùng prompt CARP với GPT-3 (0,952). So với CARP, phương pháp chỉ tốn khoảng 1,5% thời gian và 1,8% điện năng. Ba điểm cần lưu ý:
+- Đây là đối chứng có **cùng hình dạng đường ống** với Trans2Vec: embedding không học từ nhãn, rồi một bộ phân loại tuyến tính hoặc nhẹ. So sánh này công bằng về mô thức hơn so với PhoBERT tinh chỉnh.
+- Baseline RoBERTa-large trên R52 chỉ đạt 0,422, đúng bằng tỉ lệ của lớp lớn nhất trong tập kiểm tra. Bộ phân loại của baseline nhiều khả năng không hội tụ, nên phần so sánh với mô hình tiền huấn luyện kém tin cậy.
+- Phương pháp cần GPU, chỉ thử trên tiếng Anh, và tác giả tự nhận **yếu với văn bản dài**. Tin tức tiếng Việt dài hàng trăm từ, nên không thể giả định kết quả chuyển sang được.
 
-Ba xu hướng rút ra từ chương này:
+### 4.7 Nhánh G – Mạng đồ thị
+
+Mạng đồ thị cho văn bản, như TextGCN, dựng đồ thị từ – tài liệu với cạnh trọng số theo đồng xuất hiện, rồi học bằng mạng tích chập đồ thị [@li2022; @minaee2021]. Onan đề xuất một khung bảy giai đoạn: trích đặc trưng ngôn ngữ (từ loại, phụ thuộc, thực thể, đồng tham chiếu), dựng đồ thị phân cấp có tri thức miền, học đồ thị nhiều mức, rồi hợp nhất với BERT [@onan2023]. Bài báo cáo accuracy 98,75% trên R8 và 93,71% trên 20 Newsgroups.
+
+Nhánh G có hai điểm chung với Trans2Vec. Cả hai khai thác **đồng xuất hiện giữa các từ**: TextGCN qua cạnh trọng số PMI (bậc hai), Trans2Vec qua tập phổ biến (bậc cao, không cần các từ đứng liền nhau). Bản gốc của cả hai cũng học **transductive**, tức đưa tài liệu kiểm tra vào lúc học biểu diễn (Mục 9.5).
+
+Kết quả của [@onan2023] cần đọc thận trọng. **Baseline lệch so với chính các bài tổng quan:** TextGCN được báo 79,52 trên 20 Newsgroups, trong khi [@minaee2021] ghi 86,34; trên MR là 80,18 so với 76,74 [@li2022]. Như vậy mức "vượt trội trên mọi dataset" có thể đến từ baseline yếu hoặc không nhất quán. Bài cũng không công bố mã nguồn và chi phí. Với tiếng Việt, khung này phụ thuộc vào đúng những công cụ còn yếu (thực thể F1 0,58, phân tích phụ thuộc khoảng 70% [@le2013vnlp]), nên sẽ chịu lan truyền lỗi lớn. Đây là lý do hệ thống ở Chương 9 không chọn hướng đồ thị.
+
+### 4.8 Nhận xét chung
+
+Bốn xu hướng rút ra từ chương này:
 1. **Từ chọn sang học:** đặc trưng ngày càng được *học* thay vì *chọn* (B → C → D → F).
 2. **Từ thưa sang dày:** chiều biểu diễn giảm từ $10^4$–$10^5$ xuống $10^2$–$10^3$.
 3. **Từ dữ liệu nội tại sang tri thức ngoài:** từ chỉ học trên corpus đích sang tận dụng corpus ngoài (LDA trên Wikipedia, tiền huấn luyện PhoBERT).
+4. **Từ tinh chỉnh quay lại đóng băng:** F2 cho thấy một bộ mã hóa lớn đóng băng cộng bộ phân loại nhẹ có thể ngang cách dùng đắt hơn nhiều. Đây chính là hình dạng đường ống mà Trans2Vec đã dùng, chỉ khác nguồn của biểu diễn.
 
-Nhánh E nằm ở một vị trí đặc biệt. Nó *học* biểu diễn dày như C, D, F, nhưng đơn vị học là **mẫu do khai phá dữ liệu phát hiện**, nên giữ được tính diễn giải của nhánh B. Đồng thời nó **không giám sát** như D. Chương 5 phân tích nhánh này.
+Nhánh E nằm ở một vị trí đặc biệt. Nó *học* biểu diễn dày như C, D, F, nhưng đơn vị học là **mẫu do khai phá dữ liệu phát hiện**, nên giữ được tính diễn giải của nhánh B. Đồng thời nó **không giám sát** như D, và chạy được trên CPU. Chương 5 phân tích nhánh này.
