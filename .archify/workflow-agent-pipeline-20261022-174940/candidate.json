@@ -1,0 +1,344 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "Pipeline nhiều agent có cổng duyệt (/pipeline)",
+    "locale": "vi",
+    "quality_profile": "showcase",
+    "output": ".archify/workflow-agent-pipeline-20261022-174940/agent-pipeline.html"
+  },
+  "lanes": [
+    {
+      "id": "human",
+      "label": "Anh/chị duyệt"
+    },
+    {
+      "id": "orch",
+      "label": "Phiên điều phối"
+    },
+    {
+      "id": "agents",
+      "label": "Agent Claude"
+    },
+    {
+      "id": "codex",
+      "label": "Codex CLI"
+    },
+    {
+      "id": "verify",
+      "label": "Kiểm chứng và cổng cuối"
+    },
+    {
+      "id": "fix",
+      "label": "Vòng sửa",
+      "variant": "exception"
+    }
+  ],
+  "phases": [
+    {
+      "id": "ph_init",
+      "label": "Khởi tạo",
+      "fromCol": 0,
+      "toCol": 0
+    },
+    {
+      "id": "ph_design",
+      "label": "Kiến trúc + đặc tả",
+      "fromCol": 1,
+      "toCol": 2
+    },
+    {
+      "id": "ph_build",
+      "label": "Lập trình",
+      "fromCol": 3,
+      "toCol": 3,
+      "variant": "emphasis"
+    },
+    {
+      "id": "ph_check",
+      "label": "Review + kiểm thử",
+      "fromCol": 4,
+      "toCol": 5,
+      "variant": "dashed"
+    }
+  ],
+  "groups": [],
+  "mainPath": [
+    "start",
+    "init",
+    "gate0",
+    "gate_spec",
+    "spec",
+    "gate_dev",
+    "dev",
+    "codex",
+    "gate_check",
+    "check",
+    "gate_final",
+    "close"
+  ],
+  "nodes": [
+    {
+      "id": "start",
+      "lane": "human",
+      "col": 0,
+      "type": "external",
+      "label": "/pipeline <task>",
+      "sublabel": "mô tả việc cần làm",
+      "icon": "person"
+    },
+    {
+      "id": "gate0",
+      "lane": "human",
+      "col": 1,
+      "type": "security",
+      "label": "Cổng 0",
+      "sublabel": "chọn bước sẽ chạy",
+      "icon": "decision"
+    },
+    {
+      "id": "gate_spec",
+      "lane": "human",
+      "col": 2,
+      "type": "security",
+      "label": "Phiếu spec-writer",
+      "sublabel": "Duyệt · Sửa · Dừng"
+    },
+    {
+      "id": "gate_dev",
+      "lane": "human",
+      "col": 3,
+      "type": "security",
+      "label": "Phiếu developer",
+      "sublabel": "file được sửa, lệnh chạy"
+    },
+    {
+      "id": "gate_check",
+      "lane": "human",
+      "col": 4,
+      "type": "security",
+      "label": "Phiếu review + test",
+      "sublabel": "một phiếu chung"
+    },
+    {
+      "id": "gate_final",
+      "lane": "verify",
+      "col": 5,
+      "type": "security",
+      "label": "Cổng cuối (anh/chị)",
+      "sublabel": "đạt hết hay sửa tiếp",
+      "icon": "decision"
+    },
+    {
+      "id": "init",
+      "lane": "orch",
+      "col": 0,
+      "type": "backend",
+      "label": "Khởi tạo task",
+      "sublabel": "00_dau_vao.md, log.md",
+      "icon": "start"
+    },
+    {
+      "id": "close",
+      "lane": "orch",
+      "col": 5,
+      "type": "backend",
+      "label": "Đóng task",
+      "sublabel": "PLAN.md + câu commit gợi ý",
+      "tag": "không tự commit",
+      "icon": "success"
+    },
+    {
+      "id": "architect",
+      "lane": "agents",
+      "col": 1,
+      "type": "backend",
+      "label": "architect",
+      "sublabel": "01_kien_truc.md, ADR",
+      "tag": "tùy chọn"
+    },
+    {
+      "id": "spec",
+      "lane": "agents",
+      "col": 2,
+      "type": "backend",
+      "label": "spec-writer",
+      "sublabel": "02_dac_ta.md, AC đánh số"
+    },
+    {
+      "id": "dev",
+      "lane": "agents",
+      "col": 3,
+      "type": "backend",
+      "label": "developer",
+      "sublabel": "soạn prompt, kiểm diff",
+      "tag": "không tự viết code"
+    },
+    {
+      "id": "codex",
+      "lane": "codex",
+      "col": 3,
+      "type": "cloud",
+      "label": "codex exec",
+      "sublabel": "sandbox workspace-write",
+      "tag": "chỉ file trong phiếu"
+    },
+    {
+      "id": "fixloop",
+      "lane": "fix",
+      "col": 5,
+      "type": "messagebus",
+      "label": "Vòng sửa",
+      "sublabel": "tối đa 2 vòng",
+      "icon": "waiting"
+    },
+    {
+      "id": "check",
+      "lane": "verify",
+      "col": 4,
+      "type": "security",
+      "label": "Review ∥ test",
+      "sublabel": "code-reviewer, tester",
+      "tag": "chạy song song"
+    }
+  ],
+  "edges": [
+    {
+      "id": "e_start",
+      "from": "start",
+      "to": "init",
+      "label": "gọi skill"
+    },
+    {
+      "id": "e_init_gate",
+      "from": "init",
+      "to": "gate0",
+      "label": "trình cổng 0",
+      "variant": "emphasis"
+    },
+    {
+      "id": "e_arch",
+      "from": "gate0",
+      "to": "architect",
+      "label": "duyệt",
+      "variant": "security",
+      "role": "branch"
+    },
+    {
+      "id": "e_skip_arch",
+      "from": "gate0",
+      "to": "gate_spec",
+      "label": "bỏ architect",
+      "variant": "dashed",
+      "fromSide": "top",
+      "toSide": "top",
+      "route": "up-channel"
+    },
+    {
+      "id": "e_arch_done",
+      "from": "architect",
+      "to": "gate_spec",
+      "label": "01 xong",
+      "role": "branch",
+      "toSide": "left"
+    },
+    {
+      "id": "e_spec",
+      "from": "gate_spec",
+      "to": "spec",
+      "label": "duyệt",
+      "variant": "security"
+    },
+    {
+      "id": "e_spec_done",
+      "from": "spec",
+      "to": "gate_dev",
+      "label": "02 + danh sách file"
+    },
+    {
+      "id": "e_dev",
+      "from": "gate_dev",
+      "to": "dev",
+      "label": "duyệt",
+      "variant": "security"
+    },
+    {
+      "id": "e_codex",
+      "from": "dev",
+      "to": "codex",
+      "label": "codex_prompt.md",
+      "variant": "emphasis"
+    },
+    {
+      "id": "e_codex_done",
+      "from": "codex",
+      "to": "gate_check",
+      "label": "diff + py_compile"
+    },
+    {
+      "id": "e_check",
+      "from": "gate_check",
+      "to": "check",
+      "label": "duyệt",
+      "variant": "security"
+    },
+    {
+      "id": "e_check_done",
+      "from": "check",
+      "to": "gate_final",
+      "label": "AC đạt / chưa đạt"
+    },
+    {
+      "id": "e_close",
+      "from": "gate_final",
+      "to": "close",
+      "label": "đạt hết AC",
+      "variant": "emphasis"
+    },
+    {
+      "id": "e_fail",
+      "from": "gate_final",
+      "to": "fixloop",
+      "label": "AC chưa đạt",
+      "variant": "security",
+      "role": "error"
+    },
+    {
+      "id": "e_retry",
+      "from": "fixloop",
+      "to": "gate_dev",
+      "label": "phiếu developer vN",
+      "variant": "dashed",
+      "role": "return"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Log để xem lại",
+      "items": [
+        "log.md: mỗi sự kiện một dòng",
+        "logs/NN_agent.md: phiếu, lời gọi, kết quả, file đổi",
+        "Transcript agent và sự kiện Codex: *.jsonl (không commit)",
+        "Bản chụp file trước mỗi lượt Codex, diff từng vòng"
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Ranh giới",
+      "items": [
+        "Agent không tự gọi agent khác, không tự sang bước sau",
+        "Không commit, không chạy schema.sql, sync, benchmark",
+        "Tester chạy tuần tự vì dùng chung MariaDB và Manticore"
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Chạy thử ui-contrast-fix (22/10)",
+      "items": [
+        "Bỏ architect; 13/13 AC đạt sau 2 vòng sửa",
+        "Vòng sửa 1 gây tràn bảng; reviewer và tester cùng phát hiện"
+      ]
+    }
+  ]
+}

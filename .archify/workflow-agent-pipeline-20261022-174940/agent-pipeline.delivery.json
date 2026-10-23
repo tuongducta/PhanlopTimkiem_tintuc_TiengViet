@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "receiptId": "21182b11-91f7-4835-bcdb-1a971f04356c",
+  "status": "current",
+  "command": "deliver",
+  "type": "workflow",
+  "input": "/Users/ductuongta/Documents/Sau_dai_hoc_Hutech/Tri-thuc-du-lieu/TriThucDuLieu_BaiTap2.nosync/.archify/workflow-agent-pipeline-20261022-174940/candidate.json",
+  "output": "/Users/ductuongta/Documents/Sau_dai_hoc_Hutech/Tri-thuc-du-lieu/TriThucDuLieu_BaiTap2.nosync/.archify/workflow-agent-pipeline-20261022-174940/agent-pipeline.html",
+  "specification": {
+    "sha256": "0af0b1c182221f1377598adf2eb963a9a7340c98510d30b127e05555fa8275f2",
+    "bytes": 7511
+  },
+  "artifact": {
+    "sha256": "c6a09ce8057b445372dcccb6115a15cba94e28ecfb0b4e8efb085898114ecc32",
+    "bytes": 838795
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "command": "finalize",
+  "status": "pass",
+  "type": "workflow",
+  "quality": "showcase",
+  "specification": {
+    "path": "/Users/ductuongta/Documents/Sau_dai_hoc_Hutech/Tri-thuc-du-lieu/TriThucDuLieu_BaiTap2.nosync/.archify/workflow-agent-pipeline-20261022-174940/candidate.json",
+    "sha256": "4bf29c201c3ccc1fb9b81770ea1b8af2e79cb22df3f51c9bdab4dc92f9ea849b",
+    "bytes": 7521
+  },
+  "artifact": {
+    "path": "/Users/ductuongta/Documents/Sau_dai_hoc_Hutech/Tri-thuc-du-lieu/TriThucDuLieu_BaiTap2.nosync/.archify/workflow-agent-pipeline-20261022-174940/agent-pipeline.html",
+    "sha256": "13d7b6af22912c4ef815f468e41dd088706ed959ca81cec4b687f7f7359319a5",
+    "bytes": 838839
+  },
+  "gates": {
+    "validate": "pass",
+    "deliver": "pass",
+    "check": "pass",
+    "browser-check": "pass"
+  },
+  "diagnostics": [
+    {
+      "code": "i18n/locale-fallback",
+      "severity": "warning",
+      "message": "meta.locale \"vi\" has no bundled catalog and no usable meta.translations; the Viewer chrome and <html lang> fall back to English.",
+      "subject": {
+        "diagramType": "workflow",
+        "path": "/meta/locale"
+      },
+      "evidence": {
+        "locale": "vi",
+        "bundledLocales": [
+          "en",
+          "zh-CN",
+          "zh-TW",
+          "es",
+          "ko",
+          "ar"
+        ]
+      },
+      "supportedFixes": [
+        "Supply meta.translations for this locale.",
+        "Use a bundled locale: en, zh-CN, zh-TW, es, ko, ar."
+      ]
+    }
+  ],
+  "diagnosticSummary": {
+    "total": 1,
+    "shown": 1,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "/Users/ductuongta/Documents/Sau_dai_hoc_Hutech/Tri-thuc-du-lieu/TriThucDuLieu_BaiTap2.nosync/.archify/workflow-agent-pipeline-20261022-174940/agent-pipeline.finalize.json",
+    "summaryReceipt": "/Users/ductuongta/Documents/Sau_dai_hoc_Hutech/Tri-thuc-du-lieu/TriThucDuLieu_BaiTap2.nosync/.archify/workflow-agent-pipeline-20261022-174940/agent-pipeline.finalize-summary.json",
+    "browserCheckReceipt": "/Users/ductuongta/Documents/Sau_dai_hoc_Hutech/Tri-thuc-du-lieu/TriThucDuLieu_BaiTap2.nosync/.archify/workflow-agent-pipeline-20261022-174940/agent-pipeline.browser-check.json"
+  },
+  "update": {
+    "status": "current",
+    "installedVersion": "3.2.0",
+    "availableVersion": "3.2.0",
+    "releaseNotes": null,
+    "checkedAt": "2026-10-22T07:14:29.241Z",
+    "source": "cache",
+    "noticeRequired": false,
+    "noticeText": null
+  },
+  "visualReview": "not-requested",
+  "durationMs": 3050,
+  "browserCheck": {
+    "requested": true,
+    "ran": true
+  }
+}
