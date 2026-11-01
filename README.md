@@ -17,6 +17,46 @@ Dự án cho hai môn sau đại học ở HUTECH: **Tri thức dữ liệu** v�
    Lệnh này bật MariaDB 11.8.9 (cổng 3307) và Manticore 29.9.0 (cổng 9306/9308). Mật khẩu chỉ dùng cho máy cá nhân; muốn đổi thì chép `.env.example` thành `src/system/.env`.
 3. **Pandoc** (để build `.docx`), và Microsoft Word nếu cần đếm trang.
 
+## Khởi động hệ thống
+Chạy các lệnh từ thư mục gốc dự án, sau khi đã cài đặt và nạp dữ liệu.
+
+1. **Mở Docker Desktop** và chờ Docker sẵn sàng:
+   ```bash
+   open -a Docker
+   docker info
+   ```
+   Lặp lại `docker info` nếu còn báo `Cannot connect to the Docker daemon`.
+2. **Bật MariaDB và Manticore**, chờ đến khi cả hai healthy:
+   ```bash
+   docker compose -f src/system/docker-compose.yml up -d --wait
+   ```
+3. **Kiểm tra kết nối** (dòng cuối phải in `OK`):
+   ```bash
+   (cd src/system/bench && ../../../.venv-exp/bin/python check_setup.py)
+   ```
+4. **Chạy ứng dụng:**
+   ```bash
+   scripts/run-app.sh
+   ```
+   Mở http://127.0.0.1:8501. Nhấn `Ctrl+C` trong terminal này để dừng.
+
+**Khởi động lại Streamlit** khi app báo lỗi kết nối dù CSDL đã bật, hoặc sau khi sửa `search.py`, `classify.py`:
+```bash
+kill $(lsof -tiTCP:8501 -sTCP:LISTEN)
+scripts/run-app.sh
+```
+
+**Tắt CSDL** (dữ liệu vẫn được giữ trong Docker volume):
+```bash
+docker compose -f src/system/docker-compose.yml stop
+```
+
+**Mở dòng lệnh SQL** khi cần truy vấn trực tiếp:
+```bash
+docker exec -it t2v-mariadb mariadb -ut2v -p trans2vec   # MariaDB, nhập mật khẩu khi được hỏi
+docker exec -it t2v-manticore mysql -h0 -P9306           # Manticore
+```
+
 ## Chạy
 | Việc | Lệnh |
 |---|---|
